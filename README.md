@@ -1,5 +1,11 @@
 # Rideshare Web
 
+### Quick Links
+- TravisCI build?
+- Our Heroku website?
+- Our Heroku dashboard?
+- [Our wiki](https://github.com/ECSE321-Fall2018/t08-web/wiki)
+
 ### How to Get This Project On Your Computer
 1. Make sure you have Node.js installed.
     1. Type `node -v` in the terminal. If it doesn't return a version number, you don't have Node.js installed.
@@ -28,17 +34,18 @@ Here's how to try it out:
 2. The terminal will tell you which URL you can use to see the website.
 3. Change a string in a Vue file for example and save. Your website will immediately reload!
 
+
+### Run Unit Test
+```
+yarn run test:unit
+```
+
 ### Create Project Build
 To build our project:
 ```
 yarn run build
 ```
 We won't have to run this until we finish everything.
-
-### Run Unit Test
-```
-yarn run test:unit
-```
 
 ### Configure Vue Settings
 See [Vue Configuration Reference](https://cli.vuejs.org/config/).
