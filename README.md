@@ -1,10 +1,10 @@
 # Rideshare Web
 
 ### Quick Links
-- TravisCI build?
 - [Our Heroku website](https://rideshareadmin.herokuapp.com)
 - [Our Heroku dashboard](https://dashboard.heroku.com/apps/rideshareadmin)
 - [Our wiki](https://github.com/ECSE321-Fall2018/t08-web/wiki)
+- TravisCI build?
 
 ### How to Get This Project On Your Computer
 1. Make sure you have Node.js installed.
@@ -24,7 +24,7 @@
     1. The project you cloned is missing a folder called `node_modules`.
     2. It contains all our node modules (library code).
     3. However, it's like 50 MB, so I told Git to ignore it.
-    4. **To install the missing node modules, it's very easy, just run: `yarn install`**
+    **4. To install the missing node modules, it's very easy, just run: `yarn install`**
 
 Note: If you are on Mac or Linux, you may need to include `sudo` in the beginning of your `npm i` command.
 
