@@ -18,7 +18,7 @@
     4. If NPM is not installed, run `npm install npm --global` or `npm i npm -g`.
 3. Install Yarn.
     1. It's basically NPM but faster.
-    2. Run `npm i yarn -g`.
+    2. Run `npm i yarn@1.12.3 -g`.
 4. Clone the project: `git clone https://github.com/ECSE321-Fall2018/t08-web.git`
 5. There's one thing missing in the project that you need to install yourself.
     1. The project you cloned is missing a folder called `node_modules`.
@@ -35,7 +35,6 @@ Here's how to try it out:
 1. Run `yarn run serve`
 2. The terminal will tell you which URL you can use to see the website.
 3. Change a string in a Vue file for example and save. Your website will immediately reload!
-
 
 ### Run Unit Test
 ```
