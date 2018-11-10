@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "postinstall": "if test \"$NODE_ENV\" = \"dev\" ; then yarn build ; fi ",
+    "start": "node server.js"
   },
   "dependencies": {
     "vue": "^2.5.17",
