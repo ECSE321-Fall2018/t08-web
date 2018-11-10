@@ -1305,7 +1305,7 @@ babel-register@^6.26.0:
     babel-core "^6.26.0"
     babel-runtime "^6.26.0"
     core-js "^2.5.0"
-    home-or-tmp "^2.0.0"
+    login-or-tmp "^2.0.0"
     lodash "^4.17.4"
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
@@ -3434,11 +3434,11 @@ hoek@6.x.x:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.0.2.tgz#a79eac32bdc4fdd6ca056951e3066d84c229d228"
 
-home-or-tmp@^2.0.0:
+login-or-tmp@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
+  resolved "https://registry.yarnpkg.com/login-or-tmp/-/login-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
   dependencies:
-    os-homedir "^1.0.0"
+    os-logindir "^1.0.0"
     os-tmpdir "^1.0.1"
 
 hoopy@^0.1.2:
@@ -5311,9 +5311,9 @@ os-browserify@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.3.0.tgz#854373c7f5c2315914fc9bfc6bd8238fdda1ec27"
 
-os-homedir@^1.0.0:
+os-logindir@^1.0.0:
   version "1.0.2"
-  resolved "http://registry.npmjs.org/os-homedir/-/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
+  resolved "http://registry.npmjs.org/os-logindir/-/os-logindir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
 
 os-locale@^2.0.0:
   version "2.1.0"
@@ -5339,7 +5339,7 @@ osenv@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/osenv/-/osenv-0.1.5.tgz#85cdfafaeb28e8677f416e287592b5f3f49ea410"
   dependencies:
-    os-homedir "^1.0.0"
+    os-logindir "^1.0.0"
     os-tmpdir "^1.0.0"
 
 p-defer@^1.0.0:
