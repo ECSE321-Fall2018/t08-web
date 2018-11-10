@@ -2,7 +2,7 @@
   "name": "t08-web",
   "version": "0.1.0",
   "engines": {
-    "node": "10.3.0"
+    "yarn": "1.12.x"
   },
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express": "*",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
-    "express": "*"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
