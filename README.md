@@ -16,14 +16,9 @@
     2. It stands for Node Package Manager.
     3. Type `npm -v` to check if it's installed (it'll return the version number).
     4. If NPM is not installed, run `npm install npm --global` or `npm i npm -g`.
-    5. If you are on Mac or Linux, you may need to include `sudo` in the beginning of your terminal command.
 3. Install Yarn.
     1. It's basically NPM but faster.
     2. Run `npm i yarn -g`.
-<<<<<<< HEAD
-=======
-    3. If you are on Mac or Linux, you may need to include `sudo` in the beginning of your terminal command.
->>>>>>> 61c90f4cf602d968546f71547807e44acfc504c9
 4. Clone the project: `git clone https://github.com/ECSE321-Fall2018/t08-web.git`
 5. There's one thing missing in the project that you need to install yourself.
     1. The project you cloned is missing a folder called `node_modules`.
