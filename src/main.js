@@ -8,6 +8,3 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-
-var history = require('connect-history-api-fallback');
-
