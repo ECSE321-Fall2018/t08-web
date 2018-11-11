@@ -41,12 +41,5 @@ Here's how to try it out:
 yarn run test:unit
 ```
 
-### Create Project Build
-To build our project:
-```
-yarn run build
-```
-We won't have to run this until we finish everything.
-
 ### Configure Vue Settings
 See [Vue Configuration Reference](https://cli.vuejs.org/config/).
