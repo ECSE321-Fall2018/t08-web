@@ -47,4 +47,3 @@ history({
     disableDotRule: true
   });
 
-  
