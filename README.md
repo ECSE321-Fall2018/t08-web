@@ -37,11 +37,16 @@ Here's how to try it out:
 3. Change a string in a Vue file for example and save. Your website will immediately reload!
 
 ### Coding Conventions
-Please follow these conventions:
-1. Use single quotes over double quotes.
+Please follow these conventions when writing JS code:
+1. Use single quotes over double quotes (do this for HTML too).
 2. Don't use semicolons.
 3. Use `let` instead of `var` to declare your variables.
 4. Variable names should be in "camelCase". Search it up if you don't know what it means.
+
+Note: There are a few exceptions to the above rules. But most of the time, please follow them.
+
+### Muse UI
+Our Vue project uses a UI library called [Muse-UI](https://muse-ui.org/#/en-US). Basically, it provides a bunch of nice-looking components that we can use. This way, we don't have to code these components from scratch, which means less a lot less CSS to write.
 
 ### Run Unit Test
 ```
