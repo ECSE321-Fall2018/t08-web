@@ -16,6 +16,7 @@
     "connect": "^3.6.6",
     "connect-history-api-fallback": "^1.5.0",
     "express": "*",
+    "muse-ui": "^3.0.1",
     "server": "^1.0.18",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
@@ -27,7 +28,10 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-plugin-import": "^1.11.0",
     "express": "^4.16.4",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "serve-static": "^1.13.2",
     "vue-template-compiler": "^2.5.17"
   }
