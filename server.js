@@ -21,9 +21,11 @@ app.use(history());
 /* var middleware = history({}); */
 
 history({
-    index: '/login',
-    rewrites: [{from: /\/login/, to: '/login'}],
+    index: '/',
+    rewrites: [{from: /\/login/, to: '/'}],
   });
+
+
   
 /*   history({
     rewrites: [
