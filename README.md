@@ -36,17 +36,17 @@ Here's how to try it out:
 2. The terminal will tell you which URL you can use to see the website.
 3. Change a string in a Vue file for example and save. Your website will immediately reload!
 
+### Coding Conventions
+Please follow these conventions:
+1. Use single quotes over double quotes.
+2. Don't use semicolons.
+3. Use `let` instead of `var` to declare your variables.
+4. Variable names should be in "camelCase". Search it up if you don't know what it means.
+
 ### Run Unit Test
 ```
 yarn run test:unit
 ```
-
-### Create Project Build
-To build our project:
-```
-yarn run build
-```
-We won't have to run this until we finish everything.
 
 ### Configure Vue Settings
 See [Vue Configuration Reference](https://cli.vuejs.org/config/).
