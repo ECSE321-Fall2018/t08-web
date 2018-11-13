@@ -3,20 +3,7 @@ const serveStatic = require("serve-static");
 const path = require('path');
 app = express();
 app.use(serveStatic(path.join(__dirname, 'dist')));
-const port = process.env.PORT || 80;
-app.listen(port);
-
 var history = require('connect-history-api-fallback');
-/* var connect = require('connect');
-
-var app = connect()
-  .use(history())
-  .listen(3000); */
-
-
-var app = express();
-
-
 var middleware = history({
   index: '/',
   rewrites: [{from: /\/login/, to: '/'}],
@@ -24,6 +11,19 @@ var middleware = history({
 
 
 app.use(middleware);
+const port = process.env.PORT || 80;
+app.listen(port);
+
+/* var connect = require('connect');
+
+var app = connect()
+  .use(history())
+  .listen(3000); */
+
+
+// var app = express();
+
+
   
 /*   history({
     rewrites: [
