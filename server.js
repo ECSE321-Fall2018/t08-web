@@ -15,17 +15,15 @@ var app = connect()
 
 
 var app = express();
-app.use(history());
 
 
-/* var middleware = history({}); */
-
-history({
-    index: '/',
-    rewrites: [{from: /\/login/, to: '/'}],
-  });
+var middleware = history({
+  index: '/',
+  rewrites: [{from: /\/login/, to: '/'}],
+});
 
 
+app.use(middleware);
   
 /*   history({
     rewrites: [
