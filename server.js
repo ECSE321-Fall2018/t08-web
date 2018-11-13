@@ -7,24 +7,25 @@ const port = process.env.PORT || 80;
 app.listen(port);
 
 var history = require('connect-history-api-fallback');
-var connect = require('connect');
+/* var connect = require('connect');
 
 var app = connect()
   .use(history())
-  .listen(3000);
+  .listen(3000); */
 
 
 var app = express();
 app.use(history());
 
 
-var middleware = history({});
+/* var middleware = history({}); */
 
 history({
-    index: '/default.html'
+    index: '/login',
+    rewrites: [{from: /\/login/, to: '/login'}],
   });
   
-  history({
+/*   history({
     rewrites: [
       {
         from: /^\/libs\/.*$/,
@@ -33,9 +34,9 @@ history({
         }
       }
     ]
-  });
+  }); */
 
-  history({
+  /* history({
     verbose: true
   });
   
@@ -46,4 +47,5 @@ history({
   history({
     disableDotRule: true
   });
-
+ */
+  
