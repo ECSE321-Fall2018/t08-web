@@ -10,23 +10,23 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
-      name: 'login',
+      path: '/',
+      name: 'Login1',
       component: Login
     },
     {
-      path: '/',
-      name: 'login',
+      path: '/login',
+      name: 'Login2',
       component: Login
     },
     {
       path: '/rankings',
-      name: 'rankings',
+      name: 'Rankings',
       component: Rankings
     },
     {
       path: '/main',
-      name: 'main',
+      name: 'Main',
       component: () => import(/* webpackChunkName: "main" */ './views/Main.vue')
     }
   ]
