@@ -4,7 +4,7 @@
       <h2>{{title}}</h2>
     </mu-flex>
     <mu-flex justify-content='center'>
-      <List v-bind:users='sorted(filtered(users))' />
+      <List v-bind:users='sort(filtered(users))' />
     </mu-flex>
     <mu-flex justify-content='center'>
       <mu-text-field v-model='filter' type='text' icon='search' style='width: 100%'></mu-text-field>
@@ -36,9 +36,15 @@ export default {
     filtered(users) {
       return users
     },
-    sorted(users) {
+    sort(users) {
       return users
-    }
+    },
+    hideInactive(users) {
+
+    },
+    dateConstrain(users) {
+
+    },
   }
 }
 </script>
