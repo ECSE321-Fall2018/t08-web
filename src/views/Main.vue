@@ -19,7 +19,10 @@
         <Listing title='Routes' class='listing' />
       </mu-flex>
     </section>
-    <section>Form thingy</section>
+    <section>
+      <ActiveUserToggle />
+      <RankingsDatePicker />
+    </section>
   </mu-flex>
   <div v-else>
     {{goToLogin}}
@@ -28,10 +31,16 @@
 
 <script>
 import Listing from '@/components/Listing.vue'
+import ActiveUserToggle from '@/components/ActiveUserToggle.vue'
+import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
 
 export default {
   name: 'Main',
-  components: {Listing},
+  components: {
+    Listing,
+    ActiveUserToggle,
+    RankingsDatePicker,
+  },
   computed: {
     goToLogin() {
       this.$router.push('login');
@@ -41,10 +50,6 @@ export default {
 </script>
 
 <style>
-  section {
-    margin: 10px;
-  }
-
   .listings {
     width: 100%;
   }
