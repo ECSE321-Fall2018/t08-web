@@ -48,8 +48,9 @@
 
         function authorizeUser() {
           // Check if username and password match our database
-          // If yes, return true
-          // If not, return false
+          // And if that user is an admin
+          // If yes to both, return true
+          // Otherwise, return false
           // INSERT CODE HERE
 
           return true
