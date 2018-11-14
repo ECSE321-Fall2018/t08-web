@@ -7,7 +7,7 @@
     align-items='center'
   >
     <img alt='RideShare Logo' src='../assets/temp-logo.png' width='400'>
-    <div class='login-form'>
+    <div class='login-form-container'>
       <LoginForm />
     </div>
   </mu-flex>
@@ -32,7 +32,7 @@ export default {
     height: 100%;
   }
 
-  .login img, .login-form {
+  .login img, .login-form-container {
     padding: 20px 0;
   }
 </style>
