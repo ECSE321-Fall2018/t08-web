@@ -11,22 +11,22 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Login1',
+      name: 'root',
       component: Login
     },
     {
       path: '/login',
-      name: 'Login2',
+      name: 'login2',
       component: Login
     },
     {
       path: '/rankings',
-      name: 'Rankings',
+      name: 'rankings',
       component: Rankings
     },
     {
       path: '/main',
-      name: 'Main',
+      name: 'main',
       component: () => import(/* webpackChunkName: "main" */ './views/Main.vue')
     }
   ]
