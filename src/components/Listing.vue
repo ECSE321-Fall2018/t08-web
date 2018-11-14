@@ -4,10 +4,10 @@
       <h2>{{title}}</h2>
     </mu-flex>
     <mu-flex justify-content='center'>
-      <List v-bind:users='sort(filtered(users))' />
+      <List v-bind:users='sort(filter(users))' />
     </mu-flex>
     <mu-flex justify-content='center'>
-      <mu-text-field v-model='filter' type='text' icon='search' style='width: 100%'></mu-text-field>
+      <mu-text-field v-model='filterString' type='text' icon='search' style='width: 100%'></mu-text-field>
     </mu-flex>
   </mu-paper>
 </template>
@@ -20,7 +20,7 @@ export default {
   components: {List},
   data() {
     return {
-      filter: '',
+      filterString: '',
       users: [
         {name: 'projeffboy', completed: 10},
         {name: 'zhaoliang10500', completed: 20},
@@ -33,7 +33,7 @@ export default {
   },
   props: ['title'],
   methods: {
-    filtered(users) {
+    filter(users) {
       return users
     },
     sort(users) {
@@ -45,6 +45,6 @@ export default {
     dateConstrain(users) {
 
     },
-  }
+  },
 }
 </script>
