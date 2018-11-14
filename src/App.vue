@@ -30,9 +30,18 @@ html, body, #app {
 
 main {
   height: 95%;
+  min-height: 720px;
 }
 
 footer {
   height: 5%;
+}
+
+.flex-parent {
+  height: 100%;
+}
+
+.flex-item {
+  padding: 10px 0;
 }
 </style>

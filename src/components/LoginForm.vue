@@ -1,5 +1,5 @@
 <template>
-  <mu-form ref='form' :model='formDetails' class='login-form'>
+  <mu-form ref='form' :model='formDetails' class='login-form' v-on:keyup.13='() => submit(formDetails)'>
     <mu-form-item prop='username' :rules='usernameRules'>
       <mu-text-field
         placeholder='Username'
@@ -48,8 +48,9 @@
 
         function authorizeUser() {
           // Check if username and password match our database
-          // If yes, return true
-          // If not, return false
+          // And if that user is an admin
+          // If yes to both, return true
+          // Otherwise, return false
           // INSERT CODE HERE
 
           return true

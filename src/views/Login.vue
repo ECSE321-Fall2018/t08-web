@@ -1,15 +1,17 @@
 <template>
   <mu-flex
-    class='login'
+    class='flex-parent'
     direction='column'
     wrap='wrap'
     justify-content='center'
     align-items='center'
   >
-    <img alt='RideShare Logo' src='../assets/temp-logo.png' width='400'>
-    <div class='login-form-container'>
+    <section class='flex-item'>
+      <img alt='RideShare Logo' src='../assets/temp-logo.png' width='400'>
+    </section>
+    <section class='flex-item'>
       <LoginForm />
-    </div>
+    </section>
   </mu-flex>
 </template>
 
@@ -26,13 +28,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .login {
-    height: 100%;
-  }
-
-  .login img, .login-form-container {
-    padding: 20px 0;
-  }
-</style>
