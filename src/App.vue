@@ -1,8 +1,6 @@
 <template>
   <div id='app'>
-    <main>
-      <router-view />
-    </main>
+    <router-view />
     <Footer />
   </div>
 </template>
@@ -28,11 +26,15 @@ html, body, #app {
   -moz-osx-font-smoothing: grayscale;
 }
 
-main {
-  height: 95%;
-}
-
 footer {
   height: 5%;
+}
+
+.flex-parent {
+  height: 100%;
+}
+
+.flex-item {
+  padding: 20px 0;
 }
 </style>

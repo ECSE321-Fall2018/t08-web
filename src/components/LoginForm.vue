@@ -1,5 +1,5 @@
 <template>
-  <mu-form ref='form' :model='formDetails' class='login-form'>
+  <mu-form ref='form' :model='formDetails' class='login-form' v-on:keyup.13='() => submit(formDetails)'>
     <mu-form-item prop='username' :rules='usernameRules'>
       <mu-text-field
         placeholder='Username'

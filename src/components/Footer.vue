@@ -1,7 +1,7 @@
 <template>
   <footer>
     <!-- INSERT CODE HERE -->
-    Remove this footer text
+    Replace this footer text
   </footer>
 </template>
 
