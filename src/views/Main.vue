@@ -19,10 +19,17 @@
         <Listing title='Routes' class='listing' />
       </mu-flex>
     </section>
-    <section>
-      <ActiveUserToggle />
-      <RankingsDatePicker />
-    </section>
+    <mu-flex
+      tag='section'
+      justify-content='center'
+      align-items='baseline'
+      class='flex-item'
+      style='width: 100%'
+    >
+      <ActiveUserToggle style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker style='width: initial; margin: 0 10px' />
+    </mu-flex>
   </mu-flex>
   <div v-else>
     {{goToLogin}}
