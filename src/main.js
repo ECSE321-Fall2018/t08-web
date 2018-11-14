@@ -3,16 +3,18 @@ import App from './App.vue'
 import router from './router'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
-import {Button, Checkbox, Form, Grid, Paper, TextField, theme} from 'muse-ui'
+import {Button, Checkbox, DateInput, Form, Grid, Paper, Switch, TextField, theme} from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 import * as colors from 'muse-ui/lib/theme/colors'
 
 // Muse UI use components
 Vue.use(Button)
 Vue.use(Checkbox)
+Vue.use(DateInput)
 Vue.use(Form)
 Vue.use(Grid)
 Vue.use(Paper)
+Vue.use(Switch)
 Vue.use(TextField)
 
 // Muse UI add theme

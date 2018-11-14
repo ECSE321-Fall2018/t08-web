@@ -15,18 +15,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      users: [
-        {name: 'projeffboy', completed: 10},
-        {name: 'zhaoliang10500', completed: 20},
-        {name: 'cyrilyared', completed: 35},
-        {name: 'S1o3urn', completed: 27},
-        {name: '1048596BetaConvergence', completed: 5},
-        {name: 'Len-MY', completed: 2},
-      ]
-    }
-  }
+  props: ['users']
 }
 </script>
 

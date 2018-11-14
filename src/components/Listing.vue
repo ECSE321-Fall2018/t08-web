@@ -4,7 +4,7 @@
       <h2>{{title}}</h2>
     </mu-flex>
     <mu-flex justify-content='center'>
-      <List />
+      <List v-bind:users='sorted(filtered(users))' />
     </mu-flex>
     <mu-flex justify-content='center'>
       <mu-text-field v-model='filter' type='text' icon='search' style='width: 100%'></mu-text-field>
@@ -19,8 +19,26 @@ export default {
   name: 'Listing',
   components: {List},
   data() {
-    return {filter: ''}
+    return {
+      filter: '',
+      users: [
+        {name: 'projeffboy', completed: 10},
+        {name: 'zhaoliang10500', completed: 20},
+        {name: 'cyrilyared', completed: 35},
+        {name: 'S1o3urn', completed: 27},
+        {name: '1048596BetaConvergence', completed: 5},
+        {name: 'Len-MY', completed: 2},
+      ]
+    }
   },
   props: ['title'],
+  methods: {
+    filtered(users) {
+      return users
+    },
+    sorted(users) {
+      return users
+    }
+  }
 }
 </script>
