@@ -12,6 +12,10 @@
     <section class='flex-item'>
       <h1>Welcome back, {{$route.params.username}}</h1>
     </section>
+    <mu-flex tag='section' class='flex-item'>
+      <h1>Status</h1>
+      <h1>Rankings</h1>
+    </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
         <Listing title='Drivers' class='listing' />
@@ -50,9 +54,9 @@ export default {
   },
   computed: {
     goToLogin() {
-      this.$router.push('login');
+      this.$router.push('login')
     }
-  }
+  },
 };
 </script>
 

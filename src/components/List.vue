@@ -5,17 +5,21 @@
       <h3 style='width: 50%; text-align: right'>Trips Done</h3>
     </mu-flex>
     <ol>
-      <li v-for='user, i in users' class='list-item'>
-        <div style='float: left'>{{user.name}}</div>
-        <div style='float: right'>{{user.completed}}</div>
+      <li v-for='user, i in store.driver' class='list-item'>
+        <div style='float: left'>{{user.username}}</div>
+        <div style='float: right'>{{user.tripnumber}}</div>
       </li>
     </ol>
   </div>
 </template>
 
 <script>
+import store from '@/store.js'
+
 export default {
-  props: ['users']
+  data() {
+    return {store: store.data}
+  }
 }
 </script>
 
