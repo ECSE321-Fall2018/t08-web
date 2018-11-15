@@ -1,11 +1,13 @@
 <template>
-  <mu-switch v-model='isOn' label='Hide Inactive Users'></mu-switch>
+  <mu-switch v-model='store.showInactiveUsers' label='Show Inactive Users'></mu-switch>
 </template>
 
 <script>
+import store from '@/store.js'
+
 export default {
   data() {
-    return {isOn: false}
+    return {store: store.data}
   }
 }
 </script>
