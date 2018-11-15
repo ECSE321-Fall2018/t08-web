@@ -32,5 +32,5 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-// var history = require('connect-history-api-fallback');
+// let history = require('connect-history-api-fallback');
 
