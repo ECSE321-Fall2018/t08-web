@@ -10,7 +10,7 @@
       <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
     <section class='flex-item'>
-      <h1>Welcome back, {{$route.params.username}}</h1>
+      <h1>Welcome back, {{store.username}}</h1>
     </section>
     <mu-flex tag='section' class='flex-item'>
       <router-link tag='h1' to='/status'>Status</router-link>
