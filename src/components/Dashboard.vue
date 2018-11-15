@@ -1,5 +1,5 @@
 <template>
-  <mu-flex v-if='$route.params.username'
+  <mu-flex v-if='store.username'
     class='flex-parent'
     direction='column'
     wrap='wrap'
@@ -10,8 +10,12 @@
       <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
     <section class='flex-item'>
-      <h1>Welcome back, {{$route.params.username}}</h1>
+      <h1>Welcome back, {{store.username}}</h1>
     </section>
+    <mu-flex tag='section' class='flex-item'>
+      <router-link tag='h1' to='/status'>Status</router-link>
+      <router-link tag='h1' to='/rankings'>Rankings</router-link>
+    </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
         <Listing title='Drivers' class='listing' />
@@ -26,9 +30,9 @@
       class='flex-item'
       style='width: 100%'
     >
-      <ActiveUserToggle style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker style='width: initial; margin: 0 10px' />
+      <InactiveUserSwitch v-if='type === "status"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
     </mu-flex>
   </mu-flex>
   <div v-else>
@@ -38,21 +42,26 @@
 
 <script>
 import Listing from '@/components/Listing.vue'
-import ActiveUserToggle from '@/components/ActiveUserToggle.vue'
+import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
+import store from '@/store.js'
 
 export default {
-  name: 'Main',
+  name: 'Dashboard',
   components: {
     Listing,
-    ActiveUserToggle,
+    InactiveUserSwitch,
     RankingsDatePicker,
+  },
+  props: ['type'],
+  data() {
+    return {store: store.data}
   },
   computed: {
     goToLogin() {
-      this.$router.push('login');
+      this.$router.push('login')
     }
-  }
+  },
 };
 </script>
 

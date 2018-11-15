@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import store from '@/store.js'
+
   export default {
     data () {
       return {
@@ -46,26 +48,25 @@
       submit(formDetails) {
         const {username, password, staySignedIn} = formDetails
 
-        function authorizeUser() {
-          // Check if username and password match our database
-          // And if that user is an admin
-          // If yes to both, return true
-          // Otherwise, return false
-          // INSERT CODE HERE
-
-          return true
-        }
-
         this.$refs.form.validate().then(result => {
-          if (result && authorizeUser()) {
-            this.$router.push({
-              name: 'main', 
-              params: {
-                username,
-                password,
-                staySignedIn,
-              },
-            })
+          if (result) {
+            /*
+             * USER AUTHORIZATION INSTRUCTIONS
+             * Check if username and password match our database
+             * And if that user is an admin
+             * If yes to both, log the user in
+             * Otherwise, return an error
+             * 
+             * TIPS
+             * Use axios
+             * you have access to the variables `username` and `password`
+             */
+            // INSERT CODE HERE
+
+            // The code to log the user in (put it in your axios)
+            store.methods.setUsername(username)
+            store.methods.setPassword(password)
+            this.$router.push('status')
           }
         })
       },
