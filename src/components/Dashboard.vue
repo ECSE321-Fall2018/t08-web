@@ -1,5 +1,5 @@
 <template>
-  <mu-flex v-if='$route.params.username'
+  <mu-flex v-if='store.username'
     class='flex-parent'
     direction='column'
     wrap='wrap'
@@ -44,6 +44,7 @@
 import Listing from '@/components/Listing.vue'
 import ActiveUserToggle from '@/components/ActiveUserToggle.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
+import store from '@/store.js'
 
 export default {
   name: 'Dashboard',
@@ -51,6 +52,9 @@ export default {
     Listing,
     ActiveUserToggle,
     RankingsDatePicker,
+  },
+  data() {
+    return {store: store.data}
   },
   computed: {
     goToLogin() {

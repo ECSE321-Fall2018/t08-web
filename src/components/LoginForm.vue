@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import store from '@/store.js'
+
   export default {
     data () {
       return {
@@ -58,15 +60,9 @@
 
         this.$refs.form.validate().then(result => {
           if (result && authorizeUser()) {
-            
-            this.$router.push({
-              name: 'status', 
-              params: {
-                username,
-                password,
-                staySignedIn,
-              },
-            })
+            store.methods.setUsername(username)
+            store.methods.setPassword(password)
+            this.$router.push('status')
           }
         })
       },
