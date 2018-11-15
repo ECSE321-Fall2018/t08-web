@@ -45,6 +45,13 @@ Please follow these conventions when writing JS code:
 
 Note: There are a few exceptions to the above rules. But most of the time, please follow them.
 
+### Store
+never mind, watch that last video
+
+### Weird Syntax to Watch Out For
+
+### Using Javascript to Make API Requests
+
 ### Muse UI
 Our Vue project uses a UI library called [Muse-UI](https://muse-ui.org/#/en-US). Basically, it provides a bunch of nice-looking components that we can use. This way, we don't have to code these components from scratch, which means less a lot less CSS to write.
 
