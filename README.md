@@ -91,18 +91,18 @@ You can also include error handling: `.catch(e => console.log(e))`
 ### Using JS Axios to Make API Requests
 Axios makes things even easier. Just import the file I created, `axios.js`, like this:
 ```JS
-import AXIOS from '@/axios.js'
+import axios from '@/axios.js'
 ```
 
 Then you can write shorter API request code:
 ```JS
 /* Fetch Example 1 */
-AXIOS.get('https://rideshare08.herokuapp.com/api/user/users/47?adminusername=jeffery&adminpass=password')
+AXIOS.get('/user/users/47?adminusername=jeffery&adminpass=password')
 // Skip the turning into JSON data process
 .then(jsonObject => console.log(jsonObject))
 
 /* Fetch Example 2 */
-AXIOS.post('https://rideshare08.herokuapp.com/api/trip/usertripstatus?username=jeffery&password=password&status=1')
+AXIOS.post('/trip/usertripstatus?username=jeffery&password=password&status=1')
 .then(jsonObject => console.log(jsonObject))
 ```
 
