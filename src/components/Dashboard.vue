@@ -30,9 +30,9 @@
       class='flex-item'
       style='width: 100%'
     >
-      <ActiveUserToggle style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker style='width: initial; margin: 0 10px' />
+      <ActiveUserToggle v-if='type === "status"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
     </mu-flex>
   </mu-flex>
   <div v-else>
@@ -53,6 +53,7 @@ export default {
     ActiveUserToggle,
     RankingsDatePicker,
   },
+  props: ['type'],
   data() {
     return {store: store.data}
   },
