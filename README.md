@@ -4,7 +4,7 @@
 - [Our Heroku website](https://rideshareadmin.herokuapp.com)
 - [Our Heroku dashboard](https://dashboard.heroku.com/apps/rideshareadmin)
 - [Our wiki](https://github.com/ECSE321-Fall2018/t08-web/wiki)
-- TravisCI build?
+- [Vue video tutorial](https://www.youtube.com/watch?v=mZY1yyrlJWU&list=PLoYCgNOIyGADZuvKJweutZDOO9VI9YiJ9)
 
 ### How to Get This Project On Your Computer
 1. Make sure you have Node.js installed.
@@ -45,11 +45,133 @@ Please follow these conventions when writing JS code:
 
 Note: There are a few exceptions to the above rules. But most of the time, please follow them.
 
+### Store
+No, a store is not a place where you buy things.
+
+In the past, our state data was across a bunch of different files, which made it really hard to keep track of it. It was just messy. So I put all the state data in one file called `store.js`. You can look for it in our project right now and see what it contains.
+
+never mind, watch that last video
+
+### Using JS Fetch to Make API Requests
+Javascript provides us with the method `fetch()` to retrive data from the backend.
+
+Here's an example of how to make a GET request in Javascript. This gets a user's details:
+```JS
+fetch('https://rideshare08.herokuapp.com/api/user/users/47?adminusername=jeffery&adminpass=password')
+.then(response => response.json()) // turns it into JSON data
+.then(jsonObject => console.log(jsonObject)) // print it out on the web console
+```
+If you run it in the web console (Right-click -> Inspect Element), you'll probabaly get a promise with the value:
+```JS
+{
+    emailAddress: "ali4glory@yahoo.com"
+    fullName: "Hyacinth Ali"
+    password: "strongman"
+    role: "Driver"
+    status: true
+    tripnumber: 2
+    userID: 47
+    username: "Hyacinth"
+}
+```
+\
+If you make a request that isn't a GET request, you have to specify what request it is.
+Here's an example of a POST request that gets all active users and drivers:
+```JS
+fetch('https://rideshare08.herokuapp.com/api/trip/usertripstatus?username=jeffery&password=password&status=1', {method: 'POST'}) // here we specify POST
+.then(response => response.json())
+.then(jsonObject => console.log(jsonObject))
+```
+If you run it in the web console, you'll probabaly get a promise value of `["42;45", "52;50", "47;50"]`.
+So we have active users with IDs 42, 52, and 47.
+And active trips with IDs 45 and 50.
+
+You can also include error handling: `.catch(e => console.log(e))`
+
+### Using JS Axios to Make API Requests
+Axios makes things even easier. Just import the file I created, `axios.js`, like this:
+```JS
+import axios from '@/axios.js'
+```
+
+Then you can write shorter API request code:
+```JS
+/* Fetch Example 1 */
+AXIOS.get('/user/users/47?adminusername=jeffery&adminpass=password')
+// Skip the turning into JSON data process
+.then(jsonObject => console.log(jsonObject))
+
+/* Fetch Example 2 */
+AXIOS.post('/trip/usertripstatus?username=jeffery&password=password&status=1')
+.then(jsonObject => console.log(jsonObject))
+```
+
+### Weird Syntax to Watch Out For
+Template strings:
+```JS
+let a = 'jam'
+let b = 'butter'
+
+// The plus signs are kinda annoying
+let c = 'I love ' + a + 'and' + b + '!'
+
+// A lot easier to read
+let d = `I love ${a} and ${b}!`
+```
+
+Arrow syntax:
+```JS
+function add(x, y) {
+    return x + y
+}
+
+// is the same as
+
+add = (x, y) => {
+    return x + y
+}
+
+// is the same as
+
+add = (x, y) => x + y
+```
+
+Destructuring:
+```JS
+let object = {
+    drivers: driverData,
+    passengers: passengerData,
+    trips: tripsData, // yes, this comma is allows
+}
+// `object.drivers` returns `driverData`
+
+let {drivers, passengers, trips} = object
+// Now `drivers` also returns `driverData`
+```
+
+Spread/Rest operator:
+```JS
+let object = {
+    a: 'apple',
+    b: 'bear',
+    c: 'cat',
+}
+
+let biggerObject = {
+    ...object,
+    d: 'dog'
+}
+// `biggerObject` contains everything that `object` has and then some
+
+let clonedObject = {...object} // how to clone objects in JS
+```
+
+
 ### Muse UI
 Our Vue project uses a UI library called [Muse-UI](https://muse-ui.org/#/en-US). Basically, it provides a bunch of nice-looking components that we can use. This way, we don't have to code these components from scratch, which means less a lot less CSS to write.
 
 ### Run Unit Test
-```
+```Bash
 yarn run test:unit
 ```
 
