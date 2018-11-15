@@ -13,8 +13,8 @@
       <h1>Welcome back, {{$route.params.username}}</h1>
     </section>
     <mu-flex tag='section' class='flex-item'>
-      <h1>Status</h1>
-      <h1>Rankings</h1>
+      <router-link tag='h1' to='/status'>Status</router-link>
+      <router-link tag='h1' to='/rankings'>Rankings</router-link>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
@@ -46,7 +46,7 @@ import ActiveUserToggle from '@/components/ActiveUserToggle.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
 
 export default {
-  name: 'Main',
+  name: 'Dashboard',
   components: {
     Listing,
     ActiveUserToggle,

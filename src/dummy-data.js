@@ -1,5 +1,5 @@
 export default {
-  driver: [
+  drivers: [
     {
       'userID': 42,
       'username': 'dummyuser',
@@ -64,7 +64,7 @@ export default {
     },
     {
       'userID': 146,
-      'username': 'dummypassenger',
+      'username': 'dummypassenger2',
       'emailAddress': 'dummypass@dummy.com',
       'fullName': 'Dummy Passenger',
       'password': 'password',

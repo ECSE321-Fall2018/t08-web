@@ -58,8 +58,9 @@
 
         this.$refs.form.validate().then(result => {
           if (result && authorizeUser()) {
+            
             this.$router.push({
-              name: 'main', 
+              name: 'status', 
               params: {
                 username,
                 password,

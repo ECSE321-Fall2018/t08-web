@@ -4,7 +4,7 @@
       <h2>{{title}}</h2>
     </mu-flex>
     <mu-flex justify-content='center'>
-      <List />
+      <List :title='title' />
     </mu-flex>
     <mu-flex justify-content='center'>
       <mu-text-field v-model='filterString' type='text' icon='search' style='width: 100%'></mu-text-field>
