@@ -18,17 +18,20 @@ let store = {
        * INSTRUCTIONS
        * Filter drivers/passengers/trips by keyword in search box
        *
+       * TIPS
        * The variable `drivers` contains an array of driver info.
        * Similar for variables `passengers` and `trips`.
        * To see the actual data of these variables, go to dummy-data.js
        * 
-       * store.searchBoxFilters is an array
+       * store.searchBoxFilters is an array containing the three filter keywords in the three searchboxes
        */
-      console.log(drivers)
+      // INSERT CODE HERE
+
+      // UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN
+      // console.log(drivers)
       // console.log(passengers)
       // console.log(trips)
-      console.log(store.searchBoxFilters)
-      // INSERT CODE HERE
+      // console.log(store.searchBoxFilters)
 
       return {drivers, passengers, trips}
     }
