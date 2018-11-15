@@ -5,13 +5,13 @@
       <h3 style='width: 50%; text-align: right'>Trips Done</h3>
     </mu-flex>
     <ul v-if='title === "Routes"'>
-      <li v-for='trip in store["trips"]' class='list-item'>
+      <li v-for='trip in searchBoxFilters["trips"]' class='list-item'>
         <div style='float: left'>{{trip.startLocation}} {{trip.stops}}</div>
         <div style='float: right'>{{trip.status}}</div>
       </li>
     </ul>
     <ul v-else>
-      <li v-for='user in store[title.toLowerCase()]' class='list-item'>
+      <li v-for='user in searchBoxFilters[title.toLowerCase()]' class='list-item'>
         <div style='float: left'>{{user.username}}</div>
         <div style='float: right'>{{user.tripnumber}}</div>
       </li>
@@ -24,11 +24,11 @@ import store from '@/store.js'
 
 export default {
   props: ['title'],
-  data() {
-    return {
-      store: store.data,
+  computed: {
+    searchBoxFilters() {
+      return store.computed.searchBoxFilters()
     }
-  },
+  }
 }
 </script>
 

@@ -7,19 +7,20 @@
       <List :title='title' />
     </mu-flex>
     <mu-flex justify-content='center'>
-      <mu-text-field v-model='filterString' type='text' icon='search' style='width: 100%'></mu-text-field>
+      <mu-text-field v-model='store.searchBoxFilters[title.toLowerCase()]' type='text' icon='search' style='width: 100%'></mu-text-field>
     </mu-flex>
   </mu-paper>
 </template>
 
 <script>
 import List from '@/components/List.vue'
+import store from '@/store.js'
 
 export default {
   name: 'Listing',
   components: {List},
   data() {
-    return {filterString: ''}
+    return {store: store.data}
   },
   props: ['title'],
   methods: {
