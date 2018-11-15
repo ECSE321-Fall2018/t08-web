@@ -42,6 +42,6 @@ footer {
 }
 
 .flex-item {
-  padding: 0px 0;
+  padding: 20px 0;
 }
 </style>

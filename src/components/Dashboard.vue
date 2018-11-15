@@ -9,12 +9,14 @@
     <section class='flex-item'>
       <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
-    <section class='flex-item'>
-      <h1>Welcome back, {{store.username}}</h1>
-    </section>
-    <mu-flex tag='section' class='flex-item'>
-      <router-link tag='h1' to='/status'>Status</router-link>
-      <router-link tag='h1' to='/rankings'>Rankings</router-link>
+    <mu-flex tag='section' class='flex-item' style='width: 93%'>
+      <mu-flex tag='section' fill>
+        <h1 class='zeroMargin'>Welcome back, {{store.username}}</h1>
+      </mu-flex>
+      <mu-flex tag='section' fill justify-content='end'>
+        <router-link tag='h1' to='/status' class='zeroMargin' :style='"padding: 0 100px; color:" + "red"'>Status</router-link>
+        <router-link tag='h1' to='/rankings' class='zeroMargin'>Rankings</router-link>
+      </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
@@ -66,6 +68,10 @@ export default {
 </script>
 
 <style>
+  .zeroMargin {
+    margin: 0;
+  }
+
   .listings {
     width: 100%;
   }
