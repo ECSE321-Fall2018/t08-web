@@ -30,7 +30,7 @@
       class='flex-item'
       style='width: 100%'
     >
-      <ActiveUserToggle v-if='type === "status"' style='width: initial; margin: 0 10px' />
+      <InactiveUserSwitch v-if='type === "status"' style='width: initial; margin: 0 10px' />
       <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
       <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
     </mu-flex>
@@ -42,7 +42,7 @@
 
 <script>
 import Listing from '@/components/Listing.vue'
-import ActiveUserToggle from '@/components/ActiveUserToggle.vue'
+import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
 import store from '@/store.js'
 
@@ -50,7 +50,7 @@ export default {
   name: 'Dashboard',
   components: {
     Listing,
-    ActiveUserToggle,
+    InactiveUserSwitch,
     RankingsDatePicker,
   },
   props: ['type'],
