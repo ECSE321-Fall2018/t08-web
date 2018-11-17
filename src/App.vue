@@ -16,8 +16,7 @@ export default {
 }
 </script>
 
-
-<style>
+<style scoped>
 html, body, #app {
   height: 100%;
 }
@@ -36,7 +35,10 @@ main {
 footer {
   height: 5%;
 }
+</style>
 
+<!-- GLOBAL STYLES (ONLY DECLARE HERE) -->
+<style>
 .flex-parent {
   height: 100%;
 }

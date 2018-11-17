@@ -3,7 +3,6 @@
     tag='h1'
     :to='"/" + text.toLowerCase()'
     class='link'
-    :class='true ? "focused" : ""'
   >
     <mu-icon :value='iconName' class='icon'></mu-icon>
     <span>{{text}}</span>
@@ -14,10 +13,12 @@
 export default {
   props: ['text', 'iconName'],
 }
+
+//    :class='true ? "focused" : ""'
 </script>
 
 
-<style>
+<style scoped>
   .icon {
     font-size: 28px;
     margin-right: 5px;
@@ -27,5 +28,6 @@ export default {
     margin: 0;
     display: flex;
     align-items: center;
+    flex-grow: 1;
   }
 </style>

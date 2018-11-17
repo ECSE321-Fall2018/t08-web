@@ -70,17 +70,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .listings {
     width: 100%;
-  }
-  
-  .listing {
-    width: 30%;
-    margin-left: calc(10% / 3);
-  }
-  
-  .listing:last-child {
-    margin-right: calc(10% / 3);
   }
 </style>

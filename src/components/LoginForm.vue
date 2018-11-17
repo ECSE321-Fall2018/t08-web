@@ -84,7 +84,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .login-form {
   width: 400px
 }
