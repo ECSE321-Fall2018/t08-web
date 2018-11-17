@@ -261,7 +261,7 @@ export default {
       'status': 1,
     },
   ],
-  active: [
+  activeUsersAndTrips: [
     '42;45',
     '52;50',
     '47;50',

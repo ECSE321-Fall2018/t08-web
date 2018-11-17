@@ -50,7 +50,12 @@ No, a store is not a place where you buy things.
 
 In the past, our state data was across a bunch of different files, which made it really hard to keep track of it. It was just messy. So I put all the state data in one file called `store.js`. You can look for it in our project right now and see what it contains.
 
-never mind, watch that last video
+In fact, if you go to our website, open up the web console, and enter `store`, it will return you our store data! Really nice for debugging.
+
+### Looping Through Arrays/Objects
+- [List of JS array methods](https://www.w3schools.com/jsref/jsref_obj_array.asp)
+- [for-in loop](https://www.w3schools.com/jsref/jsref_forin.asp)
+- You can also search up `for-of` loop if you want.
 
 ### Using JS Fetch to Make API Requests
 Javascript provides us with the method `fetch()` to retrive data from the backend.

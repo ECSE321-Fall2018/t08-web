@@ -19,12 +19,16 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import LoginForm from '@/components/LoginForm.vue'
+import store from '@/store.js'
 
 export default {
   name: 'Login',
   components: {
     HelloWorld,
     LoginForm,
+  },
+  beforeDestroy() {
+    store.methods.changePageName('status')
   }
 }
 </script>
