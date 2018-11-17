@@ -11,11 +11,12 @@
     </section>
     <mu-flex tag='section' class='flex-item' style='width: 93%'>
       <mu-flex tag='section' fill>
-        <h1 class='zeroMargin'>Welcome back, {{store.username}}</h1>
+        <h1 style='margin: 0'>Welcome back, {{store.username}}</h1>
       </mu-flex>
       <mu-flex tag='section' fill justify-content='end'>
-        <router-link tag='h1' to='/status' class='zeroMargin' :style='"padding: 0 100px; color:" + "red"'>Status</router-link>
-        <router-link tag='h1' to='/rankings' class='zeroMargin'>Rankings</router-link>
+        <Link text='Status' iconName='list' />
+        <Link text='Rankings' iconName='format_list' />
+        <Link text='Settings' iconName='settings' />
       </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
@@ -46,6 +47,7 @@
 import Listing from '@/components/Listing.vue'
 import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
+import Link from '@/components/Link.vue'
 import store from '@/store.js'
 
 export default {
@@ -54,6 +56,7 @@ export default {
     Listing,
     InactiveUserSwitch,
     RankingsDatePicker,
+    Link,
   },
   props: ['type'],
   data() {
@@ -68,10 +71,6 @@ export default {
 </script>
 
 <style>
-  .zeroMargin {
-    margin: 0;
-  }
-
   .listings {
     width: 100%;
   }

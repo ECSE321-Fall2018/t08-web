@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
-import {Button, Checkbox, DateInput, Form, Grid, Paper, Switch, TextField, theme} from 'muse-ui'
+import {Button, Checkbox, DateInput, Form, Grid, Icon, Paper, Switch, TextField, theme} from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 import * as colors from 'muse-ui/lib/theme/colors'
 
@@ -14,15 +14,20 @@ Vue.use(Checkbox)
 Vue.use(DateInput)
 Vue.use(Form)
 Vue.use(Grid)
+Vue.use(Icon)
 Vue.use(Paper)
 Vue.use(Switch)
 Vue.use(TextField)
 
 // Muse UI add theme
-theme.add('custom-theme', {
-  primary: colors.indigo,
-  secondary: colors.pinkA200
-})
+theme.add('teal', {
+  primary: '#009688',
+  secondary: '#ff4081',
+  success: '#4caf50',
+  warning: '#ffeb3b',
+});
+
+theme.use('teal');
 
 // Disable tips
 Vue.config.productionTip = false

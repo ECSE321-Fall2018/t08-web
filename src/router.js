@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
-import Rankings from './views/Rankings.vue'
 import Status from './views/Status.vue'
+import Rankings from './views/Rankings.vue'
+import Settings from './views/Settings.vue'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/rankings',
       name: 'rankings',
       component: Rankings,
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
     },
   ]
 })

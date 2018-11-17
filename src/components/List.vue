@@ -6,14 +6,14 @@
     </mu-flex>
     <ul v-if='title === "Routes"'>
       <li v-for='trip in allFilters["trips"]' class='list-item'>
-        <div style='float: left'>{{trip.startLocation}} {{trip.stops}}</div>
-        <div style='float: right'>{{trip.status}}</div>
+        <div>{{trip.startLocation}} {{trip.stops}}</div>
+        <div>{{trip.status}}</div>
       </li>
     </ul>
     <ul v-else>
       <li v-for='user in allFilters[title.toLowerCase()]' class='list-item'>
-        <div style='float: left'>{{user.username}}</div>
-        <div style='float: right'>{{user.tripnumber}}</div>
+        <div>{{user.username}}</div>
+        <div>{{user.tripnumber}}</div>
       </li>
     </ul>
   </div>
@@ -32,6 +32,19 @@ export default {
   ul {
     height: 250px;
     overflow: auto;
+    margin-left: -15px;
+  }
+
+  li {
+    display: flex;
+  }
+
+  li div {
+    flex-grow: 1;
+  }
+
+  li div:last-child {
+    text-align: right;
   }
 
   .list-item {
