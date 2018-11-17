@@ -147,4 +147,8 @@ let store = {
   }
 }
 
+// You can access the variable store directly in the console
+// (for debugging purposes)
+window.store = store // MAKE SURE YOU DELETE THIS LINE AFTER THE PROEJCT IS FINISHED (FOR SECURITY REASONS)
+
 export default store
