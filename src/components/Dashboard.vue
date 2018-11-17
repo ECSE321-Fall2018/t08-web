@@ -33,9 +33,19 @@
       class='flex-item'
       style='width: 100%'
     >
-      <InactiveUserSwitch v-if='pageName === "status"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='pageName === "rankings"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='pageName === "rankings"' style='width: initial; margin: 0 10px' />
+      <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
+      <RankingsDatePicker
+        type='startDate'
+        label='Start Date'
+        v-if='pageName === "rankings"'
+        class='bottomFilter'
+      />
+      <RankingsDatePicker
+        type='endDate'
+        label='End Date'
+        v-if='pageName === "rankings"'
+        class='bottomFilter'
+      />
     </mu-flex>
   </mu-flex>
   <div v-else>
@@ -73,5 +83,10 @@ export default {
 <style scoped>
   .listings {
     width: 100%;
+  }
+
+  .bottomFilter {
+    width: initial;
+    margin: 0 10px;
   }
 </style>

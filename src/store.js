@@ -10,6 +10,8 @@ let store = {
       trips: null,
     }, // since there are 3 search boxes
     showInactiveUsers: false,
+    startDate: null,
+    endDate: null,
     ...dummyData, // GO TO dummy-data.js TO SEE THE DUMMY DATA
   },
   computed: {

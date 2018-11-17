@@ -1,8 +1,8 @@
 <template>
   <mu-date-input
     icon='today'
-    v-model='date'
-    label='Start Date'
+    v-model='store[type]'
+    :label='label'
     container='dialog'
     label-float
     full-width
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import store from '@/store.js'
+
 const dayAbbreviation = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 const dayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -42,9 +44,10 @@ const enDateFormat = {
 
 
 export default {
+  props: ['label', 'type'],
   data() {
     return {
-      date: undefined,
+      store: store.data,
       enDateFormat,
     }
   }
