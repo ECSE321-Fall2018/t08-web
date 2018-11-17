@@ -41,10 +41,14 @@ export default {
 </script>
 
 <style scoped>
+  h2 {
+    margin: 0 0 20px;
+  }
+
   .listing {
     width: 30%;
     margin-left: calc(10% / 3);
-    padding: 0 20px;
+    padding: 10px 20px;
   }
   
   .listing:last-child {

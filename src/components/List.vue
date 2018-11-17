@@ -1,8 +1,8 @@
 <template>
   <div style='width: 100%'>
     <mu-flex class='flex-wrapper' justify-content='center' fill>
-      <h3 style='width: 50%; text-align: left'>User</h3>
-      <h3 style='width: 50%; text-align: right'>Trips Done</h3>
+      <h3>User</h3>
+      <h3>Trips Done</h3>
     </mu-flex>
     <ul v-if='title === "Routes"'>
       <li v-for='trip in allFilters["trips"]' class='list-item'>
@@ -29,10 +29,19 @@ export default {
 </script>
 
 <style scoped>
+  h3 {
+    width: 50%;
+    margin: 0;
+  }
+
+  h3:last-child {
+    text-align: right;
+  }
+
   ul {
     height: 250px;
     overflow: auto;
-    margin-left: -15px;
+    margin: 0 0 0 -15px;
   }
 
   li {
