@@ -2,6 +2,7 @@ import dummyData from '@/dummy-data.js'
 
 let store = {
   data: {
+    currentPageName: 'login',
     username: null,
     password: null,
     searchBoxFilters: {
@@ -17,56 +18,36 @@ let store = {
   computed: {
     allFilters() {
       const {
-        drivers, 
-        passengers, 
-        trips, 
+        currentPageName,
         searchBoxFilters,
         showInactiveUsers, 
         startDate, 
         endDate,
+        drivers, 
+        passengers, 
+        trips, 
         activeUsersAndTrips
       } = store.data
-      const {searchBoxFilter, switchFilter, sortList} = store.filters
+      const {searchBoxFilter, switchFilter, dateFilter, sortList} = store.filters
 
       return sortList(
-        searchBoxFilter(
-          switchFilter(
-            {drivers, passengers, trips},
-            showInactiveUsers,
-            activeUsersAndTrips
+        dateFilter(
+          searchBoxFilter(
+            switchFilter(
+              {drivers, passengers, trips},
+              showInactiveUsers,
+              activeUsersAndTrips
+            ),
+            searchBoxFilters
           ),
-          searchBoxFilters
+          startDate,
+          endDate
         ),
-        startDate,
-        endDate
+        currentPageName
       )
     }
   },
   filters: {
-    searchBoxFilter({drivers, passengers, trips}, searchBoxFilters) {
-      /*
-       * INSTRUCTIONS
-       * Filter drivers/passengers/trips by keyword in search box
-       *
-       * USE THESE VARIABLES
-       * `drivers`: contains an array of driver info
-       * `passengers`: contains an array of passenger info
-       * `trips`: contains an array of trip info
-       * searchBoxFilters: an array containing what's in the three searchboxes
-       *
-       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
-       */
-      // console.log(drivers)
-      // console.log(passengers)
-      // console.log(trips)
-      // console.log(searchBoxFilters)
-
-      // INSERT CODE HERE
-
-      
-
-      return {drivers, passengers, trips}
-    },
     switchFilter(
       {drivers, passengers, trips},
       showInactiveUsers,
@@ -104,6 +85,30 @@ let store = {
         return {drivers, passengers, trips}
       }
     },
+    searchBoxFilter({drivers, passengers, trips}, searchBoxFilters) {
+      /*
+       * INSTRUCTIONS
+       * Filter drivers/passengers/trips by keyword in search box
+       *
+       * USE THESE VARIABLES
+       * `drivers`: contains an array of driver info
+       * `passengers`: contains an array of passenger info
+       * `trips`: contains an array of trip info
+       * searchBoxFilters: an array containing what's in the three searchboxes
+       *
+       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
+       */
+      // console.log(drivers)
+      // console.log(passengers)
+      // console.log(trips)
+      // console.log(searchBoxFilters)
+
+      // INSERT CODE HERE
+
+      
+
+      return {drivers, passengers, trips}
+    },
     dateFilter({drivers, passengers, trips}, startDate, endDate) {
       /*
        * INSTRUCTIONS
@@ -116,6 +121,8 @@ let store = {
        * `trips`: contains an array of trip info
        * startDate: self-explanatory
        * endDate: self-explanatory
+       * 
+       * TIPS: Use Date.parse(..) to convert string date to number date
        *
        * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
        */
@@ -126,18 +133,41 @@ let store = {
       // console.log(endDate)
       return {drivers, passengers, trips}
     },
-    sortList({drivers, passengers, trips}) {
+    sortList({drivers, passengers, trips}, currentPageName) {
       /*
-       * WRITE SOMETHING
+       * INSTRUCTIONS
+       * Sort drivers/passengers/trips
+       *
+       * USE THESE VARIABLES
+       * `drivers`: contains an array of driver info
+       * `passengers`: contains an array of passenger info
+       * `trips`: contains an array of trip info
+       * currentPageName: last word in the current URL (e.g. status, rankings)
+       *
+       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
        */
-      // INSERT CODE HERE
+      // console.log(drivers)
+      // console.log(passengers)
+      // console.log(trips)
+      // console.log(currentPageName)
 
+      // INSERT CODE HERE (I'VE HELPED YOU OUT)
 
+      if (currentPageName === 'status') {
+        // Sort by alphabetical order of username (`username`)
+
+      } else if (currentPageName === 'rankings') {
+        // Sort by most trips taken (`tripnumber`)
+
+      }
 
       return {drivers, passengers, trips}
     },
   },
   methods: {
+    changePageName(newPageName) {
+      store.data.currentPageName = newPageName
+    },
     setUsername(username) {
       store.data.username = username
     },
