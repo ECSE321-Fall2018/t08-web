@@ -19,9 +19,9 @@ export default {
 <style scoped>
 #app {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
 }
 
 main {

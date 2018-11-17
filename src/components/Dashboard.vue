@@ -21,9 +21,9 @@
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
-        <Listing title='Drivers' class='listing' />
-        <Listing title='Passengers' class='listing' />
-        <Listing title='Routes' class='listing' />
+        <Listing title='Drivers' />
+        <Listing title='Passengers' />
+        <Listing title='Routes' />
       </mu-flex>
     </section>
     <mu-flex

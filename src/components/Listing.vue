@@ -49,6 +49,7 @@ export default {
     width: 30%;
     margin-left: calc(10% / 3);
     padding: 10px 20px;
+    border-radius: 8px;
   }
   
   .listing:last-child {
