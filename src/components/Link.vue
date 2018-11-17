@@ -30,7 +30,7 @@ export default {
   }
 
   .currentLink {
-    color: #FFC107;
+    color: #c00;
   }
 
   /* CREDITS: https://stackoverflow.com/questions/44673496/how-to-animate-a-link-underline-with-border-bottom-so-that-there-is-space-betwe */
@@ -40,7 +40,7 @@ export default {
   }
 
   .link:hover {
-    color: #FFC107;
+    color: #c00;
     -webkit-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
   }
@@ -52,7 +52,7 @@ export default {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: #FFC107;
+    background-color: #c00;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);

@@ -42,6 +42,7 @@ export default {
     height: 250px;
     overflow: auto;
     margin: 0 0 0 -15px;
+    font-size: 16px;
   }
 
   li {
