@@ -2,7 +2,7 @@
   <router-link
     tag='h1'
     :to='"/" + text.toLowerCase()'
-    class='link'
+    :class='pageName === text.toLowerCase() ? "currentLink" : "link"'
   >
     <mu-icon :value='iconName' class='icon'></mu-icon>
     <span>{{text}}</span>
@@ -11,10 +11,8 @@
 
 <script>
 export default {
-  props: ['text', 'iconName'],
+  props: ['pageName', 'text', 'iconName'],
 }
-
-//    :class='true ? "focused" : ""'
 </script>
 
 
@@ -24,11 +22,51 @@ export default {
     margin-right: 5px;
   }
 
-  .link {
-    margin: 0;
+  .link, .currentLink {
+    margin: 0 0 0 50px;
     display: flex;
     align-items: center;
     flex-grow: 1;
-    padding-left: 50px;
+  }
+
+  .currentLink {
+    color: #FFC107;
+  }
+
+  /* CREDITS: https://stackoverflow.com/questions/44673496/how-to-animate-a-link-underline-with-border-bottom-so-that-there-is-space-betwe */
+  .link {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .link:hover {
+    color: #FFC107;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  .link:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #FFC107;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  .link:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  .none {
+    display: none !important;
   }
 </style>

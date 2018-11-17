@@ -6,7 +6,7 @@ import axios from 'axios'
 import 'muse-ui/lib/styles/base.less'
 import {Button, Checkbox, DateInput, Form, Grid, Icon, Paper, Switch, TextField, theme} from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
-import * as colors from 'muse-ui/lib/theme/colors'
+import customTheme from './theme.js'
 
 // Muse UI use components
 Vue.use(Button)
@@ -20,14 +20,9 @@ Vue.use(Switch)
 Vue.use(TextField)
 
 // Muse UI add theme
-theme.add('teal', {
-  primary: '#009688',
-  secondary: '#ff4081',
-  success: '#4caf50',
-  warning: '#ffeb3b',
-});
+theme.add('customTheme', customTheme);
 
-theme.use('teal');
+theme.use('customTheme');
 
 // Disable tips
 Vue.config.productionTip = false

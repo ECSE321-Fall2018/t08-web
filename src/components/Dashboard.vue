@@ -14,9 +14,9 @@
         <h1 style='margin: 0'>Welcome back, {{store.username}}</h1>
       </mu-flex>
       <mu-flex tag='section'>
-        <Link text='Status' iconName='format_list_bulleted' />
-        <Link text='Rankings' iconName='format_list_numbered' />
-        <Link text='Settings' iconName='settings' />
+        <Link :pageName='pageName' text='Status' iconName='format_list_bulleted' />
+        <Link :pageName='pageName' text='Rankings' iconName='format_list_numbered' />
+        <Link :pageName='pageName' text='Settings' iconName='settings' />
       </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
@@ -33,9 +33,9 @@
       class='flex-item'
       style='width: 100%'
     >
-      <InactiveUserSwitch v-if='type === "status"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
+      <InactiveUserSwitch v-if='pageName === "status"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='pageName === "rankings"' style='width: initial; margin: 0 10px' />
+      <RankingsDatePicker v-if='pageName === "rankings"' style='width: initial; margin: 0 10px' />
     </mu-flex>
   </mu-flex>
   <div v-else>
@@ -58,7 +58,7 @@ export default {
     RankingsDatePicker,
     Link,
   },
-  props: ['type'],
+  props: ['pageName'],
   data() {
     return {store: store.data}
   },
