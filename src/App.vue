@@ -17,14 +17,11 @@ export default {
 </script>
 
 <style scoped>
-html, body, #app {
-  height: 100%;
-}
-
 #app {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 main {
@@ -39,6 +36,10 @@ footer {
 
 <!-- GLOBAL STYLES (ONLY DECLARE HERE) -->
 <style>
+html, body, #app {
+  height: 100%;
+}
+
 .flex-parent {
   height: 100%;
 }

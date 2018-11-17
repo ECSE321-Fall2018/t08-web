@@ -30,7 +30,6 @@
       tag='section'
       justify-content='center'
       align-items='baseline'
-      class='flex-item'
       style='width: 100%'
     >
       <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
@@ -88,5 +87,8 @@ export default {
   .bottomFilter {
     width: initial;
     margin: 0 10px;
+    height: 72px;
+    display: flex;
+    align-items: center;
   }
 </style>
