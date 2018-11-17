@@ -29,5 +29,6 @@ export default {
     display: flex;
     align-items: center;
     flex-grow: 1;
+    padding-left: 50px;
   }
 </style>

@@ -13,9 +13,9 @@
       <mu-flex tag='section' fill>
         <h1 style='margin: 0'>Welcome back, {{store.username}}</h1>
       </mu-flex>
-      <mu-flex tag='section' fill justify-content='end'>
-        <Link text='Status' iconName='list' />
-        <Link text='Rankings' iconName='format_list' />
+      <mu-flex tag='section'>
+        <Link text='Status' iconName='format_list_bulleted' />
+        <Link text='Rankings' iconName='format_list_numbered' />
         <Link text='Settings' iconName='settings' />
       </mu-flex>
     </mu-flex>
