@@ -1,5 +1,5 @@
 <template>
-  <Dashboard type='rankings' />
+  <Dashboard pageName='rankings' />
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <mu-paper :z-depth='2' style='padding: 0 20px'>
+  <mu-paper :z-depth='2' class='listing'>
     <mu-flex justify-content='center'>
       <h2>{{title}}</h2>
     </mu-flex>
@@ -39,3 +39,20 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  h2 {
+    margin: 0 0 20px;
+  }
+
+  .listing {
+    width: 30%;
+    margin-left: calc(10% / 3);
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+  
+  .listing:last-child {
+    margin-right: calc(10% / 3);
+  }
+</style>

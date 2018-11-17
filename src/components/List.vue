@@ -1,19 +1,19 @@
 <template>
   <div style='width: 100%'>
     <mu-flex class='flex-wrapper' justify-content='center' fill>
-      <h3 style='width: 50%; text-align: left'>User</h3>
-      <h3 style='width: 50%; text-align: right'>Trips Done</h3>
+      <h3>User</h3>
+      <h3>Trips Done</h3>
     </mu-flex>
     <ul v-if='title === "Routes"'>
       <li v-for='trip in allFilters["trips"]' class='list-item'>
-        <div style='float: left'>{{trip.startLocation}} {{trip.stops}}</div>
-        <div style='float: right'>{{trip.status}}</div>
+        <div>{{trip.startLocation}} {{trip.stops}}</div>
+        <div>{{trip.status}}</div>
       </li>
     </ul>
     <ul v-else>
       <li v-for='user in allFilters[title.toLowerCase()]' class='list-item'>
-        <div style='float: left'>{{user.username}}</div>
-        <div style='float: right'>{{user.tripnumber}}</div>
+        <div>{{user.username}}</div>
+        <div>{{user.tripnumber}}</div>
       </li>
     </ul>
   </div>
@@ -29,9 +29,31 @@ export default {
 </script>
 
 <style scoped>
+  h3 {
+    width: 50%;
+    margin: 0;
+  }
+
+  h3:last-child {
+    text-align: right;
+  }
+
   ul {
     height: 250px;
     overflow: auto;
+    margin: 0 0 0 -15px;
+  }
+
+  li {
+    display: flex;
+  }
+
+  li div {
+    flex-grow: 1;
+  }
+
+  li div:last-child {
+    text-align: right;
   }
 
   .list-item {

@@ -9,30 +9,42 @@
     <section class='flex-item'>
       <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
-    <section class='flex-item'>
-      <h1>Welcome back, {{store.username}}</h1>
-    </section>
-    <mu-flex tag='section' class='flex-item'>
-      <router-link tag='h1' to='/status'>Status</router-link>
-      <router-link tag='h1' to='/rankings'>Rankings</router-link>
+    <mu-flex tag='section' class='flex-item' style='width: 93%'>
+      <mu-flex tag='section' fill>
+        <h1 style='margin: 0'>Welcome back, {{store.username}}</h1>
+      </mu-flex>
+      <mu-flex tag='section'>
+        <Link :pageName='pageName' text='Status' iconName='format_list_bulleted' />
+        <Link :pageName='pageName' text='Rankings' iconName='format_list_numbered' />
+        <Link :pageName='pageName' text='Settings' iconName='settings' />
+      </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
-        <Listing title='Drivers' class='listing' />
-        <Listing title='Passengers' class='listing' />
-        <Listing title='Routes' class='listing' />
+        <Listing title='Drivers' />
+        <Listing title='Passengers' />
+        <Listing title='Routes' />
       </mu-flex>
     </section>
     <mu-flex
       tag='section'
       justify-content='center'
       align-items='baseline'
-      class='flex-item'
       style='width: 100%'
     >
-      <InactiveUserSwitch v-if='type === "status"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
-      <RankingsDatePicker v-if='type === "rankings"' style='width: initial; margin: 0 10px' />
+      <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
+      <RankingsDatePicker
+        type='startDate'
+        label='Start Date'
+        v-if='pageName === "rankings"'
+        class='bottomFilter'
+      />
+      <RankingsDatePicker
+        type='endDate'
+        label='End Date'
+        v-if='pageName === "rankings"'
+        class='bottomFilter'
+      />
     </mu-flex>
   </mu-flex>
   <div v-else>
@@ -44,6 +56,7 @@
 import Listing from '@/components/Listing.vue'
 import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
+import Link from '@/components/Link.vue'
 import store from '@/store.js'
 
 export default {
@@ -52,8 +65,9 @@ export default {
     Listing,
     InactiveUserSwitch,
     RankingsDatePicker,
+    Link,
   },
-  props: ['type'],
+  props: ['pageName'],
   data() {
     return {store: store.data}
   },
@@ -65,17 +79,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .listings {
     width: 100%;
   }
-  
-  .listing {
-    width: 30%;
-    margin-left: calc(10% / 3);
-  }
-  
-  .listing:last-child {
-    margin-right: calc(10% / 3);
+
+  .bottomFilter {
+    width: initial;
+    margin: 0 10px;
+    height: 72px;
+    display: flex;
+    align-items: center;
   }
 </style>
