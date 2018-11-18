@@ -1,16 +1,17 @@
-const express = require('express');
+var express = require('express');
 const serveStatic = require("serve-static");
 const path = require('path');
-app = express();
-app.use(serveStatic(path.join(__dirname, 'dist')));
-let history = require('connect-history-api-fallback');
-let middleware = history({
+var history = require('connect-history-api-fallback');
+var app = express();
+
+
+history({
   index: '/',
   rewrites: [{from: /\/login/, to: '/'}],
 });
 
+app.use(history());
 
-app.use(middleware);
 const port = process.env.PORT || 80;
 app.listen(port);
 
