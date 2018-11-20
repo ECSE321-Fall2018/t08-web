@@ -21,29 +21,34 @@
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
-        <Listing title='Drivers' />
-        <Listing title='Passengers' />
-        <Listing title='Routes' />
+        <Listing :pageName='pageName' title='Drivers' />
+        <Listing :pageName='pageName' title='Passengers' />
+        <Listing :pageName='pageName' title='Routes' />
       </mu-flex>
     </section>
     <mu-flex
+      v-if='pageName === "status"'
+      tag='section'
+      justify-content='center'
+    >
+      <InactiveUserSwitch class='bottomFilter' />
+    </mu-flex>
+    <mu-flex
+      v-else
       tag='section'
       justify-content='center'
       align-items='baseline'
       style='width: 100%'
     >
-      <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
-      <mu-button flat v-if='pageName === "rankings"' class='bottomFilter' v-on:click='resetDates(store)'>Reset Dates</mu-button>
+      <mu-button flat class='bottomFilter' v-on:click='resetDates(store)'>Reset Dates</mu-button>
       <RankingsDatePicker
         type='startDate'
         label='Start Date'
-        v-if='pageName === "rankings"'
         class='bottomFilter'
       />
       <RankingsDatePicker
         type='endDate'
         label='End Date'
-        v-if='pageName === "rankings"'
         class='bottomFilter'
       />
     </mu-flex>
@@ -51,7 +56,7 @@
 </template>
 
 <script>
-import Listing from '@/components/Listing.vue'
+import Listing from '@/components/Main/Listing.vue'
 import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
 import Link from '@/components/Link.vue'
