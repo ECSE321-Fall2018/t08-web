@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
