@@ -33,6 +33,7 @@
       style='width: 100%'
     >
       <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
+      <mu-button flat v-if='pageName === "rankings"' class='bottomFilter' v-on:click='resetDates(store)'>Reset Dates</mu-button>
       <RankingsDatePicker
         type='startDate'
         label='Start Date'
@@ -76,6 +77,12 @@ export default {
       this.$router.push('login')
     }
   },
+  methods: {
+    resetDates(store) {
+      store.startDate = null
+      store.endDate = null
+    }
+  }
 };
 </script>
 

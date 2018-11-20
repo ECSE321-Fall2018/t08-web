@@ -34,7 +34,11 @@ let store = {
         dateFilter(
           searchBoxFilter(
             switchFilter(
-              {drivers, passengers, trips},
+              {
+                drivers: [...drivers],
+                passengers: [...passengers],
+                trips: [...trips]
+              },
               showInactiveUsers,
               activeUsersAndTrips
             ),
@@ -131,6 +135,7 @@ let store = {
       //console.log(trips)
       //console.log(startDate)
       //console.log(endDate)
+      
 		let count;
 		let Sdate;
 		let Edate;
@@ -169,7 +174,7 @@ let store = {
 					trips.splice(count, 1);
 				}
 			}		
-		}
+    }
 		
 		return {drivers, passengers, trips}
     },
