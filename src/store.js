@@ -134,23 +134,21 @@ let store = {
 		let count;
 		let Sdate;
 		let Edate;
-		let newtrips = [];
+		let Starto;
+		let Endo;
 		
-		for(count = 0; count < trips.length; count ++){
-			newtrips[count] = trips[count];
-		}
-		
+		Starto = Date.parse(startDate);
+		Endo = Date.parse(endDate);
 		
 		if(startDate == null && endDate == null){
 		return {drivers, passengers, trips}
 		}
-		
 		else if(startDate !== null && endDate == null){
 			for (count = 0; count < trips.length; count ++){
 				Sdate = new Date(trips[count]['startdate']);
-				console.log(startDate);
+				console.log(Starto);
 				console.log(startDate.getMonth() == Sdate.getMonth());
-				if(startDate.getFullYear() !== Sdate.getFullYear() || startDate.getMonth() !== Sdate.getMonth()|| startDate.getMonth() !== Sdate.getMonth()){
+				if(Sdate < Starto){
 					trips.splice(count, 1);
 				}
 			}
@@ -158,7 +156,7 @@ let store = {
 		else if(startDate == null && endDate !== null){
 			for (count = 0; count < trips.length; count ++){
 				Edate = new Date(trips[count]['enddate']);
-				if(endDate.getFullYear() !== Edate.getFullYear() || endDate.getMonth() !== Edate.getMonth()|| endDate.getMonth() !== Edate.getMonth()){
+				if(Edate > Endo){
 					trips.splice(count, 1);
 				}
 			}
@@ -167,12 +165,9 @@ let store = {
 			for (count = 0; count < trips.length; count ++){
 				Sdate = new Date(trips[count]['startdate']);
 				Edate = new Date(trips[count]['enddate']);
-				if(startDate.getFullYear() !== Sdate.getFullYear() || startDate.getMonth() !== Sdate.getMonth()|| startDate.getMonth() !== Sdate.getMonth()){
+				if(Sdate < Starto || Edate > Endo){
 					trips.splice(count, 1);
 				}
-				if(endDate.getFullYear() !== Edate.getFullYear() || endDate.getMonth() !== Edate.getMonth()|| endDate.getMonth() !== Edate.getMonth()){
-					trips.splice(count, 1);
-				}			
 			}		
 		}
 		
