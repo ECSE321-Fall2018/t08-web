@@ -23,25 +23,19 @@ let store = {
         showInactiveUsers, 
         startDate, 
         endDate,
-        drivers, 
-        passengers, 
-        trips, 
-        activeUsersAndTrips
+        drivers,
+        passengers,
+        trips,
+        activeUsersAndTrips,
+        usersBetweenDates,
+        routesBetweenDates
       } = store.data
       const {searchBoxFilter, switchFilter, dateFilter, sortList} = store.filters
-
+      /*
       return sortList(
         dateFilter(
           searchBoxFilter(
-            switchFilter(
-              {
-                drivers: [...drivers],
-                passengers: [...passengers],
-                trips: [...trips]
-              },
-              showInactiveUsers,
-              activeUsersAndTrips
-            ),
+            switchFilter(activeUsersAndTrips, showInactiveUsers),
             searchBoxFilters
           ),
           startDate,
@@ -49,19 +43,24 @@ let store = {
         ),
         currentPageName
       )
+      */
+     return {drivers, passengers, trips}
     }
   },
   filters: {
     switchFilter(
-      {drivers, passengers, trips},
-      showInactiveUsers,
-      activeUsersAndTrips
+      activeUsersAndTrips,
+      showInactiveUsers
     ) {
+      let clonedActiveUsersAndTrips = [...activeUsersAndTrips]
+      let drivers = {}
+      let passengers = {}
+      let trips = {}
+
       if (!showInactiveUsers) {
         /*
          * INSTRUCTIONS
          * Return only active drivers, passengers, and trips
-         * 
          *
          * USE THESE VARIABLES
          * `drivers`: contains an array of driver info
