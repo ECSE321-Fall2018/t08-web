@@ -174,31 +174,22 @@ let store = {
 		return {drivers, passengers, trips}
     },
     sortList({drivers, passengers, trips}, currentPageName) {
-      /*
-       * INSTRUCTIONS
-       * Sort drivers/passengers/trips
-       *
-       * USE THESE VARIABLES
-       * `drivers`: contains an array of driver info
-       * `passengers`: contains an array of passenger info
-       * `trips`: contains an array of trip info
-       * currentPageName: last word in the current URL (e.g. status, rankings)
-       *
-       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
-       */
-      // console.log(drivers)
-      // console.log(passengers)
-      // console.log(trips)
-      // console.log(currentPageName)
-
-      // INSERT CODE HERE (I'VE HELPED YOU OUT)
-
+      
       if (currentPageName === 'status') {
         // Sort by alphabetical order of username (`username`)
+        drivers.sort((a, b) => a.username.localeCompare(b.username))
+        passengers.sort((a, b) => a.username.localeCompare(b.username))
+        trips.sort((a, b) => a.startLocation.localeCompare(b.startLocation))
 
       } else if (currentPageName === 'rankings') {
-        // Sort by most trips taken (`tripnumber`)
-
+        // Sort by most trips taken (`tripnumber`) 
+        //drivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
+        drivers.sort(function(a, b){
+          return a.tripnumber - b.tripnumber
+        })
+        passengers.sort(function(a, b){
+          return a.tripnumber - b.tripnumber
+        })
       }
 
       return {drivers, passengers, trips}
