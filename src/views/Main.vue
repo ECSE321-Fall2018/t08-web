@@ -1,11 +1,12 @@
 <template>
-  <Dashboard pageName='rankings' />
+  <Dashboard :pageName='pageName' />
 </template>
 
 <script>
   import Dashboard from '@/components/Dashboard.vue'
 
   export default {
-    components: {Dashboard}
+    components: {Dashboard},
+    props: ['pageName'],
   }
 </script>

@@ -2,7 +2,6 @@ import dummyData from '@/dummy-data.js'
 
 let store = {
   data: {
-    currentPageName: 'login',
     username: null,
     password: null,
     searchBoxFilters: {
@@ -18,7 +17,6 @@ let store = {
   computed: {
     allFilters() {
       const {
-        currentPageName,
         searchBoxFilters,
         showInactiveUsers, 
         startDate, 
@@ -177,15 +175,13 @@ let store = {
 		
 		return {drivers, passengers, trips}
     },
-    sortList({drivers, passengers, trips}, currentPageName) {
+    sortList({drivers, passengers, trips}) {
       
-      if (currentPageName === 'status') {
         // Sort by alphabetical order of username (`username`)
         drivers.sort((a, b) => a.username.localeCompare(b.username))
         passengers.sort((a, b) => a.username.localeCompare(b.username))
         trips.sort((a, b) => a.startLocation.localeCompare(b.startLocation))
 
-      } else if (currentPageName === 'rankings') {
         // Sort by most trips taken (`tripnumber`) 
         //drivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
         drivers.sort(function(a, b){
@@ -194,15 +190,11 @@ let store = {
         passengers.sort(function(a, b){
           return a.tripnumber - b.tripnumber
         })
-      }
 
       return {drivers, passengers, trips}
     },
   },
   methods: {
-    changePageName(newPageName) {
-      store.data.currentPageName = newPageName
-    },
     setUsername(username) {
       store.data.username = username
     },
