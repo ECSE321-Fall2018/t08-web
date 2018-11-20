@@ -8,17 +8,17 @@
       </ul>
     </div>
   </footer>
-
-  <script>
-      function showContact() {
-          document.getElementById("contact").innerHTML = "<b>RideShareDevs@gmail.com</b>";
-      }
-
-      function hideContact() {
-          document.getElementById("contact").innerHTML = "<b>Contact</b>";
-      }
-  </script>
 </template>
+
+<script>
+    function showContact() {
+        document.getElementById("contact").innerHTML = "<b>RideShareDevs@gmail.com</b>";
+    }
+
+    function hideContact() {
+        document.getElementById("contact").innerHTML = "<b>Contact</b>";
+    }
+</script>
 
 <style scoped>
   #footerText {
