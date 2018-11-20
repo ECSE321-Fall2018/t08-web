@@ -3,7 +3,6 @@
     tag='h1'
     :to='"/" + text.toLowerCase()'
     :class='pageName === text.toLowerCase() ? "currentLink" : "link"'
-    v-on:click.native='changePageName(text.toLowerCase())'
   >
     <mu-icon :value='iconName' class='icon'></mu-icon>
     <span id='text'>{{text}}</span>
@@ -15,14 +14,8 @@ import store from '@/store.js'
 
 export default {
   props: ['pageName', 'text', 'iconName'],
-  methods: {
-    changePageName(newPageName) {
-      store.methods.changePageName(newPageName)
-    }
-  },
 }
 </script>
-
 
 <style scoped>
   .icon {

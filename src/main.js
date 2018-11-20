@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import axios from 'axios'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
 import {Button, Checkbox, DateInput, Form, Grid, Icon, Paper, Switch, TextField, theme} from 'muse-ui'

@@ -4,7 +4,7 @@
       <h2>{{title}}</h2>
     </mu-flex>
     <mu-flex justify-content='center'>
-      <List :title='title' />
+      <List :pageName='pageName' :title='title' />
     </mu-flex>
     <mu-flex justify-content='center'>
       <mu-text-field v-model='store.searchBoxFilters[title.toLowerCase()]' type='text' icon='search' style='width: 100%'></mu-text-field>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import List from '@/components/List.vue'
+import List from '@/components/Main/List.vue'
 import store from '@/store.js'
 
 export default {
@@ -22,7 +22,7 @@ export default {
   data() {
     return {store: store.data}
   },
-  props: ['title'],
+  props: ['title', 'pageName'],
   methods: {
     filter(users) {
       return users

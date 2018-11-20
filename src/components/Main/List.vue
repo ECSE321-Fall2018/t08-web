@@ -5,14 +5,17 @@
       <h3>Trips Done</h3>
     </mu-flex>
     <ul v-if='title === "Routes"'>
-      <li v-for='trip in allFilters["trips"]' class='list-item'>
-        <div>{{trip.startLocation}} {{trip.stops}}</div>
-        <div>{{trip.status}}</div>
+      <li
+        v-for='trip, i in pageName === "status" ? statusFilters["trips"] : rankingsFilters["trips"]'
+        class='list-item'
+      >
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.slice(0, trip.indexOf(';'))}}</div>
+        <div>{{trip.slice(trip.indexOf(';')).slice(1)}}</div>
       </li>
     </ul>
     <ul v-else>
-      <li v-for='user in allFilters[title.toLowerCase()]' class='list-item'>
-        <div>{{user.username}}</div>
+      <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
         <div>{{user.tripnumber}}</div>
       </li>
     </ul>
@@ -23,7 +26,7 @@
 import store from '@/store.js'
 
 export default {
-  props: ['title'],
+  props: ['title', 'pageName'],
   computed: store.computed,
 }
 </script>

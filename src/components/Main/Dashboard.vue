@@ -1,5 +1,5 @@
 <template>
-  <mu-flex v-if='store.username'
+  <mu-flex
     class='flex-parent'
     direction='column'
     wrap='wrap'
@@ -7,7 +7,7 @@
     align-items='center'
   >
     <section class='flex-item'>
-      <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
+      <img alt='RideShare Logo' src='../../assets/temp-logo.png' width='300'>
     </section>
     <mu-flex tag='section' class='flex-item' style='width: 93%'>
       <mu-flex tag='section' fill>
@@ -21,39 +21,42 @@
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
       <mu-flex class='listings' align-items='center'>
-        <Listing title='Drivers' />
-        <Listing title='Passengers' />
-        <Listing title='Routes' />
+        <Listing :pageName='pageName' title='Drivers' />
+        <Listing :pageName='pageName' title='Passengers' />
+        <Listing :pageName='pageName' title='Routes' />
       </mu-flex>
     </section>
     <mu-flex
+      v-if='pageName === "status"'
+      tag='section'
+      justify-content='center'
+    >
+      <InactiveUserSwitch class='bottomFilter' />
+    </mu-flex>
+    <mu-flex
+      v-else
       tag='section'
       justify-content='center'
       align-items='baseline'
       style='width: 100%'
     >
-      <InactiveUserSwitch v-if='pageName === "status"' class='bottomFilter' />
+      <mu-button flat class='bottomFilter' v-on:click='resetDates(store)'>Reset Dates</mu-button>
       <RankingsDatePicker
         type='startDate'
         label='Start Date'
-        v-if='pageName === "rankings"'
         class='bottomFilter'
       />
       <RankingsDatePicker
         type='endDate'
         label='End Date'
-        v-if='pageName === "rankings"'
         class='bottomFilter'
       />
     </mu-flex>
   </mu-flex>
-  <div v-else>
-    {{goToLogin}}
-  </div>
 </template>
 
 <script>
-import Listing from '@/components/Listing.vue'
+import Listing from '@/components/Main/Listing.vue'
 import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
 import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
 import Link from '@/components/Link.vue'
@@ -71,11 +74,12 @@ export default {
   data() {
     return {store: store.data}
   },
-  computed: {
-    goToLogin() {
-      this.$router.push('login')
-    }
-  },
+  methods: {
+    resetDates(store) {
+      store.startDate = null
+      store.endDate = null
+    },
+  }
 };
 </script>
 

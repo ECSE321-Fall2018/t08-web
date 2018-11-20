@@ -2,7 +2,6 @@ import dummyData from '@/dummy-data.js'
 
 let store = {
   data: {
-    currentPageName: 'login',
     username: null,
     password: null,
     searchBoxFilters: {
@@ -16,100 +15,105 @@ let store = {
     ...dummyData, // GO TO dummy-data.js TO SEE THE DUMMY DATA
   },
   computed: {
-    allFilters() {
-      const {
-        currentPageName,
-        searchBoxFilters,
-        showInactiveUsers, 
-        startDate, 
-        endDate,
-        drivers, 
-        passengers, 
-        trips, 
-        activeUsersAndTrips
-      } = store.data
-      const {searchBoxFilter, switchFilter, dateFilter, sortList} = store.filters
+    statusFilters() {
+      const {searchBoxFilter, switchFilter, sortList} = store.filters
+      const {showInactiveUsers, activeUsersAndTrips, routesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
-        dateFilter(
-          searchBoxFilter(
-            switchFilter(
-              {drivers, passengers, trips},
-              showInactiveUsers,
-              activeUsersAndTrips
-            ),
-            searchBoxFilters
-          ),
-          startDate,
-          endDate
+        searchBoxFilter(
+          switchFilter(activeUsersAndTrips, routesBetweenDates, showInactiveUsers),
+          searchBoxFilters
         ),
-        currentPageName
+        'status'
       )
-    }
+    },
+    rankingsFilters() {
+      const {searchBoxFilter, dateFilter, sortList} = store.filters
+      const {startDate, endDate, usersBetweenDates, routesBetweenDates, searchBoxFilters} = store.data
+
+      return sortList(
+        searchBoxFilter(
+          dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate),
+          searchBoxFilters
+        ),
+        'rankings'
+      )
+    },
   },
   filters: {
-    switchFilter(
-      {drivers, passengers, trips},
-      showInactiveUsers,
-      activeUsersAndTrips
-    ) {
+    switchFilter(activeUsersAndTrips, routesBetweenDates, showInactiveUsers) {
+      let clonedActiveUsersAndTrips = [...activeUsersAndTrips]
+      let clonedRoutesBetweenDates = [...routesBetweenDates]
+      let drivers = {}
+      let passengers = {}
+      let trips = {}
+
       if (!showInactiveUsers) {
         /*
-         * INSTRUCTIONS
-         * Return only active drivers, passengers, and trips
-         * 
-         *
-         * USE THESE VARIABLES
-         * `drivers`: contains an array of driver info
-         * `passengers`: contains an array of passenger info
-         * `trips`: contains an array of trip info
-         * showInactiveUsers: either true (show inactive users) or false (don't show inactive users)
-         * activeUsersAndTrips: contains all the active users and trips in the format userid;tripid
-         * 
-         * (In dummy-data.js, "status" is broken, don't use it)
-         *
-         * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
+         * INSTRUCTIONS (DON'T WORK ON IT YET)
+         * Fill the empty arrays `drivers`, passengers`, and `trips` with active drivers/passengers/trips
+         * clonedActiveUsersAndTrips contains the 
          */
-        // console.log(drivers)
-        // console.log(passengers)
-        // console.log(trips)
-        // console.log(showInactiveUsers)
-        // console.log(activeUsersAndTrips)
+        // console.log(clonedActiveUsersAndTrips)
 
         // INSERT CODE HERE
 
 
         
-        return {drivers, passengers, trips}
+        // return {drivers, passengers, trips}
+        return {
+          drivers: store.data.drivers,
+          passengers: store.data.passengers,
+          trips: clonedRoutesBetweenDates,
+        }
       } else {
-        return {drivers, passengers, trips}
+        // return {drivers, passengers, trips}
+        return {
+          drivers: store.data.drivers,
+          passengers: store.data.passengers,
+          trips: clonedRoutesBetweenDates,
+        }
       }
     },
     searchBoxFilter({drivers, passengers, trips}, searchBoxFilters) {
+      let clonedDrivers = [...drivers]
+      let clonedPassengers = [...passengers]
+      let clonedTrips = [...trips]
+
       /*
        * INSTRUCTIONS
        * Filter drivers/passengers/trips by keyword in search box
        *
        * USE THESE VARIABLES
-       * `drivers`: contains an array of driver info
-       * `passengers`: contains an array of passenger info
-       * `trips`: contains an array of trip info
-       * searchBoxFilters: an array containing what's in the three searchboxes
+       * `clonedDrivers`: contains an array of driver info
+       * `clonedPassengers`: contains an array of passenger info
+       * `clonedTrips`: contains an array of trip info
+       * searchBoxFilters: an array containing what's in the three searchboxes (don't edit it)
        *
        * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
        */
-      // console.log(drivers)
-      // console.log(passengers)
-      // console.log(trips)
+      // console.log(clonedDrivers)
+      // console.log(clonedPassengers)
+      // console.log(clonedTrips)
       // console.log(searchBoxFilters)
 
       // INSERT CODE HERE
 
       
 
-      return {drivers, passengers, trips}
+      return {
+        drivers: clonedDrivers,
+        passengers: clonedPassengers,
+        trips: clonedTrips,
+      }
     },
-    dateFilter({drivers, passengers, trips}, startDate, endDate) {
+    dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate) {
+      let clonedUsersBetweenDates = [...usersBetweenDates]
+      let clonedRoutesBetweenDates = [...routesBetweenDates]
+
+      /*
+      DONT WORK ON THIS YET!!!!!!
+      */
       /*
        * INSTRUCTIONS
        * Filter drivers/passengers/trips by start and end date
@@ -131,6 +135,7 @@ let store = {
       //console.log(trips)
       //console.log(startDate)
       //console.log(endDate)
+      /*
 		let count;
 		let Sdate;
 		let Edate;
@@ -169,36 +174,47 @@ let store = {
 					trips.splice(count, 1);
 				}
 			}		
-		}
+    }
 		
-		return {drivers, passengers, trips}
-    },
-    sortList({drivers, passengers, trips}, currentPageName) {
-      
-      if (currentPageName === 'status') {
-        // Sort by alphabetical order of username (`username`)
-        drivers.sort((a, b) => a.username.localeCompare(b.username))
-        passengers.sort((a, b) => a.username.localeCompare(b.username))
-        trips.sort((a, b) => a.startLocation.localeCompare(b.startLocation))
+    return {drivers, passengers, trips}
+    */
 
-      } else if (currentPageName === 'rankings') {
+      return {
+        drivers: store.data.drivers,
+        passengers: store.data.passengers,
+        trips: clonedRoutesBetweenDates,
+      }
+    },
+    sortList({drivers, passengers, trips}, sortBy) {
+      let clonedDrivers = [...drivers]
+      let clonedPassengers = [...passengers]
+      let clonedTrips = [...trips]
+
+      if (sortBy === 'status') {
+        // Sort by alphabetical order of username (`username`)
+        clonedDrivers.sort((a, b) => a.username.localeCompare(b.username))
+        clonedPassengers.sort((a, b) => a.username.localeCompare(b.username))
+        // clonedTrips.sort((a, b) => a.startLocation.localeCompare(b.startLocation))
+
+      } else if (sortBy === 'rankings') {
         // Sort by most trips taken (`tripnumber`) 
-        //drivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
-        drivers.sort(function(a, b){
+        //cloneDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
+        clonedDrivers.sort(function(a, b){
           return a.tripnumber - b.tripnumber
         })
-        passengers.sort(function(a, b){
+        clonedPassengers.sort(function(a, b){
           return a.tripnumber - b.tripnumber
         })
       }
 
-      return {drivers, passengers, trips}
+      return {
+        drivers: clonedDrivers, 
+        passengers: clonedPassengers, 
+        trips: clonedTrips,
+      }
     },
   },
   methods: {
-    changePageName(newPageName) {
-      store.data.currentPageName = newPageName
-    },
     setUsername(username) {
       store.data.username = username
     },
