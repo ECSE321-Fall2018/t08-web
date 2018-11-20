@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Dashboard from '@/components/Dashboard.vue'
+  import Dashboard from '@/components/Main/Authentication.vue'
 
   export default {
     components: {Dashboard},

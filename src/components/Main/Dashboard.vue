@@ -1,5 +1,5 @@
 <template>
-  <mu-flex v-if='store.username'
+  <mu-flex
     class='flex-parent'
     direction='column'
     wrap='wrap'
@@ -7,7 +7,7 @@
     align-items='center'
   >
     <section class='flex-item'>
-      <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
+      <img alt='RideShare Logo' src='../../assets/temp-logo.png' width='300'>
     </section>
     <mu-flex tag='section' class='flex-item' style='width: 93%'>
       <mu-flex tag='section' fill>
@@ -48,9 +48,6 @@
       />
     </mu-flex>
   </mu-flex>
-  <div v-else>
-    {{goToLogin}}
-  </div>
 </template>
 
 <script>
@@ -72,16 +69,11 @@ export default {
   data() {
     return {store: store.data}
   },
-  computed: {
-    goToLogin() {
-      this.$router.push('login')
-    }
-  },
   methods: {
     resetDates(store) {
       store.startDate = null
       store.endDate = null
-    }
+    },
   }
 };
 </script>
