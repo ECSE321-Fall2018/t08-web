@@ -3,10 +3,10 @@
 </template>
 
 <script>
-  import Dashboard from '@/components/Main/Authentication.vue'
+  import Authorization from '@/components/Main/Authorization.vue'
 
   export default {
-    components: {Dashboard},
+    components: {Authorization},
     props: ['pageName'],
   }
 </script>
