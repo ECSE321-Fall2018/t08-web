@@ -126,12 +126,57 @@ let store = {
        *
        * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
        */
-      // console.log(drivers)
-      // console.log(passengers)
-      // console.log(trips)
-      // console.log(startDate)
-      // console.log(endDate)
-      return {drivers, passengers, trips}
+      //console.log(drivers)
+      //console.log(passengers)
+      //console.log(trips)
+      //console.log(startDate)
+      //console.log(endDate)
+		let count;
+		let Sdate;
+		let Edate;
+		let newtrips = [];
+		
+		for(count = 0; count < trips.length; count ++){
+			newtrips[count] = trips[count];
+		}
+		
+		
+		if(startDate == null && endDate == null){
+		return {drivers, passengers, trips}
+		}
+		
+		else if(startDate !== null && endDate == null){
+			for (count = 0; count < trips.length; count ++){
+				Sdate = new Date(trips[count]['startdate']);
+				console.log(startDate);
+				console.log(startDate.getMonth() == Sdate.getMonth());
+				if(startDate.getFullYear() !== Sdate.getFullYear() || startDate.getMonth() !== Sdate.getMonth()|| startDate.getMonth() !== Sdate.getMonth()){
+					trips.splice(count, 1);
+				}
+			}
+		}
+		else if(startDate == null && endDate !== null){
+			for (count = 0; count < trips.length; count ++){
+				Edate = new Date(trips[count]['enddate']);
+				if(endDate.getFullYear() !== Edate.getFullYear() || endDate.getMonth() !== Edate.getMonth()|| endDate.getMonth() !== Edate.getMonth()){
+					trips.splice(count, 1);
+				}
+			}
+		}		
+		else{
+			for (count = 0; count < trips.length; count ++){
+				Sdate = new Date(trips[count]['startdate']);
+				Edate = new Date(trips[count]['enddate']);
+				if(startDate.getFullYear() !== Sdate.getFullYear() || startDate.getMonth() !== Sdate.getMonth()|| startDate.getMonth() !== Sdate.getMonth()){
+					trips.splice(count, 1);
+				}
+				if(endDate.getFullYear() !== Edate.getFullYear() || endDate.getMonth() !== Edate.getMonth()|| endDate.getMonth() !== Edate.getMonth()){
+					trips.splice(count, 1);
+				}			
+			}		
+		}
+		
+		return {drivers, passengers, trips}
     },
     sortList({drivers, passengers, trips}, currentPageName) {
       /*
