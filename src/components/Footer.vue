@@ -2,23 +2,13 @@
   <footer>
     <div id="footerText">
       <ul>
-        <li onmouseover="showContact()" onmouseout="hideContact()"><p id="contact"><b>Contact</b></p></li>
-        <li><p><b>Rideshare 2018 (C) All rights reserved</b></p></li>
+        <li><p id="contact"><b>Contact RideshareDevs@gmail.com for assistance</b></p></li>
+        <li><p><b>Rideshare 2018 &copy; All rights reserved</b></p></li>
         <li><p><b>Last updated: November 11th, 2018</b></p></li>
       </ul>
     </div>
   </footer>
 </template>
-
-<script>
-    function showContact() {
-        document.getElementById("contact").innerHTML = "<b>RideShareDevs@gmail.com</b>";
-    }
-
-    function hideContact() {
-        document.getElementById("contact").innerHTML = "<b>Contact</b>";
-    }
-</script>
 
 <style scoped>
   #footerText {
