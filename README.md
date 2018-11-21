@@ -62,34 +62,35 @@ Javascript provides us with the method `fetch()` to retrive data from the backen
 
 Here's an example of how to make a GET request in Javascript. This gets a user's details:
 ```JS
-fetch('https://rideshare08.herokuapp.com/api/user/users/47?adminusername=jeffery&adminpass=password')
+fetch('https://rideshare08.herokuapp.com/api/user/users/58?adminusername=jeffery&adminpass=password')
 .then(response => response.json()) // turns it into JSON data
 .then(jsonObject => console.log(jsonObject)) // print it out on the web console
 ```
 If you run it in the web console (Right-click -> Inspect Element), you'll probabaly get a promise with the value:
 ```JS
 {
-    emailAddress: "ali4glory@yahoo.com"
-    fullName: "Hyacinth Ali"
-    password: "strongman"
+    emailAddress: "cyril@email.com"
+    fullName: "Cyril Driver"
+    password: "s47aw+yRqRXA9G2EJecxqGmQNNQvNLY+I7JHJ8pVQhw=$aYx++jXZOuy/dAf5n8n3IHDMPqM5GsRU4UFgND00N6o="
     role: "Driver"
     status: true
-    tripnumber: 2
-    userID: 47
-    username: "Hyacinth"
+    tripnumber: 4
+    userID: 58
+    username: "cyril"
 }
 ```
-\
+If you get the error "Unexpected end of JSON input", it means the backend has nothing to return.
+
+                
+
 If you make a request that isn't a GET request, you have to specify what request it is.
 Here's an example of a POST request that gets all active users and drivers:
 ```JS
-fetch('https://rideshare08.herokuapp.com/api/trip/usertripstatus?username=jeffery&password=password&status=1', {method: 'POST'}) // here we specify POST
+fetch('https://rideshare08.herokuapp.com/api/trip/usertripstatus?username=jeffery&password=password&status=2&role=Passenger', {method: 'POST'}) // here we specify POST
 .then(response => response.json())
 .then(jsonObject => console.log(jsonObject))
 ```
-If you run it in the web console, you'll probabaly get a promise value of `["42;45", "52;50", "47;50"]`.
-So we have active users with IDs 42, 52, and 47.
-And active trips with IDs 45 and 50.
+It'll return JSON objects of passengers in a trip right now.
 
 You can also include error handling: `.catch(e => console.log(e))`
 
@@ -102,12 +103,12 @@ import axios from '@/axios.js'
 Then you can write shorter API request code:
 ```JS
 /* Fetch Example 1 */
-axios.get('/user/users/47?adminusername=jeffery&adminpass=password')
+axios.get('/user/users/58?adminusername=jeffery&adminpass=password')
 // Skip the turning into JSON data process
 .then(jsonObject => console.log(jsonObject))
 
 /* Fetch Example 2 */
-axios.post('/trip/usertripstatus?username=jeffery&password=password&status=1')
+axios.post('/trip/usertripstatus?username=jeffery&password=password&status=2&role=Passenger')
 .then(jsonObject => console.log(jsonObject))
 ```
 
@@ -169,6 +170,7 @@ let biggerObject = {
 // `biggerObject` contains everything that `object` has and then some
 
 let clonedObject = {...object} // how to clone objects in JS
+let clonedArray = [...array] // how to clone arrays in JS
 ```
 
 
