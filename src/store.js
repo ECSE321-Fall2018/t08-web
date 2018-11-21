@@ -100,7 +100,7 @@ let store = {
 
       // INSERT CODE HERE
 
-      
+      /*
       function searchStringUser(searchFilterIndex) {
         return function(value) {
           return value.username.toLowerCase().includes(searchBoxFilters[searchFilterIndex].toLowerCase())
@@ -112,17 +112,30 @@ let store = {
           return value.toLowerCase().includes(searchBoxFilters.searchFilterIndex.toLowerCase())
         }
       }
+      */
 
-      let driversFiltered = clonedDrivers.filter(searchStringUser('drivers'))
-      let passengersFiltered = clonedPassengers.filter(searchStringRoute('passengers'))
-      let tripsFiltered = clonedTrips.filter(seachString('routes'))
+      if (searchBoxFilters.drivers) {
+        clonedDrivers = clonedDrivers.filter(
+          driver => driver.username.includes(searchBoxFilters.drivers)
+        )
+      }
+      if (searchBoxFilters.passengers) {
+        clonedPassengers = clonedPassengers.filter(
+          passenger => passenger.username.includes(searchBoxFilters.passengers)
+        )
+      }
+      if (searchBoxFilters.trips) {
+        clonedTrips = clonedTrips.filter(
+          trip => trip.includes(searchBoxFilters.trips)
+        )
+      }
 
 
-       console.log(clonedDrivers)
+       //console.log(clonedDrivers)
      //  console.log(driversFiltered.username)
-       console.log(clonedPassengers)
-       console.log(clonedTrips)
-       console.log(searchBoxFilters)
+       //console.log(clonedPassengers)
+       //console.log(clonedTrips)
+       //console.log(searchBoxFilters)
 
       
 
