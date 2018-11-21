@@ -188,24 +188,34 @@ let store = {
     sortList({drivers, passengers, trips}, sortBy) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
-      let clonedTrips = [...trips]
+      let clonedTrips = [...trips]      
+
+      // console.log(trips)
+      // console.log(clonedTrips)
 
       if (sortBy === 'status') {
         // Sort by alphabetical order of username (`username`)
         clonedDrivers.sort((a, b) => a.username.localeCompare(b.username))
         clonedPassengers.sort((a, b) => a.username.localeCompare(b.username))
-        // clonedTrips.sort((a, b) => a.startLocation.localeCompare(b.startLocation))
+        clonedTrips.sort()//(a, b) => a.startLocation.localeCompare(b.startLocation))
 
       } else if (sortBy === 'rankings') {
         // Sort by most trips taken (`tripnumber`) 
-        //cloneDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
+        //clonedDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
+        //following methods do not work --> shall work on it lataaaa
         clonedDrivers.sort(function(a, b){
-          return a.tripnumber - b.tripnumber
+          return b.tripnumber - a.tripnumber
         })
         clonedPassengers.sort(function(a, b){
-          return a.tripnumber - b.tripnumber
+          return b.tripnumber - a.tripnumber
+        })
+        clonedTrips.sort(function(a, b){
+          return a - b
         })
       }
+
+      // console.log(clonedTrips)
+      // console.log(trips)
 
       return {
         drivers: clonedDrivers, 
