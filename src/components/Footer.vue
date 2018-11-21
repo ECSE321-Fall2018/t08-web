@@ -23,7 +23,7 @@
 <style scoped>
   #footerText {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 10px;
     color: black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -34,7 +34,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: white;
+    background-color: slategrey;
   }
 
   li {
@@ -45,7 +45,7 @@
   li p {
     display: block;
     text-align: center;
-    padding: 5px 5px;
+    padding: 0px 5px;
     text-decoration: none;
   }
 </style>
