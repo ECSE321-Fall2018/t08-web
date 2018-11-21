@@ -116,17 +116,23 @@ let store = {
 
       if (searchBoxFilters.drivers) {
         clonedDrivers = clonedDrivers.filter(
-          driver => driver.username.includes(searchBoxFilters.drivers)
+          driver => driver.username.toLowerCase().includes(
+            searchBoxFilters.drivers.toLowerCase()
+          )
         )
       }
       if (searchBoxFilters.passengers) {
         clonedPassengers = clonedPassengers.filter(
-          passenger => passenger.username.includes(searchBoxFilters.passengers)
+          passenger => passenger.username.toLowerCase().includes(
+            searchBoxFilters.passengers.toLowerCase()
+          )
         )
       }
       if (searchBoxFilters.trips) {
         clonedTrips = clonedTrips.filter(
-          trip => trip.includes(searchBoxFilters.trips)
+          trip => trip.toLowerCase().includes(
+            searchBoxFilters.trips.toLowerCase()
+          )
         )
       }
 
