@@ -27,6 +27,7 @@
 
 <script>
   import store from '@/store.js'
+  import AXIOS from '@/axios.js'
 
   export default {
     data () {
@@ -62,11 +63,32 @@
              * you have access to the variables `username` and `password`
              */
             // INSERT CODE HERE
-
+              AXIOS.post(`/user/authorize?username=${username}&password=${password}&role=Administrator`)
+                  .then(function (jsonObject) {
+                      let id = jsonObject.data.data
+                      if (id === -1) {
+                          this.$router.push('/')
+                      } else {
+                          AXIOS.post(`/api/user/login?username=${username}&password=${password}`)
+                              .then(function (jsonObject) {
+                                  let loggedin = jsonObject.data.data
+                                  if (loggedin == "") {
+                                      this.$router.push('/')
+                                  }
+                                  else {
+                                      this.store.methods.setUsername(username)
+                                      this.store.methods.setPassword(password)
+                                      this.$router.push('status')
+                                  }
+                              })
+                      }
+                  })
             // The code to log the user in (put it in your axios)
+              /*
             store.methods.setUsername(username)
             store.methods.setPassword(password)
             this.$router.push('status')
+            */
           }
         })
       },
