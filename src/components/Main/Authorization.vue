@@ -1,6 +1,7 @@
 <template>
   <div v-if='store.username'>
-    <Dashboard :pageName='pageName' />
+    <Settings v-if='pageName === "settings"' />
+    <Dashboard v-else :pageName='pageName' />
   </div>
   <div v-else>
     {{goToLogin()}}
@@ -9,11 +10,15 @@
 
 <script>
 import Dashboard from '@/components/Main/Dashboard'
+import Settings from '@/components/Settings'
 import store from '@/store.js'
 
 export default {
   name: 'Authentication',
-  components: {Dashboard},
+  components: {
+    Dashboard,
+    Settings
+  },
   props: ['pageName'],
   data() {
     return {store: store.data}

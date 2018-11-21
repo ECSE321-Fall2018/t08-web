@@ -102,12 +102,12 @@ import axios from '@/axios.js'
 Then you can write shorter API request code:
 ```JS
 /* Fetch Example 1 */
-AXIOS.get('/user/users/47?adminusername=jeffery&adminpass=password')
+axios.get('/user/users/47?adminusername=jeffery&adminpass=password')
 // Skip the turning into JSON data process
 .then(jsonObject => console.log(jsonObject))
 
 /* Fetch Example 2 */
-AXIOS.post('/trip/usertripstatus?username=jeffery&password=password&status=1')
+axios.post('/trip/usertripstatus?username=jeffery&password=password&status=1')
 .then(jsonObject => console.log(jsonObject))
 ```
 

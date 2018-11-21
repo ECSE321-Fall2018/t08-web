@@ -13,6 +13,7 @@ let store = {
     startDate: null,
     endDate: null,
     ...dummyData, // GO TO dummy-data.js TO SEE THE DUMMY DATA
+    adminDetails: {},
   },
   computed: {
     statusFilters() {
@@ -99,7 +100,7 @@ let store = {
 
       // INSERT CODE HERE
 
-      
+      /*
       function searchStringUser(searchFilterIndex) {
         return function(value) {
           return value.username.toLowerCase().includes(searchBoxFilters[searchFilterIndex].toLowerCase())
@@ -111,17 +112,36 @@ let store = {
           return value.toLowerCase().includes(searchBoxFilters.searchFilterIndex.toLowerCase())
         }
       }
+      */
 
-      let driversFiltered = clonedDrivers.filter(searchStringUser('drivers'))
-      let passengersFiltered = clonedPassengers.filter(searchStringRoute('passengers'))
-      let tripsFiltered = clonedTrips.filter(seachString('routes'))
+      if (searchBoxFilters.drivers) {
+        clonedDrivers = clonedDrivers.filter(
+          driver => driver.username.toLowerCase().includes(
+            searchBoxFilters.drivers.toLowerCase()
+          )
+        )
+      }
+      if (searchBoxFilters.passengers) {
+        clonedPassengers = clonedPassengers.filter(
+          passenger => passenger.username.toLowerCase().includes(
+            searchBoxFilters.passengers.toLowerCase()
+          )
+        )
+      }
+      if (searchBoxFilters.trips) {
+        clonedTrips = clonedTrips.filter(
+          trip => trip.toLowerCase().includes(
+            searchBoxFilters.trips.toLowerCase()
+          )
+        )
+      }
 
 
-       console.log(clonedDrivers)
+       //console.log(clonedDrivers)
      //  console.log(driversFiltered.username)
-       console.log(clonedPassengers)
-       console.log(clonedTrips)
-       console.log(searchBoxFilters)
+       //console.log(clonedPassengers)
+       //console.log(clonedTrips)
+       //console.log(searchBoxFilters)
 
       
 

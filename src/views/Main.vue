@@ -1,12 +1,12 @@
 <template>
-  <Dashboard :pageName='pageName' />
+  <Authorization :pageName='pageName' />
 </template>
 
 <script>
-  import Dashboard from '@/components/Main/Authentication.vue'
+  import Authorization from '@/components/Main/Authorization'
 
   export default {
-    components: {Dashboard},
+    components: {Authorization},
     props: ['pageName'],
   }
 </script>

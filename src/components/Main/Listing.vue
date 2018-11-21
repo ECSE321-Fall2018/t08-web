@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import List from '@/components/Main/List.vue'
+import List from '@/components/Main/List'
 import store from '@/store.js'
 
 export default {

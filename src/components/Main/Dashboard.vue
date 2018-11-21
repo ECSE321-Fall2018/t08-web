@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import Listing from '@/components/Main/Listing.vue'
-import InactiveUserSwitch from '@/components/InactiveUserSwitch.vue'
-import RankingsDatePicker from '@/components/RankingsDatePicker.vue'
-import Link from '@/components/Link.vue'
+import Listing from '@/components/Main/Listing'
+import InactiveUserSwitch from '@/components/InactiveUserSwitch'
+import RankingsDatePicker from '@/components/RankingsDatePicker'
+import Link from '@/components/Link'
 import store from '@/store.js'
 
 export default {
