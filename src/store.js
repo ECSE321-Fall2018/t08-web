@@ -13,6 +13,7 @@ let store = {
     startDate: null,
     endDate: null,
     ...dummyData, // GO TO dummy-data.js TO SEE THE DUMMY DATA
+    adminDetails: {},
   },
   computed: {
     statusFilters() {
@@ -198,7 +199,7 @@ let store = {
 
       } else if (sortBy === 'rankings') {
         // Sort by most trips taken (`tripnumber`) 
-        //cloneDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
+        // cloneDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
         clonedDrivers.sort(function(a, b){
           return a.tripnumber - b.tripnumber
         })
