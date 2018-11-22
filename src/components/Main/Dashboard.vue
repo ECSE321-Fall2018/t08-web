@@ -5,6 +5,7 @@
     wrap='wrap'
     justify-content='center'
     align-items='center'
+    v-resize='resize'
   >
     <section class='flex-item'>
       <img alt='RideShare Logo' src='../../assets/temp-logo.png' width='300'>
@@ -20,10 +21,13 @@
       </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
-      <mu-flex class='listings' align-items='center'>
+      <mu-flex class='listings' align-items='center' v-if='store.pageWidth >= 800'>
         <Listing :pageName='pageName' title='Drivers' />
         <Listing :pageName='pageName' title='Passengers' />
         <Listing :pageName='pageName' title='Routes' />
+      </mu-flex>
+      <mu-flex class='listings' align-items='center' v-else>
+        <Listing :pageName='pageName' title='Drivers' />
       </mu-flex>
     </section>
     <mu-flex
@@ -72,13 +76,21 @@ export default {
   },
   props: ['pageName'],
   data() {
-    return {store: store.data}
+    return {
+      store: store.data,
+    }
+  },
+  mounted() {
+    store.data.pageWidth = window.innerWidth
   },
   methods: {
     resetDates() {
       store.data.startDate = null
       store.data.endDate = null
       store.methods.updateData()
+    },
+    resize() {
+      store.data.pageWidth = window.innerWidth
     },
   },
   created() {

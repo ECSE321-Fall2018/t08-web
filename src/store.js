@@ -15,6 +15,7 @@ let store = {
     endDate: null,
     ...dummyData, // We don't actually use the dummy data anymore, it gets overwritten by backend data
     adminDetails: {},
+    pageWidth: null,
   },
   computed: {
     statusFilters() {
