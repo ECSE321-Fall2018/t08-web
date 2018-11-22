@@ -9,7 +9,7 @@
     <section class='flex-item'>
       <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
-    <mu-paper :z-depth='2' style='margin: 40px 0' class='paper'>
+    <mu-paper :z-depth='2' style='margin: 20px 0' class='paper'>
       <mu-flex direction='column' justify-content='center' align-items='center'>
         <h1>Settings</h1>
         <ul>
@@ -17,14 +17,13 @@
             <div>ID</div>
             <div>{{store.adminDetails.userID}}</div>
           </li>
+          <li style='height: 48px'>
+            <div>Username</div>
+            <div>{{store.adminDetails.username}}</div>
+          </li>
           <SettingsList
             label='Full Name'
             property='fullName'
-            :editing='editing'
-          />
-          <SettingsList
-            label='Username'
-            property='username' 
             :editing='editing'
           />
           <SettingsList
@@ -37,7 +36,7 @@
               v-if='editing'
               tag='li'
               v-model='newPassword'
-              placeholder='New Password'
+              placeholder='New Password (Optional)'
               :action-icon='visibility ? "visibility_off" : "visibility"'
               :action-click='() => (visibility = !visibility)'
               :type='visibility ? "text" : "password"'
@@ -48,7 +47,7 @@
               v-if='editing'
               tag='li'
               v-model='reenterNewPassword'
-              placeholder='Re-enter New Password'
+              placeholder='Confirm New Password'
               :action-icon='visibility ? "visibility_off" : "visibility"'
               :action-click='() => (visibility = !visibility)'
               :type='visibility ? "text" : "password"'
@@ -64,6 +63,7 @@
     <mu-button color='primary' @click='changeMode'>
       {{store.darkMode ? "light mode" : "dark mode"}}
     </mu-button>
+    <mu-button color='primary' @click='goBack'>Back</mu-button>
     <mu-dialog
       title="Enter Your Password to Save Changes"
       width='600'
@@ -148,12 +148,19 @@ export default {
     },
     edit() {
       if (this.editing) {
-        if (
-          this.newPassword === this.reenterNewPassword
-          && this.newPassword.length > 7
-        ) {
+        if(this.newPassword == null || this.reenterNewPassword == null || this.newPassword == '') {
           this.isDialogOpen = true
         }
+        else if(this.newPassword === this.reenterNewPassword && this.newPassword.length > 7) {
+          this.isDialogOpen = true
+        }
+        else if(this.newPassword !== this.reenterNewPassword || this.newPassword.length < 8) {
+          this.color.color = 'error'
+          this.color.message = 'Passwords must match and be at least 8 characters.'
+          this.openColorSnackbar()
+        }
+
+
       } else {
         this.editing = true
       }
@@ -166,25 +173,29 @@ export default {
     confirm() {
       let that = this
       let {username, emailAddress, fullName} = this.store.adminDetails
-      let submitPassword = this.password
+      let submitPassword = null
+      let newPasswordParam = ''
       if (this.newPassword) {
         submitPassword = this.newPassword
       }
-      axios.post(`/user/update?username=${username}&email=${emailAddress}&name=${fullName}&role=Administrator&oldpass=${this.password}&newpass=${submitPassword}`)
+      if(submitPassword != null) {
+          newPasswordParam = `&newpass=${submitPassword}`
+      }
+      if(fullName != null) {
+          fullName = `&name=${fullName}`
+      }
+      axios.post(`/user/update?username=${username}&email=${emailAddress}&oldpass=${this.password}${newPasswordParam}`)
       .then(response => { 
         that.color.color = 'success'
         that.color.message = 'Success'
         that.openColorSnackbar()
+        that.updateAdminDetails()
       })
       .catch(error => {
           that.color.color = 'error'
           that.color.message = 'Unable to update administrator. Password may be invalid.'
           that.openColorSnackbar()
       })
-      .then(() => {
-        this.updateAdminDetails()
-      })
-
       this.resetStates()
     },
     resetStates() {
@@ -211,6 +222,9 @@ export default {
         this.color.open = false;
       }, this.color.timeout);
     },
+    goBack() {
+      this.$router.push('status')
+    }
   }
 }
 </script>
