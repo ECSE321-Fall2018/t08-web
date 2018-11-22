@@ -8,7 +8,8 @@
     v-resize='resize'
   >
     <section class='flex-item'>
-      <img alt='RideShare Logo' src='../../assets/temp-logo.png' width='300'>
+      <img v-if='store.darkMode' alt='RideShare Logo' src='../../assets/RideShareDarkMode.png' width='300'>
+      <img v-else alt='RideShare Logo' src='../../assets/temp-logo.png' width='300'>
     </section>
     <mu-flex tag='section' justify-content='center' class='flex-item' style='width: 93%'>
       <mu-flex tag='section' fill>

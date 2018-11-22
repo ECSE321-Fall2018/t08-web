@@ -260,7 +260,7 @@ let store = {
         passengers: clonedPassengers, 
         routes: clonedRoutes,
       }
-    }
+    },
   },
   methods: {
     setUsername(username) {
