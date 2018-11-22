@@ -43,14 +43,11 @@ let store = {
       )
     },
     rankingsFilters() {
-      const {searchBoxFilter, dateFilter, sortList} = store.filters
-      const {startDate, endDate, usersBetweenDates, routesBetweenDates, searchBoxFilters} = store.data
+      const {searchBoxFilter, sortList} = store.filters
+      const {drivers, passengers, routesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
-        searchBoxFilter(
-          dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate),
-          searchBoxFilters
-        ),
+        searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
         'rankings'
       )
     },
@@ -129,24 +126,18 @@ let store = {
         routes: clonedRoutes,
       }
     },
-    dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate) {
-      let clonedUsersBetweenDates = [...usersBetweenDates]
-      let clonedRoutesBetweenDates = [...routesBetweenDates]
-
-      
-
-      return {
-        drivers: store.data.drivers,
-        passengers: store.data.passengers,
-        routes: clonedRoutesBetweenDates,
-      }
-    },
     sortList({drivers, passengers, routes}, sortBy) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
-      let clonedRoutes = [...routes]      
-
-      // console.log(routes)
+      let clonedRoutes = [...routes]    
+      
+      // INSTRUCTIONS
+      // If sortBy === 'status', sort the above cloned variables in alphabetical order of their username
+      // If sortBy === 'rankings', sort the above cloned variables in descending order of their tripnumber
+      
+      // CHECK WHAT THEY CONTAIN
+      // console.log(clonedDrivers)
+      // console.log(clonedPassengers)
       // console.log(clonedRoutes)
 
       if (sortBy === 'status') {
@@ -226,13 +217,14 @@ let store = {
         // clonedTrips.sort(function(a, b){
         //   return a - b
         // })
+      }
 
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
         routes: clonedRoutes,
       }
-    },
+    }
   },
   methods: {
     setUsername(username) {
