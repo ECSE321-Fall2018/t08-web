@@ -203,15 +203,73 @@ let store = {
         // Sort by most trips taken (`tripnumber`) 
         //clonedDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
         //following methods do not work --> shall work on it lataaaa
-        clonedDrivers.sort(function(a, b){
-          return b.tripnumber - a.tripnumber
-        })
-        clonedPassengers.sort(function(a, b){
-          return b.tripnumber - a.tripnumber
-        })
-        clonedTrips.sort(function(a, b){
-          return a - b
-        })
+
+        function compareNumbers(a, b) {
+          return a - b;
+        }
+        clonedDrivers.sort(compareNumbers);
+
+        // can't use this cuz it's an array with diff properties and also other unknown reasons
+        // clonedDrivers.sort((a, b) => a - b); 
+        // clonedDrivers.sort((a, b) => a.SortOrder - b.SortOrder);
+
+        //-------try 1-------
+        // This seems like a good solution, but somehow it doesn't work which is pissing me off
+        // function sortProperties(obj){
+        //   // convert object into array
+        //   var sortable=[];
+        //   for(var key in obj)
+        //     if(obj.hasOwnProperty(key))
+        //       sortable.push([key, obj[key]]); // each item is an array in format [key, value]
+          
+        //   // sort items by value
+        //   sortable.sort(function(a, b){
+        //     return a[1]-b[1]; // compare numbers
+        //   });
+        //   return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
+        // }
+        // clonedDrivers = sortProperties(clonedDrivers);
+        // clonedPassengers = sortProperties(clonedPassengers);
+        // clonedTrips = sortProperties(clonedTrips);
+
+        //-------try 2-------
+        // function compare(a, b) {
+        // // Use toUpperCase() to ignore character casing
+        //   const genreA = a.genre.toUpperCase();
+        //   const genreB = b.genre.toUpperCase();
+
+        //-------try 3-------
+        // sort_array_by = function(field, reverse, pr){
+        //   reverse = (reverse) ? -1 : 1;
+        //   return function(a,b){
+        //     a = a[field];
+        //     b = b[field];
+        //     if (typeof(pr) != 'undefined'){
+        //       a = pr(a);
+        //       b = pr(b);
+        //     }
+        //     if (a<b) return reverse * -1;
+        //     if (a>b) return reverse * 1;
+        //     return 0;
+        //   }
+        // }
+        // clonedDrivers.sort(sort_array_by(tripnumber, true, function(a){
+        //   return new tripnumber(a);
+        // }));
+        // clonedDrivers.sort(sort_array_by(tripnumber, true, function(a){
+        //   return parseInt(a);
+        // }));
+
+        //OG (that worked before cloning everything)
+        // clonedDrivers.sort(function(a, b){
+        //   return b.tripnumber - a.tripnumber
+        // })
+        // clonedPassengers.sort(function(a, b){
+        //   return b.tripnumber - a.tripnumber
+        // })
+        // clonedTrips.sort(function(a, b){
+        //   return a - b
+        // })
       }
 
       // console.log(clonedTrips)
