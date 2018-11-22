@@ -83,8 +83,42 @@ let store = {
 
       if (!showInactiveUsers) {
         // INSERT CODE HERE
-
-        
+		let fakeDrivers = []
+		let fakePassengers = []
+		let fakeTrips = []
+		let count
+		let counter
+		for(count = 0; count < clonedDrivers.length; count ++){
+			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
+				if(clonedDrivers[count]['username'].toLowerCase() === clonedActiveUsersAndTrips[counter]['username'].toLowerCase()){
+					fakeDrivers.push(cloneDrivers[count])
+				}
+			}		
+		}
+		
+		for(count = 0; count < clonedPassengers.length; count ++){
+			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
+				if(clonedPassengers[count]['username'].toLowerCase() === clonedActiveUsersAndTrips[counter]['username'].toLowerCase()){
+					fakePassengers.push(clonedPassengers[count])
+				}
+			}		
+		}
+		
+		for(count = 0; count < clonedRoutesBetweenDates.length; count ++){
+			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
+				if(clonedRoutesBetweenDates[count].split('-')[0] === clonedActiveUsersAndTrips[counter]['startLocation']
+					&& clonedRoutesBetweenDates[count].split('-')[1].split(';')[0] 
+					=== clonedActiveUsersAndTrips[counter]['stops'].split(';')[clonedActiveUsersAndTrips[counter][stops].split(';').length - 1]){
+					fakeTrips.push(clonedRoutesBetweenDates[count])
+				}
+			}		
+		}		
+		
+		return {
+			drivers: fakeDrivers,
+			passengers: fakePassengers,
+			routes: fakeTrips,
+		}
       }
 
       return {
