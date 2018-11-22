@@ -129,9 +129,15 @@ let store = {
     sortList({drivers, passengers, routes}, sortBy) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
-      let clonedRoutes = [...routes]      
-
-      // console.log(routes)
+      let clonedRoutes = [...routes]    
+      
+      // INSTRUCTIONS
+      // If sortBy === 'status', sort the above cloned variables in alphabetical order of their username
+      // If sortBy === 'rankings', sort the above cloned variables in descending order of their tripnumber
+      
+      // CHECK WHAT THEY CONTAIN
+      // console.log(clonedDrivers)
+      // console.log(clonedPassengers)
       // console.log(clonedRoutes)
 
       if (sortBy === 'status') {
