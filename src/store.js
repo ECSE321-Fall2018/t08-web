@@ -10,7 +10,7 @@ let store = {
       passengers: null,
       routes: null,
     }, // since there are 3 search boxes
-    showInactiveUsers: false,
+    showInactiveUsers: true,
     startDate: null,
     endDate: null,
     ...dummyData, // We don't actually use the dummy data anymore, it gets overwritten by backend data
