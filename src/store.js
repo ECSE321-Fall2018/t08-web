@@ -43,14 +43,11 @@ let store = {
       )
     },
     rankingsFilters() {
-      const {searchBoxFilter, dateFilter, sortList} = store.filters
-      const {startDate, endDate, usersBetweenDates, routesBetweenDates, searchBoxFilters} = store.data
+      const {searchBoxFilter, sortList} = store.filters
+      const {drivers, passengers, routesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
-        searchBoxFilter(
-          dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate),
-          searchBoxFilters
-        ),
+        searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
         'rankings'
       )
     },
@@ -127,18 +124,6 @@ let store = {
         drivers: clonedDrivers,
         passengers: clonedPassengers,
         routes: clonedRoutes,
-      }
-    },
-    dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate) {
-      let clonedUsersBetweenDates = [...usersBetweenDates]
-      let clonedRoutesBetweenDates = [...routesBetweenDates]
-
-      
-
-      return {
-        drivers: store.data.drivers,
-        passengers: store.data.passengers,
-        routes: clonedRoutesBetweenDates,
       }
     },
     sortList({drivers, passengers, routes}, sortBy) {
