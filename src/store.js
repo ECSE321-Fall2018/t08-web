@@ -12,7 +12,7 @@ let store = {
     showInactiveUsers: false,
     startDate: null,
     endDate: null,
-    ...dummyData, // GO TO dummy-data.js TO SEE THE DUMMY DATA
+    ...dummyData, // We don't actually use the dummy data anymore, it gets overwritten by backend data
     adminDetails: {},
   },
   computed: {

@@ -1,3 +1,5 @@
+// We don't actually use the dummy data anymore, it gets overwritten by backend data
+
 export default {
   drivers: [
     {
@@ -262,16 +264,22 @@ export default {
     },
   ],
   activeUsersAndTrips: [
-    '42;45',
-    '52;50',
-    '47;50',
-    '65;10',
-    '23;8',
-    '99;50',
-    '41;7',
-    '246;2',
-    '346;7',
-    ';',
+    {
+      startlocation: 'Montreal',
+      stops: 'Ottawa;Toronto',
+      tripid: 60,
+      userid: 346,
+      username: 'Shane Pizza',
+      userrole: 'Passenger',
+    },
+    {
+      startlocation: 'Montreal',
+      stops: 'Ottawa;Toronto',
+      tripid: 60,
+      userid: 99,
+      username: 'Liang Zai',
+      userrole: 'Passenger',
+    },
   ],
   usersBetweenDates: [
     '65;3', 
