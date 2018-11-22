@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
   .icon {
-    font-size: 28px;
+    font-size: 36px;
     margin-right: 5px;
   }
 

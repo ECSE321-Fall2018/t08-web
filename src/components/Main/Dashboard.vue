@@ -13,7 +13,10 @@
     <mu-flex tag='section' justify-content='center' class='flex-item' style='width: 93%'>
       <mu-flex tag='section' fill>
         <h1 style='margin: 0' v-if='store.pageWidth >= 1200'>Welcome back, {{store.username}}</h1>
-        <h1 style='margin: 0' v-else>{{store.username}}</h1>
+        <h1 style='margin: 0' v-else>
+          <mu-icon value='account_circle' size='36' style='margin-right: 10px'></mu-icon>
+          <span style='max-width: 320px; margin-top: -8px;'>{{store.username}}</span>
+        </h1>
       </mu-flex>
       <mu-flex tag='section'>
         <Link :pageName='pageName' :text='displayText("Status")' iconName='format_list_bulleted' />
