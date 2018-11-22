@@ -181,10 +181,7 @@ export default {
       if(submitPassword != null) {
           newPasswordParam = `&newpass=${submitPassword}`
       }
-      if(fullName != null) {
-          fullName = `&name=${fullName}`
-      }
-      axios.post(`/user/update?username=${username}&email=${emailAddress}&oldpass=${this.password}${newPasswordParam}`)
+      axios.post(`/user/update?username=${username}&name=${fullName}&email=${emailAddress}&oldpass=${this.password}${newPasswordParam}`)
       .then(response => { 
         that.color.color = 'success'
         that.color.message = 'Success'
