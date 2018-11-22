@@ -13,6 +13,7 @@ import {
   Grid, 
   Icon, 
   Paper, 
+  Snackbar,
   Switch, 
   TextField, 
   theme
@@ -30,6 +31,7 @@ Vue.use(Form)
 Vue.use(Grid)
 Vue.use(Icon)
 Vue.use(Paper)
+Vue.use(Snackbar)
 Vue.use(Switch)
 Vue.use(TextField)
 
