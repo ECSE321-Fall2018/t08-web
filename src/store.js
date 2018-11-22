@@ -1,4 +1,5 @@
 import dummyData from '@/dummy-data.js'
+import axios from '@/axios.js'
 
 let store = {
   data: {
@@ -18,11 +19,24 @@ let store = {
   computed: {
     statusFilters() {
       const {searchBoxFilter, switchFilter, sortList} = store.filters
-      const {showInactiveUsers, activeUsersAndTrips, routesBetweenDates, searchBoxFilters} = store.data
+      const {
+        drivers,
+        passengers,
+        activeUsersAndTrips,
+        routesBetweenDates,
+        showInactiveUsers,
+        searchBoxFilters
+      } = store.data
 
       return sortList(
         searchBoxFilter(
-          switchFilter(activeUsersAndTrips, routesBetweenDates, showInactiveUsers),
+          switchFilter(
+            drivers, 
+            passengers, 
+            routesBetweenDates, 
+            activeUsersAndTrips, 
+            showInactiveUsers
+          ),
           searchBoxFilters
         ),
         'status'
@@ -42,77 +56,50 @@ let store = {
     },
   },
   filters: {
-    switchFilter(activeUsersAndTrips, routesBetweenDates, showInactiveUsers) {
-      let clonedActiveUsersAndTrips = [...activeUsersAndTrips]
-      let clonedRoutesBetweenDates = [...routesBetweenDates]
-      let drivers = {}
-      let passengers = {}
-      let routes = {}
+    switchFilter(
+      drivers, 
+      passengers, 
+      routesBetweenDates, 
+      activeUsersAndTrips, 
+      showInactiveUsers
+    ) {
+      // GENERAL INSTRUCTIONS
+      // Filter drivers/passengers/routes by whether they are active or not
+
+      // VARIABLES (ALL ARRAYS)
+      let clonedDrivers = [...drivers] // contains the drivers
+      let clonedPassengers = [...passengers] // contains the passengers
+      let clonedRoutesBetweenDates = [...routesBetweenDates] // contains the active routes
+      let clonedActiveUsersAndTrips = [...activeUsersAndTrips] // contains the active users and trips
+
+      // SPECIFIC INSTRUCTIONS
+      // I want clonedDrivers to only contain drivers that are also in clonedActiveUsersAndTrips
+      // Same for clonedPassengers
+      // I want clonedRoutesBetweenDates to only contains routes which have the same start location and last stop as one of the trips in clonedActiveUsersAndTrips
+
+      // Check what these variables contain
+      // console.log(clonedDrivers)
+      // console.log(clonedPassengers)
+      // console.log(clonedRoutesBetweenDates)
+      // console.log(clonedActiveUsersAndTrips)
+      // console.log(clonedPassengers)
 
       if (!showInactiveUsers) {
-        /*
-         * INSTRUCTIONS (DON'T WORK ON IT YET)
-         * Fill the empty arrays `drivers`, passengers`, and `routes` with active drivers/passengers/routes
-         * clonedActiveUsersAndTrips contains the 
-         */
-        // console.log(clonedActiveUsersAndTrips)
-
         // INSERT CODE HERE
 
-
         
-        // return {drivers, passengers, routes}
-        return {
-          drivers: store.data.drivers,
-          passengers: store.data.passengers,
-          routes: clonedRoutesBetweenDates,
-        }
-      } else {
-        // return {drivers, passengers, routes}
-        return {
-          drivers: store.data.drivers,
-          passengers: store.data.passengers,
-          routes: clonedRoutesBetweenDates,
-        }
+      }
+
+      return {
+        drivers: clonedDrivers,
+        passengers: clonedPassengers,
+        routes: clonedRoutesBetweenDates,
       }
     },
     searchBoxFilter({drivers, passengers, routes}, searchBoxFilters) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]
-
-      /*
-       * INSTRUCTIONS
-       * Filter drivers/passengers/routes by keyword in search box
-       *
-       * USE THESE VARIABLES
-       * `clonedDrivers`: contains an array of driver info
-       * `clonedPassengers`: contains an array of passenger info
-       * `clonedRoutes`: contains an array of trip info
-       * searchBoxFilters: an array containing what's in the three searchboxes (don't edit it)
-       *
-       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
-       */
-      // console.log(clonedDrivers)
-      // console.log(clonedPassengers)
-      // console.log(clonedRoutes)
-      // console.log(searchBoxFilters)
-
-      // INSERT CODE HERE
-
-      /*
-      function searchStringUser(searchFilterIndex) {
-        return function(value) {
-          return value.username.toLowerCase().includes(searchBoxFilters[searchFilterIndex].toLowerCase())
-        }
-      }
-
-      function searchStringRoute(searchFilterIndex) {
-        return function(value) {
-          return value.toLowerCase().includes(searchBoxFilters.searchFilterIndex.toLowerCase())
-        }
-      }
-      */
 
       if (searchBoxFilters.drivers) {
         clonedDrivers = clonedDrivers.filter(
@@ -136,15 +123,6 @@ let store = {
         )
       }
 
-
-       //console.log(clonedDrivers)
-     //  console.log(driversFiltered.username)
-       //console.log(clonedPassengers)
-       //console.log(clonedRoutes)
-       //console.log(searchBoxFilters)
-
-      
-
       return {
         drivers: clonedDrivers,
         passengers: clonedPassengers,
@@ -155,73 +133,7 @@ let store = {
       let clonedUsersBetweenDates = [...usersBetweenDates]
       let clonedRoutesBetweenDates = [...routesBetweenDates]
 
-      /*
-      DONT WORK ON THIS YET!!!!!!
-      */
-      /*
-       * INSTRUCTIONS
-       * Filter drivers/passengers/routes by start and end date
-       * 
-       *
-       * USE THESE VARIABLES
-       * `drivers`: contains an array of driver info
-       * `passengers`: contains an array of passenger info
-       * `routes`: contains an array of trip info
-       * startDate: self-explanatory
-       * endDate: self-explanatory
-       * 
-       * TIPS: Use Date.parse(..) to convert string date to number date
-       *
-       * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
-       */
-      //console.log(drivers)
-      //console.log(passengers)
-      //console.log(routes)
-      //console.log(startDate)
-      //console.log(endDate)
-      /*
-		let count;
-		let Sdate;
-		let Edate;
-		let Starto;
-		let Endo;
-		
-		Starto = Date.parse(startDate);
-		Endo = Date.parse(endDate);
-		
-		if(startDate == null && endDate == null){
-		return {drivers, passengers, routes}
-		}
-		else if(startDate !== null && endDate == null){
-			for (count = 0; count < routes.length; count ++){
-				Sdate = new Date(routes[count]['startdate']);
-				console.log(Starto);
-				console.log(startDate.getMonth() == Sdate.getMonth());
-				if(Sdate < Starto){
-					routes.splice(count, 1);
-				}
-			}
-		}
-		else if(startDate == null && endDate !== null){
-			for (count = 0; count < routes.length; count ++){
-				Edate = new Date(routes[count]['enddate']);
-				if(Edate > Endo){
-					routes.splice(count, 1);
-				}
-			}
-		}		
-		else{
-			for (count = 0; count < routes.length; count ++){
-				Sdate = new Date(routes[count]['startdate']);
-				Edate = new Date(routes[count]['enddate']);
-				if(Sdate < Starto || Edate > Endo){
-					routes.splice(count, 1);
-				}
-			}		
-    }
-		
-    return {drivers, passengers, routes}
-    */
+      
 
       return {
         drivers: store.data.drivers,
@@ -329,6 +241,70 @@ let store = {
     setPassword(password) {
       store.data.password = password
     },
+    updateData() {
+      let {username, password, startDate, endDate} = store.data
+
+      if (startDate === null) {
+        startDate = 0
+      }
+
+      if (endDate === null) {
+        endDate = 3000000000000
+      }
+
+      startDate = Math.round(startDate / 1000)
+      endDate = Math.round(endDate / 1000)
+
+      axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Passenger`)
+        .then(jsonObject => {
+          store.data.activeUsersAndTrips = jsonObject.data
+        })
+        .catch(() => {
+          store.data.activeUsersAndTrips = []
+        })
+  
+      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
+        .then(jsonObject => {
+          store.data.drivers = jsonObject.data
+  
+          axios.post(`/user/userlist?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
+            .then(jsonObject => {
+              for (let driver of jsonObject.data) {
+                if (driver.tripnumber === 0) {
+                  store.data.drivers.push(driver)
+                }
+              }
+            })
+        })
+        .catch(() => {
+          store.data.drivers = []
+        })
+  
+      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
+        .then(jsonObject => {
+          store.data.passengers = jsonObject.data
+  
+          axios.post(`/user/userlist?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
+            .then(jsonObject => {
+              for (let passenger of jsonObject.data) {
+                if (passenger.tripnumber === 0) {
+                  store.data.passengers.push(passenger)
+                }
+              }
+            })
+        })
+        .catch(() => {
+          store.data.passengers = []
+        })
+  
+      axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}`)
+        .then(jsonObject => {
+          store.data.routesBetweenDates = jsonObject.data.data
+        })
+        .catch(() => {
+          store.data.routesBetweenDates = []
+        })
+    }
   }
 }
 
