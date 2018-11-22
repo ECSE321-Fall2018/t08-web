@@ -15,6 +15,7 @@ import {
   Paper, 
   Snackbar,
   Switch, 
+  Snackbar,
   TextField, 
   theme
 } from 'muse-ui'

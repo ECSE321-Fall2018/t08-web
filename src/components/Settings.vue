@@ -79,6 +79,11 @@
       <mu-button slot='actions' flat color='primary' @click='cancel'>Cancel</mu-button>
       <mu-button slot='actions' flat color='primary' @click='confirm'>Confirm</mu-button>
   </mu-dialog>
+  <mu-snackbar :color="color.color" :open.sync="color.open">
+    <mu-icon left :value="icon"></mu-icon>
+    {{color.message}}
+    <mu-button flat slot="action" color="#fff" @click="color.open = false">Close</mu-button>
+  </mu-snackbar>
   </mu-flex>
 </template>
 
@@ -98,6 +103,22 @@ export default {
       visibility: false,
       newPassword: null,
       reenterNewPassword: null,
+      color: {
+          color: 'error',
+          message: 'Unable to update administrator. Password may be invalid.',
+          open: false,
+          timeout: 5000
+      }
+    }
+  },
+  computed: {
+    icon () {
+      return {
+        success: 'check_circle',
+        info: 'info',
+        warning: 'priority_high',
+        error: 'warning'
+      }[this.color.color]
     }
   },
   created() {   
@@ -139,15 +160,26 @@ export default {
       this.resetStates()
     },
     confirm() {
+      let that = this
       let {username, emailAddress, fullName} = this.store.adminDetails
       let submitPassword = this.password
       if (this.newPassword) {
         submitPassword = this.newPassword
       }
       axios.post(`/user/update?username=${username}&email=${emailAddress}&name=${fullName}&role=Administrator&oldpass=${this.password}&newpass=${submitPassword}`)
-      .then()
-      .catch()
-      .then(() => this.updateAdminDetails())
+      .then(response => { 
+        that.color.color = 'success'
+        that.color.message = 'Success'
+        that.openColorSnackbar()
+      })
+      .catch(error => {
+          that.color.color = 'error'
+          that.color.message = 'Unable to update administrator. Password may be invalid.'
+          that.openColorSnackbar()
+      })
+      .then(() => {
+        this.updateAdminDetails()
+      })
 
       this.resetStates()
     },
@@ -158,6 +190,13 @@ export default {
       this.newPassword = null
       this.reenterNewPassword = null
       this.visibility = false
+    },
+    openColorSnackbar() {
+      if (this.color.timer) clearTimeout(this.color.timer);
+      this.color.open = true;
+      this.color.timer = setTimeout(() => {
+        this.color.open = false;
+      }, this.color.timeout);
     }
   }
 }
@@ -195,5 +234,9 @@ export default {
 
   .paper {
     border-radius: 8px;
+  }
+
+  .demo-snackbar-radio {
+    margin: 8px 0;
   }
 </style>
