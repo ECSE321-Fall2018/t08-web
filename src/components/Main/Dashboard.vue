@@ -61,6 +61,7 @@ import InactiveUserSwitch from '@/components/InactiveUserSwitch'
 import RankingsDatePicker from '@/components/RankingsDatePicker'
 import Link from '@/components/Link'
 import store from '@/store.js'
+import axios from '@/axios.js'
 
 export default {
   name: 'Dashboard',
@@ -79,6 +80,37 @@ export default {
       store.startDate = null
       store.endDate = null
     },
+  },
+  created() {
+    /*
+fetch('https://rideshare08.herokuapp.com/api/trip/findtripstatus?username=jeffery&password=password&status=0', {method: 'POST'}) // here we specify POST
+.then(response => response.json())
+.then(jsonObject => console.log(jsonObject))
+      */
+
+    axios('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver', {method: 'POST'})
+      .then(jsonObject => {
+        store.data.drivers = jsonObject.data
+      })
+      .catch(() => {
+        store.data.drivers = []
+      })
+
+    axios('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger', {method: 'POST'})
+      .then(jsonObject => {
+        store.data.passengers = jsonObject.data
+      })
+      .catch(() => {
+        store.data.passengers = []
+      })
+
+    axios('/trip/popularroute?username=jeffery&password=password&startdate=0&enddate=3000000000', {method: 'POST'})
+      .then(jsonObject => {
+        store.data.routesBetweenDates = jsonObject.data.data
+      })
+      .catch(() => {
+        store.data.routesBetweenDates = []
+      })
   }
 };
 </script>
