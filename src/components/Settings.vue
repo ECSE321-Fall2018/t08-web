@@ -32,6 +32,7 @@
             property='emailAddress'
             :editing='editing'
           />
+		  <bm>
           <mu-text-field
             v-if='editing'
             tag='li'
@@ -41,6 +42,8 @@
             :action-click='() => (visibility = !visibility)'
             :type='visibility ? "text" : "password"'
           ></mu-text-field>
+		  </bm>
+		  <bm>
           <mu-text-field
             v-if='editing'
             tag='li'
@@ -50,6 +53,7 @@
             :action-click='() => (visibility = !visibility)'
             :type='visibility ? "text" : "password"'
           ></mu-text-field>
+		  </bm>
         </ul>
       </mu-flex>
     </mu-paper>
@@ -168,6 +172,11 @@ export default {
 
   li {
     display: flex;
+  }
+  
+  bm{
+	display: flex;
+	margin-left: 70px;
   }
 
   li div {
