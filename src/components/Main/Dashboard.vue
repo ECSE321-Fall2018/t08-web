@@ -99,35 +99,35 @@ fetch('https://rideshare08.herokuapp.com/api/trip/findtripstatus?username=jeffer
     axios.post('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver')
       .then(jsonObject => {
         store.data.drivers = jsonObject.data
+
+        axios.post('/user/userlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver')
+          .then(jsonObject => {
+            for (let driver of jsonObject.data) {
+              if (driver.tripnumber === 0) {
+                store.data.drivers.push(driver)
+              }
+            }
+          })
       })
       .catch(() => {
         store.data.drivers = []
       })
 
-    axios.post('/user/fuserlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver')
-      .then(jsonObject => {
-        for (let driver of jsonObject.data) {
-          if (driver.tripnumber === 0) {
-            store.data.drivers.push(driver)
-          }
-        }
-      })
-
     axios.post('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger')
       .then(jsonObject => {
         store.data.passengers = jsonObject.data
+
+        axios.post('/user/userlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger')
+          .then(jsonObject => {
+            for (let passenger of jsonObject.data) {
+              if (passenger.tripnumber === 0) {
+                store.data.passengers.push(passenger)
+              }
+            }
+          })
       })
       .catch(() => {
         store.data.passengers = []
-      })
-
-    axios.post('/user/fuserlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger')
-      .then(jsonObject => {
-        for (let passenger of jsonObject.data) {
-          if (passenger.tripnumber === 0) {
-            store.data.passengers.push(passenger)
-          }
-        }
       })
 
     axios.post('/trip/popularroute?username=jeffery&password=password&startdate=0&enddate=3000000000')
