@@ -226,13 +226,14 @@ let store = {
         // clonedTrips.sort(function(a, b){
         //   return a - b
         // })
+      }
 
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
         routes: clonedRoutes,
       }
-    },
+    }
   },
   methods: {
     setUsername(username) {

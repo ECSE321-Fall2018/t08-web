@@ -2,7 +2,7 @@
   <mu-date-input
     icon='today'
     v-model='store[type]'
-    v-on:change='store.methods.updateData()'
+    v-on:change='updateData'
     :label='label'
     container='dialog'
     label-float
@@ -52,6 +52,10 @@ export default {
       enDateFormat,
     }
   },
-  methods() {store: store.method},
+  methods: {
+    updateData() {
+      store.methods.updateData()
+    }
+  },
 }
 </script>
