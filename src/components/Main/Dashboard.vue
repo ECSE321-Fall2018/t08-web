@@ -61,7 +61,6 @@ import InactiveUserSwitch from '@/components/InactiveUserSwitch'
 import RankingsDatePicker from '@/components/RankingsDatePicker'
 import Link from '@/components/Link'
 import store from '@/store.js'
-import axios from '@/axios.js'
 
 export default {
   name: 'Dashboard',
@@ -87,56 +86,7 @@ fetch('https://rideshare08.herokuapp.com/api/trip/findtripstatus?username=jeffer
 .then(response => response.json())
 .then(jsonObject => console.log(jsonObject))
       */
-
-    axios.post('/trip/usertripstatus?username=jeffery&password=password&status=0&role=Passenger')
-      .then(jsonObject => {
-        store.data.activeUsersAndTrips = jsonObject.data
-      })
-      .catch(() => {
-        store.data.activeUsersAndTrips = []
-      })
-
-    axios.post('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver')
-      .then(jsonObject => {
-        store.data.drivers = jsonObject.data
-
-        axios.post('/user/userlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Driver')
-          .then(jsonObject => {
-            for (let driver of jsonObject.data) {
-              if (driver.tripnumber === 0) {
-                store.data.drivers.push(driver)
-              }
-            }
-          })
-      })
-      .catch(() => {
-        store.data.drivers = []
-      })
-
-    axios.post('/trip/ranking?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger')
-      .then(jsonObject => {
-        store.data.passengers = jsonObject.data
-
-        axios.post('/user/userlist?username=jeffery&password=password&startdate=0&enddate=3000000000&role=Passenger')
-          .then(jsonObject => {
-            for (let passenger of jsonObject.data) {
-              if (passenger.tripnumber === 0) {
-                store.data.passengers.push(passenger)
-              }
-            }
-          })
-      })
-      .catch(() => {
-        store.data.passengers = []
-      })
-
-    axios.post('/trip/popularroute?username=jeffery&password=password&startdate=0&enddate=3000000000')
-      .then(jsonObject => {
-        store.data.routesBetweenDates = jsonObject.data.data
-      })
-      .catch(() => {
-        store.data.routesBetweenDates = []
-      })
+     store.methods.updateData()
   }
 };
 </script>
