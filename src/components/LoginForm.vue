@@ -2,7 +2,7 @@
   <mu-form ref='form' :model='formDetails' class='login-form' v-on:keyup.13='() => submit(formDetails)'>
     <mu-form-item prop='username' :rules='usernameRules'>
       <mu-text-field
-        placeholder='Username'
+        placeholder='Administrator Username'
         v-model='formDetails.username'
         prop='username'
         :action-icon='"arrow_forward"'
@@ -11,7 +11,7 @@
     </mu-form-item>
     <mu-form-item prop='password' :rules='passwordRules'>
         <mu-text-field
-          placeholder='Password'
+          placeholder='Administrator Password'
           v-model='formDetails.password'
           prop='password'
           :action-icon='visibility ? "visibility_off" : "visibility"'
@@ -22,6 +22,11 @@
     <mu-form-item prop='staySignedIn'>
       <mu-checkbox label='Keep me signed in' v-model='formDetails.staySignedIn'></mu-checkbox>
     </mu-form-item>
+    <mu-snackbar :color="color.color" :open.sync="color.open">
+    <mu-icon left :value="icon"></mu-icon>
+    {{color.message}}
+    <mu-button flat slot="action" color="#fff" @click="color.open = false">Close</mu-button>
+  </mu-snackbar>
   </mu-form>
 </template>
 
@@ -43,8 +48,25 @@
           staySignedIn: false,
         },
         visibility: false,
+
+        color: {
+        color: 'error',
+        message: 'Invalid administrator username or password.',
+        open: false,
+        timeout: 5000
+      }
       }
     },
+    computed: {
+    icon () {
+      return {
+        success: 'check_circle',
+        info: 'info',
+        warning: 'priority_high',
+        error: 'warning'
+      }[this.color.color]
+    }
+  },
     methods: {
       submit(formDetails) {
         const {username, password, staySignedIn} = formDetails
@@ -77,6 +99,7 @@
                                   if (loggedin !== 'Administrator') {
                                       that.formDetails.username = ''
                                       that.formDetails.password = ''
+                                      that.openColorSnackbar()
                                   }
                                   else {
                                       store.data.username = username
@@ -95,6 +118,13 @@
           }
         })
       },
+      openColorSnackbar() {
+      if (this.color.timer) clearTimeout(this.color.timer);
+      this.color.open = true;
+      this.color.timer = setTimeout(() => {
+        this.color.open = false;
+      }, this.color.timeout);
+    }
       /*
       clear () {
         this.$refs.form.clear()
@@ -112,5 +142,8 @@
 <style scoped>
 .login-form {
   width: 400px
+}
+.demo-snackbar-radio {
+  margin: 8px 0;
 }
 </style>

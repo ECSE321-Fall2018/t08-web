@@ -88,9 +88,10 @@ export default {
     store.data.pageWidth = window.innerWidth
   },
   methods: {
-    resetDates(store) {
-      store.startDate = null
-      store.endDate = null
+    resetDates() {
+      store.data.startDate = null
+      store.data.endDate = null
+      store.methods.updateData()
     },
     resize() {
       store.data.pageWidth = window.innerWidth
