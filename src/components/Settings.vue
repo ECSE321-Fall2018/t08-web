@@ -33,27 +33,27 @@
             :editing='editing'
           />
 		  <div class='bm'>
-          <mu-text-field
-            v-if='editing'
-            tag='li'
-            v-model='newPassword'
-            placeholder='New Password'
-            :action-icon='visibility ? "visibility_off" : "visibility"'
-            :action-click='() => (visibility = !visibility)'
-            :type='visibility ? "text" : "password"'
-          ></mu-text-field>
-		  </div class='bm'>
+            <mu-text-field
+              v-if='editing'
+              tag='li'
+              v-model='newPassword'
+              placeholder='New Password'
+              :action-icon='visibility ? "visibility_off" : "visibility"'
+              :action-click='() => (visibility = !visibility)'
+              :type='visibility ? "text" : "password"'
+            ></mu-text-field>
+		  </div>
 		  <div class='bm'>
-          <mu-text-field
-            v-if='editing'
-            tag='li'
-            v-model='reenterNewPassword'
-            placeholder='Re-enter New Password'
-            :action-icon='visibility ? "visibility_off" : "visibility"'
-            :action-click='() => (visibility = !visibility)'
-            :type='visibility ? "text" : "password"'
-          ></mu-text-field>
-		  </div class='bm'>
+            <mu-text-field
+              v-if='editing'
+              tag='li'
+              v-model='reenterNewPassword'
+              placeholder='Re-enter New Password'
+              :action-icon='visibility ? "visibility_off" : "visibility"'
+              :action-click='() => (visibility = !visibility)'
+              :type='visibility ? "text" : "password"'
+            ></mu-text-field>
+		  </div>
         </ul>
       </mu-flex>
     </mu-paper>

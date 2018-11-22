@@ -2,7 +2,7 @@
   <footer>
     <div id="footerText">
       <ul>
-        <li><p id="contact"><b>Contact RideshareDevs@gmail.com for assistance</b></p></li>
+        <li><p><b>Contact RideshareDevs@gmail.com for assistance</b></p></li>
         <li><p><b>Rideshare 2018 &copy; All rights reserved</b></p></li>
         <li><p><b>Last updated: November 11th, 2018</b></p></li>
       </ul>
