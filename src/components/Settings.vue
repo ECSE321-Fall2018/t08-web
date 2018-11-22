@@ -61,14 +61,17 @@
       {{editing ? 'Save' : 'Edit'}}
       <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
     </mu-button>
-      <mu-dialog
-        title="Enter Your Password to Save Changes"
-        width='600'
-        max-width='80%'
-        :esc-press-close='false'
-        :overlay-close='false'
-        :open.sync='isDialogOpen'
-      >
+    <mu-button color='primary' @click='changeMode'>
+      {{store.darkMode ? "light mode" : "dark mode"}}
+    </mu-button>
+    <mu-dialog
+      title="Enter Your Password to Save Changes"
+      width='600'
+      max-width='80%'
+      :esc-press-close='false'
+      :overlay-close='false'
+      :open.sync='isDialogOpen'
+    >
       <mu-text-field
         v-model='password'
         label='Password'
@@ -86,6 +89,7 @@
 import axios from '@/axios.js'
 import store from '@/store.js'
 import SettingsList from '@/components/SettingsList'
+import theme from 'muse-ui/lib/theme'
 
 export default {
   components: {SettingsList},
@@ -158,6 +162,15 @@ export default {
       this.newPassword = null
       this.reenterNewPassword = null
       this.visibility = false
+    },
+    changeMode() {
+      if (!this.store.darkMode) {
+        theme.use('dark')
+      } else {
+        theme.use('customTheme')
+      }
+
+      this.store.darkMode = !this.store.darkMode
     }
   }
 }
