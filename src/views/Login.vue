@@ -7,7 +7,8 @@
     align-items='center'
   >
     <section class='flex-item'>
-      <img alt='RideShare Logo' src='../assets/temp-logo.png' width='400'>
+      <img v-if='store.darkMode' alt='RideShare Logo' src='../assets/RideShareDarkMode.png' width='400'>
+      <img v-else alt='RideShare Logo' src='../assets/temp-logo.png' width='400'>
     </section>
     <section class='flex-item'>
       <LoginForm />
@@ -18,11 +19,17 @@
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm'
+import store from '@/store.js'
 
 export default {
   name: 'Login',
   components: {
     LoginForm,
   },
+  data() {
+    return {
+      store: store.data
+    }
+  }
 }
 </script>

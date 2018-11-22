@@ -7,7 +7,8 @@
     align-items='center'
   >
     <section class='flex-item'>
-      <img alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
+      <img v-if='store.darkMode' alt='RideShare Logo' src='../assets/RideShareDarkMode.png' width='300'>
+      <img v-else alt='RideShare Logo' src='../assets/temp-logo.png' width='300'>
     </section>
     <mu-paper :z-depth='2' style='margin: 20px 0' class='paper'>
       <mu-flex direction='column' justify-content='center' align-items='center'>
