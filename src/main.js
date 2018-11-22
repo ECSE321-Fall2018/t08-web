@@ -6,11 +6,11 @@ import 'muse-ui/lib/styles/base.less'
 import {
   Button, 
   Checkbox, 
-  DataTable, 
   DateInput, 
   Dialog, 
   Form, 
   Grid, 
+  Helpers,
   Icon, 
   Paper, 
   Snackbar,
@@ -24,11 +24,11 @@ import customTheme from './theme.js'
 // Muse UI use components
 Vue.use(Button)
 Vue.use(Checkbox)
-Vue.use(DataTable)
 Vue.use(DateInput)
 Vue.use(Dialog)
 Vue.use(Form)
 Vue.use(Grid)
+Vue.use(Helpers)
 Vue.use(Icon)
 Vue.use(Paper)
 Vue.use(Snackbar)
