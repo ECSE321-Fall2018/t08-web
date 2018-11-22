@@ -7,7 +7,7 @@ let store = {
     searchBoxFilters: {
       drivers: null,
       passengers: null,
-      trips: null,
+      routes: null,
     }, // since there are 3 search boxes
     showInactiveUsers: false,
     startDate: null,
@@ -47,12 +47,12 @@ let store = {
       let clonedRoutesBetweenDates = [...routesBetweenDates]
       let drivers = {}
       let passengers = {}
-      let trips = {}
+      let routes = {}
 
       if (!showInactiveUsers) {
         /*
          * INSTRUCTIONS (DON'T WORK ON IT YET)
-         * Fill the empty arrays `drivers`, passengers`, and `trips` with active drivers/passengers/trips
+         * Fill the empty arrays `drivers`, passengers`, and `routes` with active drivers/passengers/routes
          * clonedActiveUsersAndTrips contains the 
          */
         // console.log(clonedActiveUsersAndTrips)
@@ -61,41 +61,41 @@ let store = {
 
 
         
-        // return {drivers, passengers, trips}
+        // return {drivers, passengers, routes}
         return {
           drivers: store.data.drivers,
           passengers: store.data.passengers,
-          trips: clonedRoutesBetweenDates,
+          routes: clonedRoutesBetweenDates,
         }
       } else {
-        // return {drivers, passengers, trips}
+        // return {drivers, passengers, routes}
         return {
           drivers: store.data.drivers,
           passengers: store.data.passengers,
-          trips: clonedRoutesBetweenDates,
+          routes: clonedRoutesBetweenDates,
         }
       }
     },
-    searchBoxFilter({drivers, passengers, trips}, searchBoxFilters) {
+    searchBoxFilter({drivers, passengers, routes}, searchBoxFilters) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
-      let clonedTrips = [...trips]
+      let clonedRoutes = [...routes]
 
       /*
        * INSTRUCTIONS
-       * Filter drivers/passengers/trips by keyword in search box
+       * Filter drivers/passengers/routes by keyword in search box
        *
        * USE THESE VARIABLES
        * `clonedDrivers`: contains an array of driver info
        * `clonedPassengers`: contains an array of passenger info
-       * `clonedTrips`: contains an array of trip info
+       * `clonedRoutes`: contains an array of trip info
        * searchBoxFilters: an array containing what's in the three searchboxes (don't edit it)
        *
        * UNCOMMENT BELOW TO SEE WHAT THESE VARIABLES CONTAIN (or go to dummy-data.js)
        */
       // console.log(clonedDrivers)
       // console.log(clonedPassengers)
-      // console.log(clonedTrips)
+      // console.log(clonedRoutes)
       // console.log(searchBoxFilters)
 
       // INSERT CODE HERE
@@ -128,10 +128,10 @@ let store = {
           )
         )
       }
-      if (searchBoxFilters.trips) {
-        clonedTrips = clonedTrips.filter(
+      if (searchBoxFilters.routes) {
+        clonedRoutes = clonedRoutes.filter(
           trip => trip.toLowerCase().includes(
-            searchBoxFilters.trips.toLowerCase()
+            searchBoxFilters.routes.toLowerCase()
           )
         )
       }
@@ -140,7 +140,7 @@ let store = {
        //console.log(clonedDrivers)
      //  console.log(driversFiltered.username)
        //console.log(clonedPassengers)
-       //console.log(clonedTrips)
+       //console.log(clonedRoutes)
        //console.log(searchBoxFilters)
 
       
@@ -148,7 +148,7 @@ let store = {
       return {
         drivers: clonedDrivers,
         passengers: clonedPassengers,
-        trips: clonedTrips,
+        routes: clonedRoutes,
       }
     },
     dateFilter(usersBetweenDates, routesBetweenDates, startDate, endDate) {
@@ -160,13 +160,13 @@ let store = {
       */
       /*
        * INSTRUCTIONS
-       * Filter drivers/passengers/trips by start and end date
+       * Filter drivers/passengers/routes by start and end date
        * 
        *
        * USE THESE VARIABLES
        * `drivers`: contains an array of driver info
        * `passengers`: contains an array of passenger info
-       * `trips`: contains an array of trip info
+       * `routes`: contains an array of trip info
        * startDate: self-explanatory
        * endDate: self-explanatory
        * 
@@ -176,7 +176,7 @@ let store = {
        */
       //console.log(drivers)
       //console.log(passengers)
-      //console.log(trips)
+      //console.log(routes)
       //console.log(startDate)
       //console.log(endDate)
       /*
@@ -190,58 +190,58 @@ let store = {
 		Endo = Date.parse(endDate);
 		
 		if(startDate == null && endDate == null){
-		return {drivers, passengers, trips}
+		return {drivers, passengers, routes}
 		}
 		else if(startDate !== null && endDate == null){
-			for (count = 0; count < trips.length; count ++){
-				Sdate = new Date(trips[count]['startdate']);
+			for (count = 0; count < routes.length; count ++){
+				Sdate = new Date(routes[count]['startdate']);
 				console.log(Starto);
 				console.log(startDate.getMonth() == Sdate.getMonth());
 				if(Sdate < Starto){
-					trips.splice(count, 1);
+					routes.splice(count, 1);
 				}
 			}
 		}
 		else if(startDate == null && endDate !== null){
-			for (count = 0; count < trips.length; count ++){
-				Edate = new Date(trips[count]['enddate']);
+			for (count = 0; count < routes.length; count ++){
+				Edate = new Date(routes[count]['enddate']);
 				if(Edate > Endo){
-					trips.splice(count, 1);
+					routes.splice(count, 1);
 				}
 			}
 		}		
 		else{
-			for (count = 0; count < trips.length; count ++){
-				Sdate = new Date(trips[count]['startdate']);
-				Edate = new Date(trips[count]['enddate']);
+			for (count = 0; count < routes.length; count ++){
+				Sdate = new Date(routes[count]['startdate']);
+				Edate = new Date(routes[count]['enddate']);
 				if(Sdate < Starto || Edate > Endo){
-					trips.splice(count, 1);
+					routes.splice(count, 1);
 				}
 			}		
     }
 		
-    return {drivers, passengers, trips}
+    return {drivers, passengers, routes}
     */
 
       return {
         drivers: store.data.drivers,
         passengers: store.data.passengers,
-        trips: clonedRoutesBetweenDates,
+        routes: clonedRoutesBetweenDates,
       }
     },
-    sortList({drivers, passengers, trips}, sortBy) {
+    sortList({drivers, passengers, routes}, sortBy) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
-      let clonedTrips = [...trips]      
+      let clonedRoutes = [...routes]      
 
-      // console.log(trips)
-      // console.log(clonedTrips)
+      // console.log(routes)
+      // console.log(clonedRoutes)
 
       if (sortBy === 'status') {
         // Sort by alphabetical order of username (`username`)
         clonedDrivers.sort((a, b) => a.username.localeCompare(b.username))
         clonedPassengers.sort((a, b) => a.username.localeCompare(b.username))
-        clonedTrips.sort()//(a, b) => a.startLocation.localeCompare(b.startLocation))
+        clonedRoutes.sort()//(a, b) => a.startLocation.localeCompare(b.startLocation))
 
       } else if (sortBy === 'rankings') {
         // Sort by most trips taken (`tripnumber`) 
@@ -253,18 +253,18 @@ let store = {
         clonedPassengers.sort(function(a, b){
           return b.tripnumber - a.tripnumber
         })
-        clonedTrips.sort(function(a, b){
+        clonedRoutes.sort(function(a, b){
           return a - b
         })
       }
 
-      // console.log(clonedTrips)
-      // console.log(trips)
+      // console.log(clonedRoutes)
+      // console.log(routes)
 
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
-        trips: clonedTrips,
+        routes: clonedRoutes,
       }
     },
   },

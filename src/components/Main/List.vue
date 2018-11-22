@@ -6,7 +6,7 @@
     </mu-flex>
     <ul v-if='title === "Routes"'>
       <li
-        v-for='trip, i in pageName === "status" ? statusFilters["trips"] : rankingsFilters["trips"]'
+        v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
         class='list-item'
       >
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.slice(0, trip.indexOf(';'))}}</div>

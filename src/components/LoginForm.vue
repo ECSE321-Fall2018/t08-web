@@ -48,6 +48,7 @@
     methods: {
       submit(formDetails) {
         const {username, password, staySignedIn} = formDetails
+        let that = this
 
         this.$refs.form.validate().then(result => {
           if (result) {
@@ -63,26 +64,28 @@
              * you have access to the variables `username` and `password`
              */
             // INSERT CODE HERE
-              AXIOS.post(`/user/authorize?username=${username}&password=${password}&role=Administrator`)
+              /*AXIOS.post(`/user/authorize?username=${username}&password=${password}&role=Administrator`)
                   .then(function (jsonObject) {
                       let id = jsonObject.data.data
                       if (id === -1) {
-                          this.$router.push('/')
-                      } else {
-                          AXIOS.post(`/api/user/login?username=${username}&password=${password}`)
+                          that.formDetails.username = ''
+                          that.formDetails.password = ''
+                      } else {*/
+                          AXIOS.post(`/user/login?username=${username}&password=${password}`)
                               .then(function (jsonObject) {
                                   let loggedin = jsonObject.data.data
-                                  if (loggedin == "") {
-                                      this.$router.push('/')
+                                  if (loggedin !== 'Administrator') {
+                                      that.formDetails.username = ''
+                                      that.formDetails.password = ''
                                   }
                                   else {
-                                      this.store.methods.setUsername(username)
-                                      this.store.methods.setPassword(password)
-                                      this.$router.push('status')
+                                      store.data.username = username
+                                      store.data.password = password
+                                      that.$router.push('status')
                                   }
                               })
-                      }
-                  })
+                      /*}
+                  })*/
             // The code to log the user in (put it in your axios)
               /*
             store.methods.setUsername(username)
