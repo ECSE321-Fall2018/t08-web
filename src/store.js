@@ -106,13 +106,13 @@ let store = {
 			}		
 		}
 		
-		for(count = 0; count < clonedRoutesBetweenDates.length; count ++){
-			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
-				if(clonedRoutesBetweenDates[count].split('-')[0] === clonedActiveUsersAndTrips[counter]['startLocation']
-					&& clonedRoutesBetweenDates[count].split('-')[1].split(';')[0] 
-					=== clonedActiveUsersAndTrips[counter]['stops'].split(';')[clonedActiveUsersAndTrips[counter][stops].split(';').length - 1]){
-					fakeTrips.push(clonedRoutesBetweenDates[count])
-				}
+		for(count = 0; count < clonedRoutesBetweenDates.length - 1; count ++){
+			for(counter = 0; counter < clonedActiveUsersAndTrips.length - 1; counter++){
+				if(clonedRoutesBetweenDates[count].split('-')[0].toLowerCase().trim() == clonedActiveUsersAndTrips[counter]['startLocation'].toLowerCase().trim()){
+					if(clonedRoutesBetweenDates[count].split('-')[1].split(';')[0].toLowerCase().trim() == clonedActiveUsersAndTrips[counter]['stops'].split(';')[clonedActiveUsersAndTrips[counter]['stops'].split(';').length - 1].toLowerCase().trim()){
+						fakeTrips.push(clonedRoutesBetweenDates[count])
+					}
+				}	
 			}		
 		}		
 		
