@@ -10,9 +10,13 @@
       <h3 v-if='pageName === "status"'>Status</h3>
       <h3 v-else>Times Taken</h3>
     </mu-flex>
-    <mu-flex v-else class='flex-wrapper' justify-content='center' fill>
+    <mu-flex v-else-if='inactiveUsersDisplay' class='flex-wrapper' justify-content='center' fill>
       <h3>User</h3>
       <h3>Trips Done</h3>
+    </mu-flex>
+    <mu-flex v-else class='flex-wrapper' justify-content='center' fill>
+      <h3>User</h3>
+      <h3>Current Trip</h3>
     </mu-flex>
     <ul v-if='title === "Routes" && pageName === "status"'>
       <li
@@ -35,7 +39,13 @@
     <ul v-else-if='pageName === "status"'>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
-        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + trip.stops.split(/[;]+/).pop() }}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}</div>
+      </li>
+    </ul>
+    <ul v-else>
+      <li v-for='user, i in rankingsFilters[title.toLowerCase()]' class='list-item'>
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
+        <div>{{user.tripnumber}}</div>
       </li>
     </ul>
   </div>

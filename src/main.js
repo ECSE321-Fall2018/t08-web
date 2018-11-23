@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
+import VueLodash from 'vue-lodash'
 import {
   Button, 
   Checkbox, 
@@ -40,6 +41,10 @@ theme.add('light', customLightTheme);
 theme.add('dark', customDarkTheme);
 
 theme.use('light');
+
+// Vue Lodash
+const options = { name: 'lodash' } // customize the way you want to call it
+Vue.use(VueLodash, options) // options is optional
 
 // Disable tips
 Vue.config.productionTip = false
