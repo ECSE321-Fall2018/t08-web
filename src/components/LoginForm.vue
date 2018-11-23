@@ -19,9 +19,6 @@
           :type='visibility ? "text" : "password"'
         ></mu-text-field>
     </mu-form-item>
-    <mu-form-item prop='staySignedIn'>
-      <mu-checkbox label='Keep me signed in' v-model='formDetails.staySignedIn'></mu-checkbox>
-    </mu-form-item>
     <mu-snackbar :color="color.color" :open.sync="color.open">
     <mu-icon left :value="icon"></mu-icon>
     {{color.message}}
@@ -45,7 +42,6 @@
         formDetails: {
           username: '',
           password: '',
-          staySignedIn: false,
         },
         visibility: false,
 
@@ -69,7 +65,7 @@
   },
     methods: {
       submit(formDetails) {
-        const {username, password, staySignedIn} = formDetails
+        const {username, password} = formDetails
         let that = this
 
         this.$refs.form.validate().then(result => {
@@ -125,16 +121,6 @@
         this.color.open = false;
       }, this.color.timeout);
     }
-      /*
-      clear () {
-        this.$refs.form.clear()
-        this.formDetails = {
-          username: '',
-          password: '',
-          staySignedIn: false
-        }
-      }
-      */
     }
   }
 </script>
