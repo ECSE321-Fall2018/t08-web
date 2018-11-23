@@ -63,7 +63,9 @@ let store = {
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
-      const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
+      const {drivers, passengers, frequentDrivers, frequentPassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
+      let drivers = frequentDrivers
+      let passengers = frequentPassengers
       let routes = popularRoutesBetweenDates
       return sortList(
         searchBoxFilter({drivers, passengers, routes}, searchBoxFilters),
@@ -341,8 +343,9 @@ let store = {
             }
           }
       })
-      .catch(() => {
-          store.data.drivers = []
+      .catch((error) => {
+        console.log(error)
+        store.data.drivers = []
           store.data.passengers = []
         })
 
@@ -353,8 +356,9 @@ let store = {
             store.data.allRoutes.push(trip)
           }
         })
-        .catch(() => {
-            store.data.allRoutes = []
+        .catch((error) => {
+          console.log(error)
+          store.data.allRoutes = []
         })
       
       //Gets only passengers currently on trip  
@@ -364,7 +368,8 @@ let store = {
             store.data.activePassengers.push(user)
           }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         store.data.activePassengers = []
       })
 
@@ -375,7 +380,8 @@ let store = {
             store.data.activeDrivers.push(user)
           }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         store.data.activeDrivers = []
       })
       
@@ -386,18 +392,7 @@ let store = {
             store.data.activeRoutes.push(trip)
           }
       })
-      .catch(() => {
-        store.data.activeRoutes = []
-      })
-
-      //Gets only trips currently ongoing
-      axios.post(`/trip/findtripstatus?username=${username}&password=${password}&status=0`)
-      .then(jsonObject => {
-          for (let trip of jsonObject.data) {
-            store.data.activeRoutes.push(trip)
-          }
-      })
-      .catch(() => {
+      .catch((error) => {
         store.data.activeRoutes = []
       })
 
@@ -410,9 +405,6 @@ let store = {
             tripnumber: route[1],
             path: route[0]
           }
-          console.log(routeBetweenDate.tripnumber)
-          console.log(routeBetweenDate.path)
-
           store.data.popularRoutesBetweenDates.push(routeBetweenDate)
         }
       })
@@ -421,43 +413,29 @@ let store = {
           store.data.popularRoutesBetweenDates = []
       })
 
-      
-    /*
-      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
-        .then(jsonObject => {
-          store.data.drivers = jsonObject.data
-  
-          
-        })
-        .catch(() => {
-          store.data.drivers = []
-        })
-  
-      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
-        .then(jsonObject => {
-          store.data.passengers = jsonObject.data
-  
-          axios.post(`/user/userlist?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
-            .then(jsonObject => {
-              for (let passenger of jsonObject.data) {
-                if (passenger.tripnumber === 0) {
-                  store.data.passengers.push(passenger)
-                }
-              }
-            })
-        })
-        .catch(() => {
-          store.data.passengers = []
-        })
-  
-      axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}`)
-        .then(jsonObject => {
-          store.data.routesBetweenDates = jsonObject.data.data
-        })
-        .catch(() => {
-          store.data.routesBetweenDates = []
-        })
-        */
+      //Gets user rankings between dates for passenger
+      axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}$role=Passenger`)
+      .then(jsonObject => {
+        for (let user of jsonObject.data) {
+          store.data.frequentPassengers.push(user)
+        }
+      })
+      .catch((error) => {
+          console.log(error)
+          store.data.frequentPassengers = []
+      })
+
+      //Gets user rankings between dates for driver
+      axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}$role=Driver`)
+      .then(jsonObject => {
+        for (let user of jsonObject.data) {
+          store.data.frequentDrivers.push(user)
+        }
+      })
+      .catch((error) => {
+          console.log(error)
+          store.data.frequentDrivers = []
+      })
     }
   }
 }
