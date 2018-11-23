@@ -57,7 +57,8 @@
         </ul>
       </mu-flex>
     </mu-paper>
-    <mu-flex style='width: 400px; justify-content: space-evenly !important'>
+    <mu-flex style='width: 400px; justify-content: space-evenly !important; margin-top: 10px'>
+      <mu-button color='primary' @click='goBack'>Back</mu-button>
       <mu-button color='primary' @click='edit'>
         {{editing ? 'Save' : 'Edit'}}
         <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
@@ -65,9 +66,8 @@
       <mu-button color='primary' @click='changeMode'>
         {{store.darkMode ? "light mode" : "dark mode"}}
       </mu-button>
-      <mu-button color='primary' @click='goBack'>Back</mu-button>
     </mu-flex>
-    <mu-button color='error' @click='logOut' style='margin-top: 30px'>Log out</mu-button>
+    <mu-button color='error' @click='logOut' style='margin-top: 30px; width: 400px'>Log out</mu-button>
     <mu-dialog
       title="Enter Your Password to Save Changes"
       width='600'

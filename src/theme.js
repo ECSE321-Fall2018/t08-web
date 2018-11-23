@@ -53,5 +53,4 @@ customLightTheme.primary = '#000000'
 customLightTheme.error = '#c42c00'
 customDarkTheme.primary = colors.orange500
 
-
 export {customLightTheme, customDarkTheme}

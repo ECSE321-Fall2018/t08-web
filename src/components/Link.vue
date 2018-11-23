@@ -1,11 +1,11 @@
 <template>
   <router-link
-    tag='h1'
+    tag='h1' 
     :to='"/" + text.toLowerCase()'
     :class='pageName === text.toLowerCase() ? "currentLink" : "link"'
   >
     <mu-icon :value='iconName' class='icon'></mu-icon>
-    <span id='text'>{{text}}</span>
+    <span id='text'>{{text | displayText}}</span>
   </router-link>
 </template>
 
@@ -13,7 +13,21 @@
 import store from '@/store.js'
 
 export default {
-  props: ['pageName', 'text', 'iconName']
+  props: ['pageName', 'text', 'iconName'],
+  data() {
+    return {
+      store: store.data,
+    }
+  },
+  filters: {
+    displayText(text) {
+      if (store.data.pageWidth >= 800) {
+        return text
+      } else {
+        return ''
+      }
+    },
+  }
 }
 </script>
 
