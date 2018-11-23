@@ -64,7 +64,7 @@ let store = {
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
       const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
-
+      let routes = popularRoutesBetweenDates
       return sortList(
         searchBoxFilter({drivers, passengers, routes}, searchBoxFilters),
         'rankings'

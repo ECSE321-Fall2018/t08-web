@@ -9,8 +9,8 @@
         v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
         class='list-item'
       >
-        <div>{{i + 1 + '.'}} {{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
-        <div>Hello</div>
+        <div>{{i + 1 + '.'}} {{trip.path}}</div>
+        <div>{{trip.tripnumber}}</div>
       </li>
     </ul>
     <ul v-else-if='title === "Routes" && pageName === "status"'>
