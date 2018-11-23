@@ -2,7 +2,7 @@
   <mu-form ref='form' :model='formDetails' class='login-form' v-on:keyup.13='() => submit(formDetails)'>
     <mu-form-item prop='username' :rules='usernameRules'>
       <mu-text-field
-        placeholder='Administrator Username'
+        placeholder='Admin Username'
         v-model='formDetails.username'
         prop='username'
         :action-icon='"arrow_forward"'
@@ -11,7 +11,7 @@
     </mu-form-item>
     <mu-form-item prop='password' :rules='passwordRules'>
         <mu-text-field
-          placeholder='Administrator Password'
+          placeholder='Admin Password'
           v-model='formDetails.password'
           prop='password'
           :action-icon='visibility ? "visibility_off" : "visibility"'

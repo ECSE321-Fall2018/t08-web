@@ -13,7 +13,7 @@
 import store from '@/store.js'
 
 export default {
-  props: ['pageName', 'text', 'iconName'],
+  props: ['pageName', 'text', 'iconName']
 }
 </script>
 
@@ -31,7 +31,7 @@ export default {
   }
 
   .currentLink {
-    color: #c00;
+    color: #c42c00;
   }
 
   /* CREDITS: https://stackoverflow.com/questions/44673496/how-to-animate-a-link-underline-with-border-bottom-so-that-there-is-space-betwe */
@@ -41,7 +41,7 @@ export default {
   }
 
   .link:hover {
-    color: #c00;
+    color: #c42c00;
     -webkit-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
   }
@@ -53,7 +53,7 @@ export default {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: #c00;
+    background-color: #c42c00;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);

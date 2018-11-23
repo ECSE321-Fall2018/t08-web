@@ -19,7 +19,7 @@ import {
   theme
 } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
-import customTheme from './theme.js'
+import {customLightTheme, customDarkTheme} from './theme.js'
 
 // Muse UI use components
 Vue.use(Button)
@@ -36,9 +36,10 @@ Vue.use(Switch)
 Vue.use(TextField)
 
 // Muse UI add theme
-theme.add('customTheme', customTheme);
+theme.add('light', customLightTheme);
+theme.add('dark', customDarkTheme);
 
-theme.use('customTheme');
+theme.use('light');
 
 // Disable tips
 Vue.config.productionTip = false

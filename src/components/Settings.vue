@@ -44,27 +44,29 @@
             ></mu-text-field>
 		  </div>
 		  <div class='bm'>
-            <mu-text-field
-              v-if='editing'
-              tag='li'
-              v-model='reenterNewPassword'
-              placeholder='Confirm New Password'
-              :action-icon='visibility ? "visibility_off" : "visibility"'
-              :action-click='() => (visibility = !visibility)'
-              :type='visibility ? "text" : "password"'
-            ></mu-text-field>
+        <mu-text-field
+          v-if='editing'
+          tag='li'
+          v-model='reenterNewPassword'
+          placeholder='Confirm New Password'
+          :action-icon='visibility ? "visibility_off" : "visibility"'
+          :action-click='() => (visibility = !visibility)'
+          :type='visibility ? "text" : "password"'
+        ></mu-text-field>
 		  </div>
         </ul>
       </mu-flex>
     </mu-paper>
-    <mu-button color='primary' @click='edit'>
-      {{editing ? 'Save' : 'Edit'}}
-      <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
-    </mu-button>
-    <mu-button color='primary' @click='changeMode'>
-      {{store.darkMode ? "light mode" : "dark mode"}}
-    </mu-button>
-    <mu-button color='primary' @click='goBack'>Back</mu-button>
+    <mu-flex style='width: 400px; justify-content: space-evenly !important'>
+      <mu-button color='primary' @click='edit'>
+        {{editing ? 'Save' : 'Edit'}}
+        <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
+      </mu-button>
+      <mu-button color='primary' @click='changeMode'>
+        {{store.darkMode ? "light mode" : "dark mode"}}
+      </mu-button>
+      <mu-button color='primary' @click='goBack'>Back</mu-button>
+    </mu-flex>
     <mu-dialog
       title="Enter Your Password to Save Changes"
       width='600'
@@ -208,7 +210,7 @@ export default {
       if (!this.store.darkMode) {
         theme.use('dark')
       } else {
-        theme.use('customTheme')
+        theme.use('light')
       }
 
       this.store.darkMode = !this.store.darkMode
