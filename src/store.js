@@ -66,7 +66,7 @@ let store = {
       const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
-        searchBoxFilter({drivers, passengers, popularRoutesBetweenDates}, searchBoxFilters),
+        searchBoxFilter({drivers, passengers, routes}, searchBoxFilters),
         'rankings'
       )
     },
@@ -405,15 +405,19 @@ let store = {
       axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}`)
       .then(jsonObject => {
         for (let trip of jsonObject.data.data) {
-          let route = trip.stops.split(/[;]+/)
+          let route = trip.split(";")
           let routeBetweenDate = {
-            tripnumber: route.pop(),
-            path: route.pop()
+            tripnumber: route[1],
+            path: route[0]
           }
+          console.log(routeBetweenDate.tripnumber)
+          console.log(routeBetweenDate.path)
+
           store.data.popularRoutesBetweenDates.push(routeBetweenDate)
         }
       })
-      .catch(() => {
+      .catch((error) => {
+          console.log(error)
           store.data.popularRoutesBetweenDates = []
       })
 
