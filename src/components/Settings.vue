@@ -58,7 +58,7 @@
       </mu-flex>
     </mu-paper>
     <mu-flex style='width: 400px; justify-content: space-evenly !important; margin-top: 10px'>
-      <mu-button color='primary' @click='goBack'>Back</mu-button>
+      <mu-button color='primary' @click='goBack'>Go Back</mu-button>
       <mu-button color='primary' @click='edit'>
         {{editing ? 'Save' : 'Edit'}}
         <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>

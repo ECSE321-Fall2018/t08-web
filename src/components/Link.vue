@@ -5,7 +5,7 @@
     :class='pageName === text.toLowerCase() ? "currentLink" : "link"'
   >
     <mu-icon :value='iconName' class='icon'></mu-icon>
-    <span id='text'>{{text | displayText}}</span>
+    <span>{{text | displayText}}</span>
   </router-link>
 </template>
 

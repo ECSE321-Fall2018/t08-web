@@ -2,7 +2,7 @@
   <footer>
     <ul>
       <li><strong>Rideshare 2018 &copy; All rights reserved</strong></li>
-      <li><strong>Contact RideshareDevs@gmail.com for assistance</strong></li>
+      <li><strong>Contact ridesharedevs@gmail.com for assistance</strong></li>
     </ul>
   </footer>
 </template>
