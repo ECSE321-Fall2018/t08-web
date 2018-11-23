@@ -1,6 +1,16 @@
 <template>
   <div style='width: 100%'>
-    <mu-flex class='flex-wrapper' justify-content='center' fill>
+    <mu-flex
+      v-if='title === "Routes"'
+      class='flex-wrapper'
+      justify-content='center'
+      fill
+    >
+      <h3>Start - End</h3>
+      <h3 v-if='pageName === "status"'>Status</h3>
+      <h3 v-else>Times Taken</h3>
+    </mu-flex>
+    <mu-flex v-else class='flex-wrapper' justify-content='center' fill>
       <h3>User</h3>
       <h3>Trips Done</h3>
     </mu-flex>
