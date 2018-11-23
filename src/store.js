@@ -20,10 +20,9 @@ let store = {
     activeDrivers: [],
     activePassengers: [],
     activeUsersAndTrips: [],
-    routesBetweenDates: [],
+    popularRoutesBetweenDates: [],
     activeRoutes: [],
     allRoutes: [],
-    activeRoutesBetweenDates: [],
     adminDetails: {},
     pageWidth: null,
     darkMode: false,
@@ -40,7 +39,7 @@ let store = {
         activeDrivers,
         activePassengers,
         activeUsersAndTrips,
-        routesBetweenDates,
+        popularRoutesBetweenDates,
         activeRoutes,
         allRoutes,
         activeRoutesBetweenDates,
@@ -55,7 +54,7 @@ let store = {
             passengers, 
             activeDrivers,
             activePassengers,
-            routesBetweenDates, 
+            popularRoutesBetweenDates, 
             activeRoutes,
             allRoutes,
             activeRoutesBetweenDates,
@@ -69,7 +68,7 @@ let store = {
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
-      const {drivers, passengers, activeDrivers, activePassengers, routesBetweenDates, activeRoutesBetweenDates, searchBoxFilters} = store.data
+      const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, activeRoutesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
         searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
@@ -83,7 +82,7 @@ let store = {
       passengers, 
       activeDrivers,
       activePassengers,
-      routesBetweenDates, 
+      popularRoutesBetweenDates, 
       activeRoutes,
       allRoutes,
       activeRoutesBetweenDates,
@@ -197,7 +196,7 @@ let store = {
       }
       if (searchBoxFilters.routes) {
         clonedRoutes = clonedRoutes.filter(
-          trip => (trip.startLocation.toLowerCase()+trip.stops.slice(trip.stops.indexOf(';')).slice(1)).includes(
+          trip => (trip.startLocation.toLowerCase()+ ' - ' + trip.stops.split(/[;]+/).pop().toLowerCase()).includes(
             searchBoxFilters.routes.toLowerCase()
           )
         )
@@ -395,7 +394,6 @@ let store = {
       axios.post(`/trip/findtripstatus?username=${username}&password=${password}&status=0`)
       .then(jsonObject => {
           for (let trip of jsonObject.data) {
-            console.log(trip.startLocation.toLowerCase()+trip.stops.slice(trip.stops.indexOf(';')).slice(1))
             store.data.activeRoutes.push(trip)
           }
       })

@@ -1,5 +1,5 @@
 <template>
-  <mu-switch v-model='store.showInactiveUsers' label='Show Inactive Users and Trips'></mu-switch>
+  <mu-switch v-model='store.showInactiveUsers' label='Show Users and Trips Not Currently En Route'></mu-switch>
 </template>
 
 <script>

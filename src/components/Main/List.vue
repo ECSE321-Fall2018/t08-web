@@ -9,14 +9,14 @@
         v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
         class='list-item'
       >
-        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.startLocation}} - {{trip.stops.slice(trip.stops.indexOf(';')).slice(1)}}</div>
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
         <div>{{trip.status === 0? 'Ongoing' : trip.status === 2 ? 'Completed' : 'Planned'}}</div>
       </li>
     </ul>
     <ul v-else>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
-        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.slice(user.stops.indexOf(';')).slice(1) }}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}</div>
       </li>
     </ul>
   </div>
