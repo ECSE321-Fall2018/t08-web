@@ -67,6 +67,7 @@
       </mu-button>
       <mu-button color='primary' @click='goBack'>Back</mu-button>
     </mu-flex>
+    <mu-button color='error' @click='logOut' style='margin-top: 30px'>Log out</mu-button>
     <mu-dialog
       title="Enter Your Password to Save Changes"
       width='600'
@@ -224,7 +225,10 @@ export default {
     },
     goBack() {
       this.$router.push('status')
-    }
+    },
+    logOut() {
+      this.$router.push('/')
+    },
   }
 }
 </script>
