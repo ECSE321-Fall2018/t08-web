@@ -19,7 +19,8 @@ let store = {
     routes: [],
     activeDrivers: [],
     activePassengers: [],
-    activeUsersAndTrips: [],
+    frequentDrivers: [],
+    frequentPassengers: [],
     popularRoutesBetweenDates: [],
     activeRoutes: [],
     allRoutes: [],
@@ -38,11 +39,8 @@ let store = {
         passengers,
         activeDrivers,
         activePassengers,
-        activeUsersAndTrips,
-        popularRoutesBetweenDates,
         activeRoutes,
         allRoutes,
-        activeRoutesBetweenDates,
         showInactiveUsers,
         searchBoxFilters
       } = store.data
@@ -54,11 +52,8 @@ let store = {
             passengers, 
             activeDrivers,
             activePassengers,
-            popularRoutesBetweenDates, 
             activeRoutes,
             allRoutes,
-            activeRoutesBetweenDates,
-            activeUsersAndTrips, 
             showInactiveUsers
           ),
           searchBoxFilters
@@ -68,10 +63,10 @@ let store = {
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
-      const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, activeRoutesBetweenDates, searchBoxFilters} = store.data
+      const {drivers, passengers, activeDrivers, activePassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
-        searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
+        searchBoxFilter({drivers, passengers, popularRoutesBetweenDates}, searchBoxFilters),
         'rankings'
       )
     },
@@ -82,11 +77,8 @@ let store = {
       passengers, 
       activeDrivers,
       activePassengers,
-      popularRoutesBetweenDates, 
       activeRoutes,
       allRoutes,
-      activeRoutesBetweenDates,
-      activeUsersAndTrips, 
       showInactiveUsers
     ) {
       // GENERAL INSTRUCTIONS
@@ -99,10 +91,7 @@ let store = {
       let clonedActiveDrivers = [...activeDrivers]
       let clonedActiveRoutes = [...activeRoutes] // contains the active routes
       let clonedAllRoutes = [...allRoutes]
-      let clonedActiveRoutesBetweenDates = [...activeRoutesBetweenDates]
-      let clonedActiveUsersAndTrips = [...activeUsersAndTrips] // contains the active users and trips
-
-
+    
       // SPECIFIC INSTRUCTIONS
       // I want clonedDrivers to only contain drivers that are also in clonedActiveUsersAndTrips
       // Same for clonedPassengers
@@ -212,7 +201,7 @@ let store = {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]    
-      
+      /*
       // INSTRUCTIONS
       // If sortBy === 'status', sort the above cloned variables in alphabetical order of their username
       // If sortBy === 'rankings', sort the above cloned variables in descending order of their tripnumber
@@ -299,7 +288,7 @@ let store = {
         // clonedTrips.sort(function(a, b){
         //   return a - b
         // })
-      }
+      } */
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
@@ -401,6 +390,32 @@ let store = {
         store.data.activeRoutes = []
       })
 
+      //Gets only trips currently ongoing
+      axios.post(`/trip/findtripstatus?username=${username}&password=${password}&status=0`)
+      .then(jsonObject => {
+          for (let trip of jsonObject.data) {
+            store.data.activeRoutes.push(trip)
+          }
+      })
+      .catch(() => {
+        store.data.activeRoutes = []
+      })
+
+      //Gets popular routes between dates
+      axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}`)
+      .then(jsonObject => {
+        for (let trip of jsonObject.data.data) {
+          let route = trip.stops.split(/[;]+/)
+          let routeBetweenDate = {
+            tripnumber: route.pop(),
+            path: route.pop()
+          }
+          store.data.popularRoutesBetweenDates.push(routeBetweenDate)
+        }
+      })
+      .catch(() => {
+          store.data.popularRoutesBetweenDates = []
+      })
 
       
     /*

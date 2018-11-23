@@ -4,19 +4,28 @@
       <h3>User</h3>
       <h3>Trips Done</h3>
     </mu-flex>
-    <ul v-if='title === "Routes"'>
+    <ul v-if='title === "Routes" && pageName === "rankings"'>
       <li
         v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
         class='list-item'
       >
-        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
+        <div>{{i + 1 + '.'}} {{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
+        <div>Hello</div>
+      </li>
+    </ul>
+    <ul v-else-if='title === "Routes" && pageName === "status"'>
+      <li
+        v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
+        class='list-item'
+      >
+        <div>{{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
         <div>{{trip.status === 0? 'Ongoing' : trip.status === 2 ? 'Completed' : 'Planned'}}</div>
       </li>
     </ul>
     <ul v-else>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
-        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + trip.stops.split(/[;]+/).pop() }}</div>
       </li>
     </ul>
   </div>
