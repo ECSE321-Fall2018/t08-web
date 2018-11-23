@@ -13,7 +13,16 @@ let store = {
     showInactiveUsers: true,
     startDate: null,
     endDate: null,
-    ...dummyData, // We don't actually use the dummy data anymore, it gets overwritten by backend data
+    //...dummyData, // We don't actually use the dummy data anymore, it gets overwritten by backend data
+    drivers: [],
+    passengers: [],
+    routes: [],
+    activeDrivers: [],
+    activePassengers: [],
+    activeUsersAndTrips: [],
+    routesBetweenDates: [],
+    allRoutes: [],
+    activeRoutesBetweenDates: [],
     adminDetails: {},
     pageWidth: null,
     darkMode: false,
@@ -24,8 +33,12 @@ let store = {
       const {
         drivers,
         passengers,
+        activeDrivers,
+        activePassengers,
         activeUsersAndTrips,
         routesBetweenDates,
+        allRoutes,
+        activeRoutesBetweenDates,
         showInactiveUsers,
         searchBoxFilters
       } = store.data
@@ -35,7 +48,11 @@ let store = {
           switchFilter(
             drivers, 
             passengers, 
+            activeDrivers,
+            activePassengers,
             routesBetweenDates, 
+            allRoutes,
+            activeRoutesBetweenDates,
             activeUsersAndTrips, 
             showInactiveUsers
           ),
@@ -46,7 +63,7 @@ let store = {
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
-      const {drivers, passengers, routesBetweenDates, searchBoxFilters} = store.data
+      const {drivers, passengers, activeDrivers, activePassengers, routesBetweenDates, activeRoutesBetweenDates, searchBoxFilters} = store.data
 
       return sortList(
         searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
@@ -58,7 +75,11 @@ let store = {
     switchFilter(
       drivers, 
       passengers, 
+      activeDrivers,
+      activePassengers,
       routesBetweenDates, 
+      allRoutes,
+      activeRoutesBetweenDates,
       activeUsersAndTrips, 
       showInactiveUsers
     ) {
@@ -68,8 +89,13 @@ let store = {
       // VARIABLES (ALL ARRAYS)
       let clonedDrivers = [...drivers] // contains the drivers
       let clonedPassengers = [...passengers] // contains the passengers
+      let clonedActivePassengers = [...activePassengers]
+      let clonedActiveDrivers = [...activeDrivers]
       let clonedRoutesBetweenDates = [...routesBetweenDates] // contains the active routes
+      let clonedAllRoutes = [...allRoutes]
+      let clonedActiveRoutesBetweenDates = [...activeRoutesBetweenDates]
       let clonedActiveUsersAndTrips = [...activeUsersAndTrips] // contains the active users and trips
+
 
       // SPECIFIC INSTRUCTIONS
       // I want clonedDrivers to only contain drivers that are also in clonedActiveUsersAndTrips
@@ -82,9 +108,22 @@ let store = {
       // console.log(clonedRoutesBetweenDates)
       // console.log(clonedActiveUsersAndTrips)
       // console.log(clonedPassengers)
+      if (showInactiveUsers) {
 
-      if (!showInactiveUsers) {
-        // INSERT CODE HERE
+        return {
+          drivers: clonedDrivers,
+          passengers: clonedPassengers,
+          routes: clonedAllRoutes,
+        }
+      } else {
+        return {
+          drivers: clonedActiveDrivers,
+          passengers: clonedActivePassengers,
+          routes: clonedActiveRoutesBetweenDates,
+        }
+      }
+
+    /*
 		let fakeDrivers = []
 		let fakePassengers = []
 		let fakeTrips = []
@@ -121,14 +160,15 @@ let store = {
 			passengers: fakePassengers,
 			routes: fakeTrips,
 		}
-      }
-
-      return {
+      } 
+    return {
         drivers: clonedDrivers,
         passengers: clonedPassengers,
-        routes: clonedRoutesBetweenDates,
+        routes: clonedRoutes,
       }
-    },
+*/
+      
+    }, 
     searchBoxFilter({drivers, passengers, routes}, searchBoxFilters) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
@@ -254,7 +294,6 @@ let store = {
         //   return a - b
         // })
       }
-
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
@@ -271,6 +310,7 @@ let store = {
     },
     updateData() {
       let {username, password, startDate, endDate} = store.data
+      let that = this
 
       if (startDate === null) {
         startDate = 0
@@ -282,27 +322,49 @@ let store = {
 
       startDate = Math.round(startDate / 1000)
       endDate = Math.round(endDate / 1000)
-
+      
+      store.data.activePassengers = []
+      /*
       axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Passenger`)
         .then(jsonObject => {
-          store.data.activeUsersAndTrips = jsonObject.data
+          store.data.activePassengers = jsonObject.data
+          console.log(jsonObject.data)
         })
         .catch(() => {
-          store.data.activeUsersAndTrips = []
+          store.data.activePassengers = []
         })
-  
+  */
+      axios.post(`/user/userlist?username=${username}&password=${password}`)
+      .then(jsonObject => {
+          for (let user of jsonObject.data) {
+            if (user.role === 'Driver') {
+              store.data.drivers.push(user)
+            }
+            if (user.role === 'Passenger') {
+              store.data.passengers.push(user)
+            }
+          }
+      })
+      .catch(() => {
+          store.data.drivers = []
+          store.data.passengers = []
+        })
+
+        axios.post(`/trip/utripslist?username=${username}&password=${password}`)
+        .then(jsonObject => {
+          for (let trip of jsonObject.data) {
+            store.data.allRoutes.push(trip)
+          }
+        })
+        .catch(() => {
+            store.data.allRoutes = []
+        })
+    /*
       axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
         .then(jsonObject => {
           store.data.drivers = jsonObject.data
   
-          axios.post(`/user/userlist?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
-            .then(jsonObject => {
-              for (let driver of jsonObject.data) {
-                if (driver.tripnumber === 0) {
-                  store.data.drivers.push(driver)
-                }
-              }
-            })
+          
         })
         .catch(() => {
           store.data.drivers = []
@@ -332,6 +394,7 @@ let store = {
         .catch(() => {
           store.data.routesBetweenDates = []
         })
+        */
     }
   }
 }
