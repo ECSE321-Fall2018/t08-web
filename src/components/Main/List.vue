@@ -16,7 +16,7 @@
     <ul v-else>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
-        <div>{{user.tripnumber}}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.slice(user.stops.indexOf(';')).slice(1) }}</div>
       </li>
     </ul>
   </div>

@@ -21,6 +21,7 @@ let store = {
     activePassengers: [],
     activeUsersAndTrips: [],
     routesBetweenDates: [],
+    activeRoutes: [],
     allRoutes: [],
     activeRoutesBetweenDates: [],
     adminDetails: {},
@@ -28,6 +29,9 @@ let store = {
     darkMode: false,
   },
   computed: {
+    inactiveUsersDisplay() {
+      return store.data.showInactiveUsers
+    },
     statusFilters() {
       const {searchBoxFilter, switchFilter, sortList} = store.filters
       const {
@@ -37,6 +41,7 @@ let store = {
         activePassengers,
         activeUsersAndTrips,
         routesBetweenDates,
+        activeRoutes,
         allRoutes,
         activeRoutesBetweenDates,
         showInactiveUsers,
@@ -51,6 +56,7 @@ let store = {
             activeDrivers,
             activePassengers,
             routesBetweenDates, 
+            activeRoutes,
             allRoutes,
             activeRoutesBetweenDates,
             activeUsersAndTrips, 
@@ -78,6 +84,7 @@ let store = {
       activeDrivers,
       activePassengers,
       routesBetweenDates, 
+      activeRoutes,
       allRoutes,
       activeRoutesBetweenDates,
       activeUsersAndTrips, 
@@ -91,7 +98,7 @@ let store = {
       let clonedPassengers = [...passengers] // contains the passengers
       let clonedActivePassengers = [...activePassengers]
       let clonedActiveDrivers = [...activeDrivers]
-      let clonedRoutesBetweenDates = [...routesBetweenDates] // contains the active routes
+      let clonedActiveRoutes = [...activeRoutes] // contains the active routes
       let clonedAllRoutes = [...allRoutes]
       let clonedActiveRoutesBetweenDates = [...activeRoutesBetweenDates]
       let clonedActiveUsersAndTrips = [...activeUsersAndTrips] // contains the active users and trips
@@ -119,7 +126,7 @@ let store = {
         return {
           drivers: clonedActiveDrivers,
           passengers: clonedActivePassengers,
-          routes: clonedActiveRoutesBetweenDates,
+          routes: clonedActiveRoutes,
         }
       }
 
@@ -190,7 +197,7 @@ let store = {
       }
       if (searchBoxFilters.routes) {
         clonedRoutes = clonedRoutes.filter(
-          trip => trip.toLowerCase().includes(
+          trip => (trip.startLocation.toLowerCase()+trip.stops.slice(trip.stops.indexOf(';')).slice(1)).includes(
             searchBoxFilters.routes.toLowerCase()
           )
         )
@@ -334,6 +341,7 @@ let store = {
           store.data.activePassengers = []
         })
   */
+      //Gets all users
       axios.post(`/user/userlist?username=${username}&password=${password}`)
       .then(jsonObject => {
           for (let user of jsonObject.data) {
@@ -350,7 +358,8 @@ let store = {
           store.data.passengers = []
         })
 
-        axios.post(`/trip/utripslist?username=${username}&password=${password}`)
+      //Gets all trips
+      axios.post(`/trip/utripslist?username=${username}&password=${password}`)
         .then(jsonObject => {
           for (let trip of jsonObject.data) {
             store.data.allRoutes.push(trip)
@@ -359,6 +368,43 @@ let store = {
         .catch(() => {
             store.data.allRoutes = []
         })
+      
+      //Gets only passengers currently on trip  
+      axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Passenger`)
+      .then(jsonObject => {
+          for (let user of jsonObject.data) {
+            store.data.activePassengers.push(user)
+          }
+      })
+      .catch(() => {
+        store.data.activePassengers = []
+      })
+
+      //Gets only drivers currently on trip  
+      axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Driver`)
+      .then(jsonObject => {
+          for (let user of jsonObject.data) {
+            store.data.activeDrivers.push(user)
+          }
+      })
+      .catch(() => {
+        store.data.activeDrivers = []
+      })
+      
+      //Gets only trips currently ongoing
+      axios.post(`/trip/findtripstatus?username=${username}&password=${password}&status=0`)
+      .then(jsonObject => {
+          for (let trip of jsonObject.data) {
+            console.log(trip.startLocation.toLowerCase()+trip.stops.slice(trip.stops.indexOf(';')).slice(1))
+            store.data.activeRoutes.push(trip)
+          }
+      })
+      .catch(() => {
+        store.data.activeRoutes = []
+      })
+
+
+      
     /*
       axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
         .then(jsonObject => {
