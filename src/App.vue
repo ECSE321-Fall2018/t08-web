@@ -25,11 +25,12 @@ export default {
 }
 
 main {
-  height: 95%;
+  height: calc(95% - 50px);
   min-height: 720px;
 }
 
 footer {
+  margin: 40px 0 10px;
   height: 5%;
 }
 </style>

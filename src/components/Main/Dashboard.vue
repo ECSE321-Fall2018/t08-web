@@ -20,9 +20,9 @@
         </h1>
       </mu-flex>
       <mu-flex tag='section'>
-        <Link :pageName='pageName' :text='displayText("Status")' iconName='format_list_bulleted' />
-        <Link :pageName='pageName' :text='displayText("Rankings")' iconName='format_list_numbered' />
-        <Link :pageName='pageName' :text='displayText("Settings")' iconName='settings' />
+        <Link :pageName='pageName' text='Status' iconName='format_list_bulleted' />
+        <Link :pageName='pageName' text='Rankings' iconName='format_list_numbered' />
+        <Link :pageName='pageName' text='Settings' iconName='settings' />
       </mu-flex>
     </mu-flex>
     <section class='flex-item' style='width: 100%'>
@@ -97,13 +97,6 @@ export default {
     resize() {
       store.data.pageWidth = window.innerWidth
     },
-    displayText(text) {
-      if (this.store.pageWidth >= 800) {
-        return text
-      } else {
-        return ''
-      }
-    }
   },
   created() {
     /*
