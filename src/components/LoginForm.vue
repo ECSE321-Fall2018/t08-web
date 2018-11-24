@@ -46,11 +46,11 @@
         visibility: false,
 
         color: {
-        color: 'error',
-        message: 'Invalid administrator username or password.',
-        open: false,
-        timeout: 5000
-      }
+          color: 'error',
+          message: 'Invalid administrator username or password.',
+          open: false,
+          timeout: 5000,
+        }
       }
     },
     computed: {
