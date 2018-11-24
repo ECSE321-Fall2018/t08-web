@@ -1,4 +1,3 @@
-import dummyData from '@/dummy-data.js'
 import axios from '@/axios.js'
 import _ from 'lodash'
 
@@ -332,6 +331,6 @@ let store = {
 
 // You can access the variable store directly in the console
 // (for debugging purposes)
-window.store = store // MAKE SURE YOU DELETE THIS LINE AFTER THE PROEJCT IS FINISHED (FOR SECURITY REASONS)
+// window.store = store // MAKE SURE YOU DELETE THIS LINE AFTER THE PROEJCT IS FINISHED (FOR SECURITY REASONS)
 
 export default store
