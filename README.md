@@ -9,7 +9,7 @@
 ### Login Credentials for Administrator Website
 In order to access the administrator website, the following credentials can be used.
 * Username: `admin`
-* Password" `password`
+* Password: `password`
 
 ### How to Get This Project On Your Computer
 1. Make sure you have Node.js installed.
