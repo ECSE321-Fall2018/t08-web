@@ -12,7 +12,8 @@
     </mu-flex>
     <mu-flex v-else-if='inactiveUsersDisplay' class='flex-wrapper' justify-content='center' fill>
       <h3>User</h3>
-      <h3>Trips Done</h3>
+      <h3 v-if='pageName === "status"'>Trips Registered</h3>
+      <h3 v-else>Trips Completed</h3>
     </mu-flex>
     <mu-flex v-else class='flex-wrapper' justify-content='center' fill>
       <h3>User</h3>
