@@ -1,4 +1,4 @@
-# Rideshare Web
+# RideShare Web
 
 ### Quick Links
 - [Our Heroku website](https://rideshareadmin.herokuapp.com)
