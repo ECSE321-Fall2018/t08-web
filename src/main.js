@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 // Muse UI imports
 import 'muse-ui/lib/styles/base.less'
+import VueLodash from 'vue-lodash'
 import {
   Button, 
   Checkbox, 
@@ -19,7 +20,7 @@ import {
   theme
 } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
-import customTheme from './theme.js'
+import {customLightTheme, customDarkTheme} from './theme.js'
 
 // Muse UI use components
 Vue.use(Button)
@@ -36,9 +37,14 @@ Vue.use(Switch)
 Vue.use(TextField)
 
 // Muse UI add theme
-theme.add('customTheme', customTheme);
+theme.add('light', customLightTheme);
+theme.add('dark', customDarkTheme);
 
-theme.use('customTheme');
+theme.use('light');
+
+// Vue Lodash
+const options = { name: 'lodash' } // customize the way you want to call it
+Vue.use(VueLodash, options) // options is optional
 
 // Disable tips
 Vue.config.productionTip = false

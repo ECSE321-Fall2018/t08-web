@@ -1,20 +1,49 @@
 <template>
   <div style='width: 100%'>
-    <mu-flex class='flex-wrapper' justify-content='center' fill>
+    <mu-flex
+      v-if='title === "Routes"'
+      class='flex-wrapper'
+      justify-content='center'
+      fill
+    >
+      <h3>Start - End</h3>
+      <h3 v-if='pageName === "status"'>Status</h3>
+      <h3 v-else>Times Taken</h3>
+    </mu-flex>
+    <mu-flex v-else-if='inactiveUsersDisplay' class='flex-wrapper' justify-content='center' fill>
       <h3>User</h3>
       <h3>Trips Done</h3>
     </mu-flex>
-    <ul v-if='title === "Routes"'>
+    <mu-flex v-else class='flex-wrapper' justify-content='center' fill>
+      <h3>User</h3>
+      <h3>Current Trip</h3>
+    </mu-flex>
+    <ul v-if='title === "Routes" && pageName === "status"'>
       <li
-        v-for='trip, i in pageName === "status" ? statusFilters["routes"] : rankingsFilters["routes"]'
+        v-for='trip, i in statusFilters["routes"]'
         class='list-item'
       >
-        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{trip.startLocation}} - {{trip.stops.slice(trip.stops.indexOf(';')).slice(1)}}</div>
+        <div>{{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
         <div>{{trip.status === 0? 'Ongoing' : trip.status === 2 ? 'Completed' : 'Planned'}}</div>
       </li>
     </ul>
-    <ul v-else>
+    <ul v-else-if='title === "Routes" && pageName === "rankings"'>
+      <li
+        v-for='trip, i in rankingsFilters["routes"]'
+        class='list-item'
+      >
+        <div>{{i + 1 + '.'}} {{trip.path}}</div>
+        <div>{{trip.tripnumber}}</div>
+      </li>
+    </ul>
+    <ul v-else-if='pageName === "status"'>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}</div>
+      </li>
+    </ul>
+    <ul v-else>
+      <li v-for='user, i in rankingsFilters[title.toLowerCase()]' class='list-item'>
         <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
         <div>{{user.tripnumber}}</div>
       </li>

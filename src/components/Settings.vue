@@ -44,27 +44,30 @@
             ></mu-text-field>
 		  </div>
 		  <div class='bm'>
-            <mu-text-field
-              v-if='editing'
-              tag='li'
-              v-model='reenterNewPassword'
-              placeholder='Confirm New Password'
-              :action-icon='visibility ? "visibility_off" : "visibility"'
-              :action-click='() => (visibility = !visibility)'
-              :type='visibility ? "text" : "password"'
-            ></mu-text-field>
+        <mu-text-field
+          v-if='editing'
+          tag='li'
+          v-model='reenterNewPassword'
+          placeholder='Confirm New Password'
+          :action-icon='visibility ? "visibility_off" : "visibility"'
+          :action-click='() => (visibility = !visibility)'
+          :type='visibility ? "text" : "password"'
+        ></mu-text-field>
 		  </div>
         </ul>
       </mu-flex>
     </mu-paper>
-    <mu-button color='primary' @click='edit'>
-      {{editing ? 'Save' : 'Edit'}}
-      <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
-    </mu-button>
-    <mu-button color='primary' @click='changeMode'>
-      {{store.darkMode ? "light mode" : "dark mode"}}
-    </mu-button>
-    <mu-button color='primary' @click='goBack'>Back</mu-button>
+    <mu-flex style='width: 400px; justify-content: space-evenly !important; margin-top: 10px'>
+      <mu-button color='primary' @click='goBack'>Go Back</mu-button>
+      <mu-button color='primary' @click='edit'>
+        {{editing ? 'Save' : 'Edit'}}
+        <mu-icon right :value='editing ? "save" : "edit"'></mu-icon>
+      </mu-button>
+      <mu-button color='primary' @click='changeMode'>
+        {{store.darkMode ? "light mode" : "dark mode"}}
+      </mu-button>
+    </mu-flex>
+    <mu-button color='error' @click='logOut' style='margin-top: 30px; width: 400px'>Log out</mu-button>
     <mu-dialog
       title="Enter Your Password to Save Changes"
       width='600'
@@ -208,7 +211,7 @@ export default {
       if (!this.store.darkMode) {
         theme.use('dark')
       } else {
-        theme.use('customTheme')
+        theme.use('light')
       }
 
       this.store.darkMode = !this.store.darkMode
@@ -222,7 +225,10 @@ export default {
     },
     goBack() {
       this.$router.push('status')
-    }
+    },
+    logOut() {
+      this.$router.push('/')
+    },
   }
 }
 </script>

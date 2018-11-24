@@ -1,5 +1,6 @@
 import dummyData from '@/dummy-data.js'
 import axios from '@/axios.js'
+import _ from 'lodash'
 
 let store = {
   data: {
@@ -19,15 +20,19 @@ let store = {
     routes: [],
     activeDrivers: [],
     activePassengers: [],
-    activeUsersAndTrips: [],
-    routesBetweenDates: [],
+    frequentDrivers: [],
+    frequentPassengers: [],
+    popularRoutesBetweenDates: [],
+    activeRoutes: [],
     allRoutes: [],
-    activeRoutesBetweenDates: [],
     adminDetails: {},
     pageWidth: null,
     darkMode: false,
   },
   computed: {
+    inactiveUsersDisplay() {
+      return store.data.showInactiveUsers
+    },
     statusFilters() {
       const {searchBoxFilter, switchFilter, sortList} = store.filters
       const {
@@ -35,40 +40,43 @@ let store = {
         passengers,
         activeDrivers,
         activePassengers,
-        activeUsersAndTrips,
-        routesBetweenDates,
+        activeRoutes,
         allRoutes,
-        activeRoutesBetweenDates,
         showInactiveUsers,
         searchBoxFilters
       } = store.data
+      let ranking = false
 
-      return sortList(
-        searchBoxFilter(
+      return searchBoxFilter(
           switchFilter(
             drivers, 
             passengers, 
             activeDrivers,
             activePassengers,
-            routesBetweenDates, 
+            activeRoutes,
             allRoutes,
-            activeRoutesBetweenDates,
-            activeUsersAndTrips, 
             showInactiveUsers
           ),
-          searchBoxFilters
-        ),
-        'status'
-      )
+          searchBoxFilters,
+          ranking
+        )
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
-      const {drivers, passengers, activeDrivers, activePassengers, routesBetweenDates, activeRoutesBetweenDates, searchBoxFilters} = store.data
-
+      const {frequentDrivers, frequentPassengers, popularRoutesBetweenDates, searchBoxFilters} = store.data
+      let drivers = frequentDrivers
+      let passengers = frequentPassengers
+      let routes = popularRoutesBetweenDates
+      let ranking = true
+      return searchBoxFilter(
+        sortList({drivers, passengers, routes}, 'rankings'),
+        searchBoxFilters, ranking)
+/*
       return sortList(
-        searchBoxFilter({drivers, passengers, routesBetweenDates}, searchBoxFilters),
+        searchBoxFilter({drivers, passengers, routes}, searchBoxFilters),
         'rankings'
       )
+      */
     },
   },
   filters: {
@@ -77,10 +85,8 @@ let store = {
       passengers, 
       activeDrivers,
       activePassengers,
-      routesBetweenDates, 
+      activeRoutes,
       allRoutes,
-      activeRoutesBetweenDates,
-      activeUsersAndTrips, 
       showInactiveUsers
     ) {
       // GENERAL INSTRUCTIONS
@@ -91,23 +97,14 @@ let store = {
       let clonedPassengers = [...passengers] // contains the passengers
       let clonedActivePassengers = [...activePassengers]
       let clonedActiveDrivers = [...activeDrivers]
-      let clonedRoutesBetweenDates = [...routesBetweenDates] // contains the active routes
+      let clonedActiveRoutes = [...activeRoutes] // contains the active routes
       let clonedAllRoutes = [...allRoutes]
-      let clonedActiveRoutesBetweenDates = [...activeRoutesBetweenDates]
-      let clonedActiveUsersAndTrips = [...activeUsersAndTrips] // contains the active users and trips
-
-
+    
       // SPECIFIC INSTRUCTIONS
       // I want clonedDrivers to only contain drivers that are also in clonedActiveUsersAndTrips
       // Same for clonedPassengers
       // I want clonedRoutesBetweenDates to only contains routes which have the same start location and last stop as one of the trips in clonedActiveUsersAndTrips
 
-      // Check what these variables contain
-      // console.log(clonedDrivers)
-      // console.log(clonedPassengers)
-      // console.log(clonedRoutesBetweenDates)
-      // console.log(clonedActiveUsersAndTrips)
-      // console.log(clonedPassengers)
       if (showInactiveUsers) {
 
         return {
@@ -119,57 +116,12 @@ let store = {
         return {
           drivers: clonedActiveDrivers,
           passengers: clonedActivePassengers,
-          routes: clonedActiveRoutesBetweenDates,
+          routes: clonedActiveRoutes,
         }
       }
-
-    /*
-		let fakeDrivers = []
-		let fakePassengers = []
-		let fakeTrips = []
-		let count
-		let counter
-		for(count = 0; count < clonedDrivers.length; count ++){
-			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
-				if(clonedDrivers[count]['username'].toLowerCase() === clonedActiveUsersAndTrips[counter]['username'].toLowerCase()){
-					fakeDrivers.push(cloneDrivers[count])
-				}
-			}		
-		}
-		
-		for(count = 0; count < clonedPassengers.length; count ++){
-			for(counter = 0; counter < clonedActiveUsersAndTrips.length; counter++){
-				if(clonedPassengers[count]['username'].toLowerCase() === clonedActiveUsersAndTrips[counter]['username'].toLowerCase()){
-					fakePassengers.push(clonedPassengers[count])
-				}
-			}		
-		}
-		
-		for(count = 0; count < clonedRoutesBetweenDates.length - 1; count ++){
-			for(counter = 0; counter < clonedActiveUsersAndTrips.length - 1; counter++){
-				if(clonedRoutesBetweenDates[count].split('-')[0].toLowerCase().trim() == clonedActiveUsersAndTrips[counter]['startLocation'].toLowerCase().trim()){
-					if(clonedRoutesBetweenDates[count].split('-')[1].split(';')[0].toLowerCase().trim() == clonedActiveUsersAndTrips[counter]['stops'].split(';')[clonedActiveUsersAndTrips[counter]['stops'].split(';').length - 1].toLowerCase().trim()){
-						fakeTrips.push(clonedRoutesBetweenDates[count])
-					}
-				}	
-			}		
-		}		
-		
-		return {
-			drivers: fakeDrivers,
-			passengers: fakePassengers,
-			routes: fakeTrips,
-		}
-      } 
-    return {
-        drivers: clonedDrivers,
-        passengers: clonedPassengers,
-        routes: clonedRoutes,
-      }
-*/
       
     }, 
-    searchBoxFilter({drivers, passengers, routes}, searchBoxFilters) {
+    searchBoxFilter({drivers, passengers, routes}, searchBoxFilters, ranking) {
       let clonedDrivers = [...drivers]
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]
@@ -189,11 +141,19 @@ let store = {
         )
       }
       if (searchBoxFilters.routes) {
-        clonedRoutes = clonedRoutes.filter(
-          trip => trip.toLowerCase().includes(
-            searchBoxFilters.routes.toLowerCase()
+        if(ranking) {
+          clonedRoutes = clonedRoutes.filter(
+            trip => (trip.path.toLowerCase()).includes(
+              searchBoxFilters.routes.toLowerCase()
+            )
           )
-        )
+        } else {
+          clonedRoutes = clonedRoutes.filter(
+            trip => (trip.startLocation.toLowerCase()+ ' - ' + trip.stops.split(/[;]+/).pop().toLowerCase()).includes(
+              searchBoxFilters.routes.toLowerCase()
+            )
+          )
+        }
       }
 
       return {
@@ -207,93 +167,11 @@ let store = {
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]    
       
-      // INSTRUCTIONS
-      // If sortBy === 'status', sort the above cloned variables in alphabetical order of their username
-      // If sortBy === 'rankings', sort the above cloned variables in descending order of their tripnumber
-      
-      // CHECK WHAT THEY CONTAIN
-      // console.log(clonedDrivers)
-      // console.log(clonedPassengers)
-      // console.log(clonedRoutes)
 
-      if (sortBy === 'status') {
-        // Sort by alphabetical order of username (`username`)
-        clonedDrivers.sort((a, b) => a.username.localeCompare(b.username))
-        clonedPassengers.sort((a, b) => a.username.localeCompare(b.username))
-        clonedRoutes.sort()//(a, b) => a.startLocation.localeCompare(b.startLocation))
+      clonedDrivers = _.orderBy(clonedDrivers, ['tripnumber'], ['desc'])
+      clonedPassengers = _.orderBy(clonedPassengers, ['tripnumber'], ['desc'])
+      clonedRoutes = _.orderBy(clonedRoutes, ['tripnumber'], ['desc'])
 
-      } else if (sortBy === 'rankings') {
-        // Sort by most trips taken (`tripnumber`) 
-
-        function compareNumbers(a, b) {
-          return a - b;
-        }
-        clonedDrivers.sort(compareNumbers);
-
-        // can't use this cuz it's an array with diff properties and also other unknown reasons
-        // clonedDrivers.sort((a, b) => a - b); 
-        // clonedDrivers.sort((a, b) => a.SortOrder - b.SortOrder);
-        // can't use this bc we are sorting numbers, not Strings
-        //clonedDrivers.sort((a, b) => a.tripnumber.localeCompare(b.tripnumber));
-
-        //-------try 1-------
-        // This seems like a good solution, but somehow it doesn't work which is pissing me off
-        // function sortProperties(obj){
-        //   // convert object into array
-        //   var sortable=[];
-        //   for(var key in obj)
-        //     if(obj.hasOwnProperty(key))
-        //       sortable.push([key, obj[key]]); // each item is an array in format [key, value]
-          
-        //   // sort items by value
-        //   sortable.sort(function(a, b){
-        //     return a[1]-b[1]; // compare numbers
-        //   });
-        //   return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
-        // }
-        // clonedDrivers = sortProperties(clonedDrivers);
-        // clonedPassengers = sortProperties(clonedPassengers);
-        // clonedTrips = sortProperties(clonedTrips);
-
-        //-------try 2-------
-        // function compare(a, b) {
-        // // Use toUpperCase() to ignore character casing
-        //   const genreA = a.genre.toUpperCase();
-        //   const genreB = b.genre.toUpperCase();
-
-        //-------try 3-------
-        // sort_array_by = function(field, reverse, pr){
-        //   reverse = (reverse) ? -1 : 1;
-        //   return function(a,b){
-        //     a = a[field];
-        //     b = b[field];
-        //     if (typeof(pr) != 'undefined'){
-        //       a = pr(a);
-        //       b = pr(b);
-        //     }
-        //     if (a<b) return reverse * -1;
-        //     if (a>b) return reverse * 1;
-        //     return 0;
-        //   }
-        // }
-        // clonedDrivers.sort(sort_array_by(tripnumber, true, function(a){
-        //   return new tripnumber(a);
-        // }));
-        // clonedDrivers.sort(sort_array_by(tripnumber, true, function(a){
-        //   return parseInt(a);
-        // }));
-
-        //OG (that worked before cloning everything)
-        // clonedDrivers.sort(function(a, b){
-        //   return b.tripnumber - a.tripnumber
-        // })
-        // clonedPassengers.sort(function(a, b){
-        //   return b.tripnumber - a.tripnumber
-        // })
-        // clonedTrips.sort(function(a, b){
-        //   return a - b
-        // })
-      }
       return {
         drivers: clonedDrivers, 
         passengers: clonedPassengers, 
@@ -334,6 +212,9 @@ let store = {
           store.data.activePassengers = []
         })
   */
+      //Gets all users
+      store.data.drivers = []
+      store.data.passengers = []
       axios.post(`/user/userlist?username=${username}&password=${password}`)
       .then(jsonObject => {
           for (let user of jsonObject.data) {
@@ -345,56 +226,106 @@ let store = {
             }
           }
       })
-      .catch(() => {
-          store.data.drivers = []
-          store.data.passengers = []
+      .catch((error) => {
+        console.log(error)
+        store.data.drivers = []
+        store.data.passengers = []
         })
 
-        axios.post(`/trip/utripslist?username=${username}&password=${password}`)
+      //Gets all trips
+      store.data.allRoutes = []
+      axios.post(`/trip/utripslist?username=${username}&password=${password}`)
         .then(jsonObject => {
           for (let trip of jsonObject.data) {
             store.data.allRoutes.push(trip)
           }
         })
-        .catch(() => {
-            store.data.allRoutes = []
+        .catch((error) => {
+          console.log(error)
+          store.data.allRoutes = []
         })
-    /*
-      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
-        .then(jsonObject => {
-          store.data.drivers = jsonObject.data
-  
-          
-        })
-        .catch(() => {
-          store.data.drivers = []
-        })
-  
-      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
-        .then(jsonObject => {
-          store.data.passengers = jsonObject.data
-  
-          axios.post(`/user/userlist?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
-            .then(jsonObject => {
-              for (let passenger of jsonObject.data) {
-                if (passenger.tripnumber === 0) {
-                  store.data.passengers.push(passenger)
-                }
-              }
-            })
-        })
-        .catch(() => {
-          store.data.passengers = []
-        })
-  
+      
+      //Gets only passengers currently on trip  
+      store.data.activePassengers = []
+      axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Passenger`)
+      .then(jsonObject => {
+          for (let user of jsonObject.data) {
+            store.data.activePassengers.push(user)
+          }
+      })
+      .catch((error) => {
+        console.log(error)
+        store.data.activePassengers = []
+      })
+
+      //Gets only drivers currently on trip  
+      store.data.activeDrivers = []
+      axios.post(`/trip/usertripstatus?username=${username}&password=${password}&status=0&role=Driver`)
+      .then(jsonObject => {
+          for (let user of jsonObject.data) {
+            store.data.activeDrivers.push(user)
+          }
+      })
+      .catch((error) => {
+        console.log(error)
+        store.data.activeDrivers = []
+      })
+      
+      //Gets only trips currently ongoing
+      store.data.activeRoutes = []
+      axios.post(`/trip/findtripstatus?username=${username}&password=${password}&status=0`)
+      .then(jsonObject => {
+          for (let trip of jsonObject.data) {
+            store.data.activeRoutes.push(trip)
+          }
+      })
+      .catch((error) => {
+        store.data.activeRoutes = []
+      })
+
+      //Gets popular routes between dates
+      store.data.popularRoutesBetweenDates = []
       axios.post(`/trip/popularroute?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}`)
-        .then(jsonObject => {
-          store.data.routesBetweenDates = jsonObject.data.data
-        })
-        .catch(() => {
-          store.data.routesBetweenDates = []
-        })
-        */
+      .then(jsonObject => {
+        for (let trip of jsonObject.data.data) {
+          let route = trip.split(";")
+          let routeBetweenDate = {
+            tripnumber: route[1],
+            path: route[0]
+          }
+          store.data.popularRoutesBetweenDates.push(routeBetweenDate)
+        }
+      })
+      .catch((error) => {
+          console.log(error)
+          store.data.popularRoutesBetweenDates = []
+      })
+
+      //Gets user rankings between dates for passenger
+      store.data.frequentPassengers = []
+      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Passenger`)
+      .then(jsonObject => {
+        for (let user of jsonObject.data) {
+          store.data.frequentPassengers.push(user)
+        }
+      })
+      .catch((error) => {
+          console.log(error)
+          store.data.frequentPassengers = []
+      })
+
+      //Gets user rankings between dates for driver
+      store.data.frequentDrivers = []
+      axios.post(`/trip/ranking?username=${username}&password=${password}&startdate=${startDate}&enddate=${endDate}&role=Driver`)
+      .then(jsonObject => {
+        for (let user of jsonObject.data) {
+          store.data.frequentDrivers.push(user)
+        }
+      })
+      .catch((error) => {
+          console.log(error)
+          store.data.frequentDrivers = []
+      })
     }
   }
 }

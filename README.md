@@ -1,10 +1,15 @@
-# Rideshare Web
+# RideShare Web
 
 ### Quick Links
 - [Our Heroku website](https://rideshareadmin.herokuapp.com)
 - [Our Heroku dashboard](https://dashboard.heroku.com/apps/rideshareadmin)
-- [Our wiki](https://github.com/ECSE321-Fall2018/t08-web/wiki)
-- [Vue video tutorial](https://www.youtube.com/watch?v=mZY1yyrlJWU&list=PLoYCgNOIyGADZuvKJweutZDOO9VI9YiJ9)
+- [Our Wiki](https://github.com/ECSE321-Fall2018/t08-web/wiki)
+- [Our RESTful API and Android Application Repository](https://github.com/ECSE321-Fall2018/t08)
+
+### Login Credentials for Administrator Website
+In order to access the administrator website, the following credentials can be used.
+* Username: `admin`
+* Password: `password`
 
 ### How to Get This Project On Your Computer
 1. Make sure you have Node.js installed.
@@ -184,3 +189,5 @@ yarn run test:unit
 
 ### Configure Vue Settings
 See [Vue Configuration Reference](https://cli.vuejs.org/config/).
+
+- [Vue Video Tutorial](https://www.youtube.com/watch?v=mZY1yyrlJWU&list=PLoYCgNOIyGADZuvKJweutZDOO9VI9YiJ9)
