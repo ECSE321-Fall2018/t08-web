@@ -46,7 +46,8 @@ let store = {
       } = store.data
       let ranking = false
 
-      return searchBoxFilter(
+      return sortList(
+        searchBoxFilter(
           switchFilter(
             drivers, 
             passengers, 
@@ -58,7 +59,9 @@ let store = {
           ),
           searchBoxFilters,
           ranking
-        )
+        ),
+        'status'
+      )
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
@@ -166,10 +169,15 @@ let store = {
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]    
       
-
-      clonedDrivers = _.orderBy(clonedDrivers, ['tripnumber'], ['desc'])
-      clonedPassengers = _.orderBy(clonedPassengers, ['tripnumber'], ['desc'])
-      clonedRoutes = _.orderBy(clonedRoutes, ['tripnumber'], ['desc'])
+      if (sortBy === 'rankings') {
+        clonedDrivers = _.orderBy(clonedDrivers, ['tripnumber'], ['desc'])
+        clonedPassengers = _.orderBy(clonedPassengers, ['tripnumber'], ['desc'])
+        clonedRoutes = _.orderBy(clonedRoutes, ['tripnumber'], ['desc'])
+      } else {
+        clonedDrivers = _.orderBy(clonedDrivers, ['username'], ['asc'])
+        clonedPassengers = _.orderBy(clonedPassengers, ['username'], ['asc'])
+        clonedRoutes = _.orderBy(clonedRoutes, ['username'], ['asc'])
+      }
 
       return {
         drivers: clonedDrivers, 
