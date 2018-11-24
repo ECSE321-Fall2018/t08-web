@@ -39,16 +39,8 @@
     </ul>
     <ul v-else-if='pageName === "status"'>
       <li v-for='user, i in statusFilters[title.toLowerCase()]' class='list-item'>
-        <div>
-          <span :style='"color:" + isUserActive(user.username, title, inactiveUsersDisplay)'>
-            {{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}
-          </span>
-        </div>
-        <div>
-          <span :style='"color:" + isUserActive(user.username, title, inactiveUsersDisplay)'>
-            {{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}
-          </span>
-        </div>
+        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
+        <div>{{inactiveUsersDisplay ? user.tripnumber : user.startlocation + ' - ' + user.stops.split(/[;]+/).pop() }}</div>
       </li>
     </ul>
     <ul v-else>
@@ -96,11 +88,6 @@ export default {
         return '#00c853'
       } else if (status === 2) {
         return '#f44336'
-      }
-    },
-    isUserActive(username, title, isActive) {
-      if (isActive && !store.data['active' + title].map(obj => obj.username).includes(username)) {
-        return '#9e9e9e'
       }
     },
   }
