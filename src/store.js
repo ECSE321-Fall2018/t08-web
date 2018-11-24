@@ -1,4 +1,3 @@
-import dummyData from '@/dummy-data.js'
 import axios from '@/axios.js'
 import _ from 'lodash'
 
@@ -47,7 +46,8 @@ let store = {
       } = store.data
       let ranking = false
 
-      return searchBoxFilter(
+      return sortList(
+        searchBoxFilter(
           switchFilter(
             drivers, 
             passengers, 
@@ -59,7 +59,9 @@ let store = {
           ),
           searchBoxFilters,
           ranking
-        )
+        ),
+        'status'
+      )
     },
     rankingsFilters() {
       const {searchBoxFilter, sortList} = store.filters
@@ -167,10 +169,15 @@ let store = {
       let clonedPassengers = [...passengers]
       let clonedRoutes = [...routes]    
       
-
-      clonedDrivers = _.orderBy(clonedDrivers, ['tripnumber'], ['desc'])
-      clonedPassengers = _.orderBy(clonedPassengers, ['tripnumber'], ['desc'])
-      clonedRoutes = _.orderBy(clonedRoutes, ['tripnumber'], ['desc'])
+      if (sortBy === 'rankings') {
+        clonedDrivers = _.orderBy(clonedDrivers, ['tripnumber'], ['desc'])
+        clonedPassengers = _.orderBy(clonedPassengers, ['tripnumber'], ['desc'])
+        clonedRoutes = _.orderBy(clonedRoutes, ['tripnumber'], ['desc'])
+      } else {
+        clonedDrivers = _.orderBy(clonedDrivers, ['username'], ['asc'])
+        clonedPassengers = _.orderBy(clonedPassengers, ['username'], ['asc'])
+        clonedRoutes = _.orderBy(clonedRoutes, ['username'], ['asc'])
+      }
 
       return {
         drivers: clonedDrivers, 
@@ -332,6 +339,6 @@ let store = {
 
 // You can access the variable store directly in the console
 // (for debugging purposes)
-window.store = store // MAKE SURE YOU DELETE THIS LINE AFTER THE PROEJCT IS FINISHED (FOR SECURITY REASONS)
+// window.store = store // MAKE SURE YOU DELETE THIS LINE AFTER THE PROEJCT IS FINISHED (FOR SECURITY REASONS)
 
 export default store

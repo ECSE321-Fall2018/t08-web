@@ -25,7 +25,7 @@
         class='list-item'
       >
         <div>{{trip.startLocation}} - {{trip.stops.split(/[;]+/).pop()}}</div>
-        <div>{{trip.status === 0? 'Ongoing' : trip.status === 2 ? 'Completed' : 'Planned'}}</div>
+        <div :style='"color: " + tripColor(trip.status)'>{{trip.status | tripStatus}}</div>
       </li>
     </ul>
     <ul v-else-if='title === "Routes" && pageName === "rankings"'>
@@ -33,8 +33,8 @@
         v-for='trip, i in rankingsFilters["routes"]'
         class='list-item'
       >
-        <div>{{i + 1 + '.'}} {{trip.path}}</div>
-        <div>{{trip.tripnumber}}</div>
+        <div :style='"color: " + medal(i)'>{{i + 1 + '.'}} {{trip.path}} <mu-icon value=''></mu-icon></div>
+        <div :style='"color: " + medal(i)'>{{trip.tripnumber}}</div>
       </li>
     </ul>
     <ul v-else-if='pageName === "status"'>
@@ -45,8 +45,8 @@
     </ul>
     <ul v-else>
       <li v-for='user, i in rankingsFilters[title.toLowerCase()]' class='list-item'>
-        <div>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
-        <div>{{user.tripnumber}}</div>
+        <div :style='"color: " + medal(i)'>{{pageName === 'rankings' ? i + 1 + '.' : ''}} {{user.username}}</div>
+        <div :style='"color: " + medal(i)'>{{user.tripnumber}}</div>
       </li>
     </ul>
   </div>
@@ -58,6 +58,39 @@ import store from '@/store.js'
 export default {
   props: ['title', 'pageName'],
   computed: store.computed,
+  filters: {
+    tripStatus(status) {
+      if (status === 0) {
+        return 'Ongoing'
+      } else if (status === 1) {
+        return 'Completed'
+      } else if (status === 2) {
+        return 'Planned'
+      }
+    }
+  },
+  methods: {
+    medal(i) {
+      if (i === 0) {
+        return 'gold'
+      } else if (i === 1) {
+        return 'silver'
+      } else if (i === 2) {
+        return '#cd7f32'
+      } else {
+        return ''
+      }
+    },
+    tripColor(status) {
+      if (status === 0) {
+        return '#ffd600'
+      } else if (status === 1) {
+        return '#00c853'
+      } else if (status === 2) {
+        return '#f44336'
+      }
+    },
+  }
 }
 </script>
 
