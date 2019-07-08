@@ -182,11 +182,6 @@ let clonedArray = [...array] // how to clone arrays in JS
 ### Muse UI
 Our Vue project uses a UI library called [Muse-UI](https://muse-ui.org/#/en-US). Basically, it provides a bunch of nice-looking components that we can use. This way, we don't have to code these components from scratch, which means less a lot less CSS to write.
 
-### Run Unit Test
-```Bash
-yarn run test:unit
-```
-
 ### Configure Vue Settings
 See [Vue Configuration Reference](https://cli.vuejs.org/config/).
 

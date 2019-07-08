@@ -8,7 +8,6 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "start": "node server.js"
   },
@@ -18,18 +17,14 @@
     "connect-history-api-fallback": "^1.5.0",
     "express": "*",
     "muse-ui": "^3.0.1",
-    "server": "^1.0.18",
     "vue": "^2.5.17",
     "vue-lodash": "^2.0.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
-    "@vue/cli-plugin-unit-jest": "^3.1.1",
     "@vue/cli-service": "^3.1.1",
-    "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-plugin-import": "^1.11.0",
     "express": "^4.16.4",
     "less": "^3.8.1",
